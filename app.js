@@ -1,22 +1,13 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-//db
-const connectDB = require('./config/db');
-connectDB();
-
-
-//importer routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const statistiqueGardienRouter = require('./routes/statistiqueGardienRoutes');
-const statistiqueEquipeRouter = require('./routes/statistiqueEquipeRoutes');
-const statistiqueJoueurRouter = require('./routes/statistiqueJoueurRoutes');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
