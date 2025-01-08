@@ -12,7 +12,7 @@
 },
 {
   "_id": "2",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fchicago-blackhawks.ee37f442.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/CHI_light.svg",
   "name": "Blackhawks",
   "city": "Chicago",
   "conference": "Western",
@@ -23,7 +23,7 @@
 },
 {
   "_id": "3",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdallas-stars.d5ec2749.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/DAL_light.svg",
   "name": "Stars",
   "city": "Dallas",
   "conference": "Western",
@@ -34,7 +34,7 @@
 },
 {
   "_id": "4",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fminnesota-wild.72839331.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/MIN_light.svg",
   "name": "Wild",
   "city": "Minnesota",
   "conference": "Western",
@@ -45,7 +45,7 @@
 },
 {
   "_id": "5",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fflorida-panthers.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/FLA_light.svg",
   "name": "Panthers",
   "city": "Florida",
   "conference": "Eastern",
@@ -56,7 +56,7 @@
 },
 {
   "_id": "6",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flos-angeles-kings.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/LAK_light.svg",
   "name": "Kings",
   "city": "Los Angeles",
   "conference": "Western",
@@ -67,7 +67,7 @@
 },
 {
   "_id": "7",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcarolina-hurricanes.b2eafb35.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/CAR_light.svg",
   "name": "Hurricanes",
   "city": "Carolina",
   "conference": "Eastern",
@@ -78,7 +78,7 @@
 },
 {
   "_id": "8",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fedmonton-oilers.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/EDM_light.svg",
   "name": "Oilers",
   "city": "Edmonton",
   "conference": "Western",
@@ -89,7 +89,7 @@
 },
 {
   "_id": "9",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftoronto-maple-leafs.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/TOR_light.svg",
   "name": "Maple Leafs",
   "city": "Toronto",
   "conference": "Eastern",
@@ -100,7 +100,7 @@
 },
 {
   "_id": "10",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwinnipeg-jets.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/WPG_light.svg",
   "name": "Jets",
   "city": "Winnipeg",
   "conference": "Western",
@@ -111,7 +111,7 @@
 },
 {
   "_id": "11",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwashington-capitals.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/WSH_secondary_light.svg",
   "name": "Capitals",
   "city": "Washington",
   "conference": "Eastern",
@@ -122,7 +122,7 @@
 },
 {
   "_id": "12",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fvegas-golden-knights.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/VGK_light.svg",
   "name": "Golden Knights",
   "city": "Vegas",
   "conference": "Western",
@@ -133,7 +133,7 @@
 },
 {
   "_id": "13",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fnew-jersey-devils.efa88323.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/NJD_light.svg",
   "name": "Devils",
   "city": "New Jersey",
   "conference": "Eastern",
@@ -144,7 +144,7 @@
 },
 {
   "_id": "14",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftampa-bay-lightning.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/TBL_light.svg",
   "name": "Lightning",
   "city": "Tampa Bay",
   "conference": "Eastern",
@@ -155,7 +155,7 @@
 },
 {
   "_id": "15",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fvancouver-canucks.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/VAN_light.svg",
   "name": "Canucks",
   "city": "Vancouver",
   "conference": "Western",
@@ -166,7 +166,7 @@
 },
 {
   "_id": "16",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fboston-bruins.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/BOS_light.svg",
   "name": "Bruins",
   "city": "Boston",
   "conference": "Eastern",
@@ -177,7 +177,7 @@
 },
 {
   "_id": "17",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcalgary-flames.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/CGY_light.svg",
   "name": "Flames",
   "city": "Calgary",
   "conference": "Western",
@@ -188,7 +188,7 @@
 },
 {
   "_id": "18",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fottawa-senators.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/OTT_light.svg",
   "name": "Senators",
   "city": "Ottawa",
   "conference": "Eastern",
@@ -199,7 +199,7 @@
 },
 {
   "_id": "19",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpittsburgh-penguins.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/PIT_light.svg",
   "name": "Penguins",
   "city": "Pittsburgh",
   "conference": "Eastern",
@@ -210,7 +210,7 @@
 },
 {
   "_id": "20",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fst-louis-blues.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/STL_light.svg",
   "name": "Blues",
   "city": "St. Louis",
   "conference": "Western",
@@ -221,7 +221,7 @@
 },
 {
   "_id": "21",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fnew-york-rangers.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/NYR_light.svg",
   "name": "Rangers",
   "city": "New York",
   "conference": "Eastern",
@@ -232,7 +232,7 @@
 },
 {
   "_id": "22",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fphiladelphia-flyers.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/PHI_light.svg",
   "name": "Flyers",
   "city": "Philadelphia",
   "conference": "Eastern",
@@ -243,7 +243,7 @@
 },
 {
   "_id": "23",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fseattle-kraken.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/SEA_light.svg",
   "name": "Kraken",
   "city": "Seattle",
   "conference": "Western",
@@ -254,7 +254,7 @@
 },
 {
   "_id": "24",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcolumbus-blue-jackets.6342c43e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/CBJ_light.svg",
   "name": "Blue Jackets",
   "city": "Columbus",
   "conference": "Eastern",
@@ -265,7 +265,7 @@
 },
 {
   "_id": "25",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fnew-york-islanders.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/NYI_light.svg",
   "name": "Islanders",
   "city": "New York",
   "conference": "Eastern",
@@ -276,7 +276,7 @@
 },
 {
   "_id": "26",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdetroit-red-wings.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/DET_light.svg",
   "name": "Red Wings",
   "city": "Detroit",
   "conference": "Eastern",
@@ -287,7 +287,7 @@
 },
 {
   "_id": "27",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmontreal-canadiens.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/MTL_light.svg",
   "name": "Canadiens",
   "city": "Montreal",
   "conference": "Eastern",
@@ -298,7 +298,7 @@
 },
 {
   "_id": "28",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fanaheim-ducks.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/ANA_light.svg",
   "name": "Ducks",
   "city": "Anaheim",
   "conference": "Western",
@@ -309,7 +309,7 @@
 },
 {
   "_id": "29",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsan-jose-sharks.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/SJS_light.svg",
   "name": "Sharks",
   "city": "San Jose",
   "conference": "Western",
@@ -320,7 +320,7 @@
 },
 {
   "_id": "30",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbuffalo-sabres.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/BUF_light.svg",
   "name": "Sabres",
   "city": "Buffalo",
   "conference": "Eastern",
@@ -331,7 +331,7 @@
 },
 {
   "_id": "31",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fnashville-predators.5d5e5e5e.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/NSH_light.svg",
   "name": "Predators",
   "city": "Nashville",
   "conference": "Western",
@@ -342,18 +342,7 @@
 },
 {
   "_id": "32",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwashington-capitals.832b005a.png&w=128&q=20",
-  "name": "Capitals",
-  "city": "Washington",
-  "conference": "Eastern",
-  "division": "Metropolitan",
-  "founded": 1974,
-  "championships": 1,
-  "teamsABV": "WSH"
-},
-{
-  "_id": "32",
-  "logo": "https://www.dailyfaceoff.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Futah-hockey-club.03502a67.png&w=128&q=20",
+  "logo": "https://assets.nhle.com/logos/nhl/svg/UTA_light.svg",
   "name": "Utah Hockey Club",
   "city": "Salt Lake City",
   "conference": "Western",

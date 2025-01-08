@@ -10,12 +10,6 @@ const equipeSchema = new mongoose.Schema({
   division: { type: String, required: true }, // Division de l'équipe (ex: Atlantic, Central, etc.)
   founded: { type: Number, required: true }, // Année de fondation
   championships: { type: Number, default: 0 }, // Nombre de championnats
-  statistiqueEquipe: { //Récuprère les statistiques de l'équipe du model StatistiquesEquipe
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'StatistiquesEquipe', // Référence au modèle des statistiques d'équipe
-    required: true 
-  }
-
 });
 
 const Equipe = mongoose.model('Equipe', equipeSchema);
