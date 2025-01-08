@@ -53,7 +53,7 @@ async function insererUpdateJoueur() {
   }
 }
 
-//Export la function insererUpdateJoueur pour la rendre accessible pour la mise a jour des données
+//Export de la function insererUpdateJoueur pour la rendre accessible pour la mise a jour des données
 module.exports = insererUpdateJoueur;
 
 
