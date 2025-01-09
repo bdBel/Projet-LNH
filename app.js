@@ -7,6 +7,7 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const equipeRoutes = require('./routes/equipeRoutes');
+//Route vers statitique
 const statistiqueGardienRoutes = require('./routes/statistiqueGardienRoutes');
 const statistiqueEquipeRoutes = require('./routes/statistiqueEquipeRoutes');
 const statistiqueJoueurRoutes = require('./routes/statistiqueJoueurRoutes');
