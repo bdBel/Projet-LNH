@@ -7,6 +7,9 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const equipeRoutes = require('./routes/equipeRoutes');
+const statistiqueGardienRoutes = require('./routes/statistiqueGardienRoutes');
+const statistiqueEquipeRoutes = require('./routes/statistiqueEquipeRoutes');
+const statistiqueJoueurRoutes = require('./routes/statistiqueJoueurRoutes');
 
 const app = express();
 
@@ -25,9 +28,9 @@ app.use('/users', usersRouter);
 app.use('/', equipeRoutes);
 
 // Routes des statistiques
-//app.use('/gardien', statistiqueGardienRouter);
-//app.use('/equipe', statistiqueEquipeRouter);
-//app.use('/joueur', statistiqueJoueurRouter);
+app.use('/gardien', statistiqueGardienRoutes);
+app.use('/equipe', statistiqueEquipeRoutes);
+app.use('/joueur', statistiqueJoueurRoutes);
 
 
 

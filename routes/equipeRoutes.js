@@ -12,8 +12,8 @@ router.get("/equipe/:teamsABV", async (req, res) => {
       console.log('Équipe récupérée :', equipe); 
   
       if (!equipe) {
-        // Si l'équipe n'est pas trouvée, afficher une page d'erreur
-        return res.status(404).render('error', { message: 'Equipe non trouvée' });
+        // Si l'équipe n'est pas trouvée
+        return res.status(404).send('Équipe non trouvée');
       }
   
       // Rendre la vue 'equipe.ejs' avec les données de l'équipe
