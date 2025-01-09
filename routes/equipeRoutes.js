@@ -1,16 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const EquipeControlleur = require('../controllers/EquipeControlleur');
-/**
-// Route pour récupérer une équipe par son abréviation
-router.get('/equipe/:teamABV', EquipeControlleur.getEquipeByABVControlleur);
-
-// Route pour récupérer les équipes par conférence
-router.get('/conference/conference', EquipeControlleur.getEquipesByConferenceControlleur);
-
-// Route pour récupérer les équipes par division
-router.get('/division/division', EquipeControlleur.getEquipesByDivisionControlleur);
-*/
 
 const EquipeService = require('../service/EquipeService');
 
