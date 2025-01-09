@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des Équipes</title>
+  <style>
+    .teams-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .team-card {
+      margin: 30px;
+      width: 250px;
+      box-shadow: 4px 4px 8px rgb(122, 46, 46);
+      text-align: center;
+    }
+    .team-card img {
+      width: 25%;
+      margin-bottom: 10px;
+    }
+    .team-info {
+      font-size: 18px;
+      text-align: left;
+    }
+    .team-info strong {
+      display: inline-block;
+      width: 120px;
+    }
+  </style>
+</head>
+<body>
+
+  <% const WesternTeams = equipe.filter(equipe => equipe.conference === "Western"); %>
+  
+  <h1>Ouest</h1>
+  <div class="teams-container">
+    <% WesternTeams.forEach(equipe => { %>
+      <div class="team-card">
+        <div class="team-info">
+          <strong>Nom:</strong> <%= equipe.name %><br>
+          <strong>Conférence:</strong> <%= equipe.conference %><br>
+          <strong>Division:</strong> <%= equipe.division %><br>
+          <strong>Abbréviation:</strong> <%= equipe.teamsABV %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+  <% const easternTeams = equipe.filter(equipe => equipe.conference === "Eastern"); %>
+  <h1>Est</h1>
+  
+  <div class="teams-container">
+    <% easternTeams.forEach(equipe => { %>
+      <a href="/equipe/<%= equipe.teamsABV%>">
+      <div class="team-card">
+        <div class="team-info">
+          <strong>teamsABV:</strong> <%= equipe.teamsABV %><br>
+          <strong>Nom:</strong> <%= equipe.name %><br>
+          <strong>Conférence:</strong> <%= equipe.conference %><br>
+          <strong>Division:</strong> <%= equipe.division %><br>
+          <strong>Abbréviation:</strong> <%= equipe.teamsABV %>
+        </div>
+      </div>
+    </a>
+    <% }) %>
+  </div>
+
+</body>
+</html>

@@ -18,11 +18,30 @@ router.get("/equipe/:teamsABV", async (req, res) => {
   
       // Rendre la vue 'equipe.ejs' avec les données de l'équipe
       res.render('equipe', { equipe });
-      //res.status(200).json(equipe); // Retourner l'équipe
     } catch (err) {
       // En cas d'erreur, afficher une page d'erreur avec un message
       res.status(500);
     }
   });
+
+  // Récupérer une liste d'équipe
+router.get("/listeEquipes", async (req, res) => {
+  try {
+    const listeEquipes = await EquipeService.getEquipes(); // Appel au service pour récupérer l'équipe
+    console.log('Liste d\'Équipe récupérée :', listeEquipes); 
+
+    if (!listeEquipes) {
+      // Si la liste d'équipe n'est pas trouvée
+      return res.status(404).send('Liste d\'équipe non trouvée');
+    }
+
+    // Rendre la vue 'equipe.ejs' avec les données de l'équipe
+    res.render('listEquipe', { equipe: listeEquipes });
+  
+  } catch (err) {
+    // En cas d'erreur, afficher une page d'erreur avec un message
+    res.status(500);
+  }
+});
 module.exports = router;
  

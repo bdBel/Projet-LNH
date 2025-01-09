@@ -21,6 +21,17 @@ const getEquipeByABV = async (teamsABV) => {
  
 };
 
+// Récupérer toutes les équipes
+const getEquipes = async () => {
+  try {
+    connectDB();
+    const listeEquipes = await Equipe.find({},{"name":1, "division":1, "conference":1, "teamsABV":1});
+    return listeEquipes;
+  } catch (err) {
+    throw new Error('Erreur lors de la récupération des équipes: ' + err.message);
+  }
+};
+
 // Récupérer toutes les équipes d'une conférence donnée
 const getEquipesByConference = async (conference) => {
   try {
@@ -44,6 +55,7 @@ const getEquipesByDivision = async (division) => {
 module.exports = {
   getEquipeByABV,
   getEquipesByConference,
-  getEquipesByDivision
+  getEquipesByDivision,
+  getEquipes
 };
 
