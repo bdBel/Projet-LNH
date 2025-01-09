@@ -25,7 +25,7 @@ const getEquipeByABV = async (teamsABV) => {
 const getEquipes = async () => {
   try {
     connectDB();
-    const listeEquipes = await Equipe.find({},{"name":1, "division":1, "conference":1, "teamsABV":1});
+    const listeEquipes = await Equipe.find({});
     return listeEquipes;
   } catch (err) {
     throw new Error('Erreur lors de la récupération des équipes: ' + err.message);

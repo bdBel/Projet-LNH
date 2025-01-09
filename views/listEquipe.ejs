@@ -7,16 +7,17 @@
   <style>
     .teams-container {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column; /* Afficher les éléments en colonne */
+      align-items: center; /* Centrer les éléments horizontalement */
     }
     .team-card {
-      margin: 30px;
-      width: 250px;
+      margin: 10px;
+      width: 80%; /* Ajuster la largeur des cartes */
       box-shadow: 4px 4px 8px rgb(122, 46, 46);
       text-align: center;
     }
     .team-card img {
-      width: 25%;
+      width: 10%; /* Ajuster la largeur de l'image */
       margin-bottom: 10px;
     }
     .team-info {
@@ -28,43 +29,62 @@
       width: 120px;
     }
   </style>
+  
 </head>
 <body>
+  <!--Inserer la navbar-->
+  <%- include('composant/navbar') %>
 
-  <% const WesternTeams = equipe.filter(equipe => equipe.conference === "Western"); %>
+  <% const PacificTeams = equipe.filter(equipe => equipe.division === "Pacific"); %>
+  <% const CentralTeams = equipe.filter(equipe => equipe.division === "Central"); %>
+  
   
   <h1>Ouest</h1>
-  <div class="teams-container">
-    <% WesternTeams.forEach(equipe => { %>
-      <div class="team-card">
-        <div class="team-info">
-          <strong>Nom:</strong> <%= equipe.name %><br>
-          <strong>Conférence:</strong> <%= equipe.conference %><br>
-          <strong>Division:</strong> <%= equipe.division %><br>
-          <strong>Abbréviation:</strong> <%= equipe.teamsABV %>
-        </div>
-      </div>
-    <% }) %>
+  <h2>Central</h2>
+  <div class="teams-container">    
+      <% CentralTeams.forEach(equipe => { %>
+      <a href="/equipe/<%= equipe.teamsABV %>">
+        <div class="team-card">
+          <img src="<%= equipe.logo %>" alt="Logo <%= equipe.name %>">
+            <div class="team-info">          
+             <%= equipe.name %><br> </a>     
+              <%= equipe.conference %><br>
+              <%= equipe.division %><br>          
+              </div>
+        </div>    
+        <% }) %> <br>
+        <h2>Pacifique</h2>
+        <% PacificTeams.forEach(equipe => { %>
+          <a href="/equipe/<%= equipe.teamsABV %>">
+            <div class="team-card">
+              <img src="<%= equipe.logo %>" alt="Logo <%= equipe.name %>">
+                <div class="team-info">          
+                 <%= equipe.name %><br> </a>     
+                  <%= equipe.conference %><br>
+                  <%= equipe.division %><br>          
+                  </div>
+            </div>    
+            <% }) %>
+            <br>
+         
   </div>
 
-  <% const easternTeams = equipe.filter(equipe => equipe.conference === "Eastern"); %>
+  <% const EasternTeams = equipe.filter(equipe => equipe.conference === "Eastern"); %>
   <h1>Est</h1>
-  
   <div class="teams-container">
-    <% easternTeams.forEach(equipe => { %>
-      <a href="/equipe/<%= equipe.teamsABV%>">
+    <% EasternTeams.forEach(equipe => { %>
+      <a href="/equipe/<%= equipe.teamsABV %>">
       <div class="team-card">
-        <div class="team-info">
-          <strong>teamsABV:</strong> <%= equipe.teamsABV %><br>
+        <img src="<%= equipe.logo %>" alt="Logo <%= equipe.name %>">
+        <div class="team-info">          
           <strong>Nom:</strong> <%= equipe.name %><br>
           <strong>Conférence:</strong> <%= equipe.conference %><br>
           <strong>Division:</strong> <%= equipe.division %><br>
           <strong>Abbréviation:</strong> <%= equipe.teamsABV %>
         </div>
       </div>
-    </a>
+      </a>
     <% }) %>
   </div>
-
 </body>
 </html>
