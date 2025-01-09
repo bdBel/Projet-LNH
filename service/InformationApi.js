@@ -81,6 +81,8 @@ async function insererUpdateEquipe() {
   }
 }
 
+
+
 //appel de la fonction insererUpdateJoueur pour soit ajouter ou mettre à jour les données des joueurs
 //insererUpdateJoueur();
 insererUpdateEquipe();

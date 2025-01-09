@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Équipe : <%= equipe.name %></title>
+</head>
+<body>
+  <h1><%= equipe.name %> (<%= equipe.teamsABV %>)</h1>
+  <img src="<%= equipe.logo %>" alt="Logo de l'équipe" style="width:150px; height:auto;">
+  <p><strong>Ville :</strong> <%= equipe.city %></p>
+  <p><strong>Conférence :</strong> <%= equipe.conference %></p>
+  <p><strong>Division :</strong> <%= equipe.division %></p>
+  <p><strong>Fondée en :</strong> <%= equipe.founded %></p>
+  <p><strong>Championnats gagnés :</strong> <%= equipe.championships %></p>
+</body>
+</html>

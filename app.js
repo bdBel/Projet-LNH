@@ -6,6 +6,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const equipeRoutes = require('./routes/equipeRoutes');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/', equipeRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -38,4 +40,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// Démarrer le serveur
+app.listen(3000, () => {
+  console.log('Serveur démarré sur http://localhost:3030');
+});
 module.exports = app;
