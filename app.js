@@ -24,6 +24,13 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', equipeRoutes);
 
+// Routes des statistiques
+app.use('/gardien', statistiqueGardienRouter);
+app.use('/equipe', statistiqueEquipeRouter);
+app.use('/joueur', statistiqueJoueurRouter);
+
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

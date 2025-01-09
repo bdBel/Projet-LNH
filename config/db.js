@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // Fonction pour se connecter à MongoDB
 const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb+srv://Gabriel:jqhR0COFgKdPrMTH@cluster0.9cpa4.mongodb.net/', {
+        await mongoose.connect('mongodb+srv://Gabriel:jqhR0COFgKdPrMTH@cluster0.9cpa4.mongodb.net/test', {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
