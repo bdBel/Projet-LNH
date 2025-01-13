@@ -4,29 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Liste des Équipes</title>
-  <style>
-    .teams-container {
-      display: flex;
-      flex-direction: column; /* Afficher les éléments en colonne */
-      align-items: center; /* Centrer les éléments horizontalement */
+  <style> 
+    body{
+      font-family: Arial, sans-serif;
+
     }
     .team-card {
-      margin: 10px;
-      width: 80%; /* Ajuster la largeur des cartes */
-      box-shadow: 4px 4px 8px rgb(122, 46, 46);
-      text-align: center;
+      margin-top: 10px;
+      width: 100%; /* Ajuster la largeur des cartes */
+      box-shadow: 4px 4px 8px rgb(219, 40, 40);
+      display: flex;
     }
-    .team-card img {
-      width: 10%; /* Ajuster la largeur de l'image */
+    .box img {
+      width: 90%;
+      margin-top: 1%;      
+    } 
+    /**/
+    .container {
+      display: flex;
+      justify-content: space-between; /* Espace entre les boîtes */
+      padding-left: 10%;
+      padding-right: 10%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    .box {
+      width: 100%; /* Largeur de chaque boîte */
+      padding: 5%;      
+    }
+    .box h2 {
+      padding-left: 5%;
       margin-bottom: 10px;
     }
-    .team-info {
-      font-size: 18px;
-      text-align: left;
+    .team-card-img {
+      justify-content: right;
+      width: 25%;
+      max-width: 35%;
     }
-    .team-info strong {
-      display: inline-block;
-      width: 120px;
+    
+    .team-info ul{
+      display: flex;
+    }
+    .team-info ul li{
+      margin-right:30px;
+    }
+    .team-info h3{
+      margin-left:30px;
     }
   </style>
   
@@ -35,56 +59,94 @@
   <!--Inserer la navbar-->
   <%- include('composant/navbar') %>
 
-  <% const PacificTeams = equipe.filter(equipe => equipe.division === "Pacific"); %>
-  <% const CentralTeams = equipe.filter(equipe => equipe.division === "Central"); %>
-  
-  
-  <h1>Ouest</h1>
-  <h2>Central</h2>
-  <div class="teams-container">    
-      <% CentralTeams.forEach(equipe => { %>
-      <a href="/equipe/<%= equipe.teamsABV %>">
-        <div class="team-card">
-          <img src="<%= equipe.logo %>" alt="Logo <%= equipe.name %>">
-            <div class="team-info">          
-             <%= equipe.name %><br> </a>     
-              <%= equipe.conference %><br>
-              <%= equipe.division %><br>          
+  <% const MetropolitanTeams = equipe.filter(equipe => equipe.division === "Metropolitan"); %>
+  <% const AtlanticTeams = equipe.filter(equipe => equipe.division === "Atlantic"); %>
+
+  <h1 style="text-align: center;">Conférence de l'Est</h1>
+  <div class="container">   
+    
+    <div class="box">
+      <h2>Atlantic</h2>
+      <% AtlanticTeams.forEach(equipe => { %>
+          <div class="team-card">
+              <div class="team-card-img">
+                <a href="/equipe/<%= equipe.teamsABV %>"><img src="<%= equipe.logo %>" style="text-align: right;" alt="Logo <%= equipe.name %>">
+                </a>
               </div>
-        </div>    
-        <% }) %> <br>
-        <h2>Pacifique</h2>
-        <% PacificTeams.forEach(equipe => { %>
-          <a href="/equipe/<%= equipe.teamsABV %>">
-            <div class="team-card">
-              <img src="<%= equipe.logo %>" alt="Logo <%= equipe.name %>">
-                <div class="team-info">          
-                 <%= equipe.name %><br> </a>     
-                  <%= equipe.conference %><br>
-                  <%= equipe.division %><br>          
-                  </div>
-            </div>    
-            <% }) %>
-            <br>
-         
+              <div class="team-info">   
+                <h3><%= equipe.name %></h3>   
+                <ul>
+                  <li><a href="">Joueur</a></li>
+                  <li><a href="">Informatinon équipe</a></li>
+                  <li><a href="#">Ajout dun autre chose</a>Ajout dun autre chose</li>
+                </ul>          
+              </div>
+          </div>    
+          <% }) %>
+    </div>
+    <div class="box">
+      <h2>Metropolitan</h2>
+      <% MetropolitanTeams.forEach(equipe => { %>
+          <div class="team-card">
+            <div class="team-card-img">
+              <a href="/equipe/<%= equipe.teamsABV %>"><img src="<%= equipe.logo %>" style="text-align: right;" alt="Logo <%= equipe.name %>">
+              </a>
+            </div>
+            <div class="team-info">   
+              <h3><%= equipe.name %></h3>   
+              <ul>
+                <li><a href="">Joueur</a></li>
+                <li><a href="">Informatinon équipe</a></li>
+                <li><a href="#">Ajout dun autre chose</a>Ajout dun autre chose</li>
+              </ul>           
+            </div>
+          </div>    
+          <% }) %>
+    </div>
   </div>
 
-  <% const EasternTeams = equipe.filter(equipe => equipe.conference === "Eastern"); %>
-  <h1>Est</h1>
-  <div class="teams-container">
-    <% EasternTeams.forEach(equipe => { %>
-      <a href="/equipe/<%= equipe.teamsABV %>">
-      <div class="team-card">
-        <img src="<%= equipe.logo %>" alt="Logo <%= equipe.name %>">
-        <div class="team-info">          
-          <strong>Nom:</strong> <%= equipe.name %><br>
-          <strong>Conférence:</strong> <%= equipe.conference %><br>
-          <strong>Division:</strong> <%= equipe.division %><br>
-          <strong>Abbréviation:</strong> <%= equipe.teamsABV %>
-        </div>
-      </div>
-      </a>
-    <% }) %>
+  <% const PacificTeams = equipe.filter(equipe => equipe.division === "Pacific"); %>
+  <% const CentralTeams = equipe.filter(equipe => equipe.division === "Central"); %>
+  <h1 style="text-align: center;">Conférence de l'Ouest</h1>
+  <div class="container">   
+    <div class="box">
+      <h2>Pacific</h2>
+      <% PacificTeams.forEach(equipe => { %>
+          <div class="team-card">
+              <div class="team-card-img">
+                <a href="/equipe/<%= equipe.teamsABV %>"><img src="<%= equipe.logo %>" style="text-align: right;" alt="Logo <%= equipe.name %>">
+                </a>
+              </div>
+              <div class="team-info">   
+                <h3><%= equipe.name %></h3>   
+                <ul>
+                  <li><a href="">Joueur</a></li>
+                  <li><a href="">Informatinon équipe</a></li>
+                  <li><a href="#">Ajout dun autre chose</a>Ajout dun autre chose</li>
+                </ul>          
+              </div>
+          </div>    
+          <% }) %>
+    </div>
+    <div class="box">
+      <h2>Central</h2>
+      <% CentralTeams.forEach(equipe => { %>
+          <div class="team-card">
+            <div class="team-card-img">
+              <a href="/equipe/<%= equipe.teamsABV %>"><img src="<%= equipe.logo %>" style="text-align: right;" alt="Logo <%= equipe.name %>">
+              </a>
+            </div>
+            <div class="team-info">   
+              <h3><%= equipe.name %></h3>   
+              <ul>
+                <li><a href="">Joueur</a></li>
+                <li><a href="">Informatinon équipe</a></li>
+                <li><a href="#">Ajout dun autre chose</a>Ajout dun autre chose</li>
+              </ul>          
+            </div>
+          </div>    
+          <% }) %>
+    </div>
   </div>
 </body>
 </html>
