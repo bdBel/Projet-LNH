@@ -128,6 +128,8 @@ const mettreAJourToutesStatistiques = async () => {
     console.error('Erreur lors de la mise à jour des statistiques :', error);
   }
 };
+mettreAJourToutesStatistiques();
+
 
 // Pour exporter les fonctions
 module.exports = {

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scores des matchs de hockey</title>
+</head>
+<body>
+    <h1>Scores des matchs de hockey</h1>
+    <% if (games && games.length > 0) { %>
+        <% games.forEach(dateEntry => { %>
+            <h2>Date : <%= dateEntry.date %></h2>
+            <ul>
+                <% dateEntry.games.forEach(game => { %>
+                    <li>
+                        <strong><%= game.homeTeam.name %></strong> vs <strong><%= game.awayTeam.name %></strong>
+                        <br>
+                        Score: <%= game.homeTeam.score %> - <%= game.awayTeam.score %>
+                    </li>
+                <% }) %>
+            </ul>
+        <% }) %>
+    <% } else { %>
+        <p>Aucun match en cours.</p>
+    <% } %>
+</body>
+</html>

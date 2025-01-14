@@ -7,7 +7,7 @@ const EquipeService = require('../service/EquipeService');
 router.get("/equipe/:teamsABV", async (req, res) => {
     try {
       const teamsABV = req.params.teamsABV; // Récupérer le paramètre de l'URL
-      console.log("Requetere pour l'equipe avec l'abréviation : " + teamsABV);
+      console.log("Requete pour l'equipe avec l'abréviation : " + teamsABV);
       const equipe = await EquipeService.getEquipeByABV(teamsABV); // Appel au service pour récupérer l'équipe
       console.log('Équipe récupérée :', equipe); 
   
@@ -36,7 +36,7 @@ router.get("/listeEquipes", async (req, res) => {
     }
 
     // Rendre la vue 'equipe.ejs' avec les données de l'équipe
-    res.render('listEquipe', { equipe: listeEquipes });
+    res.render('listeEquipe', { equipe: listeEquipes });
   
   } catch (err) {
     // En cas d'erreur, afficher une page d'erreur avec un message
