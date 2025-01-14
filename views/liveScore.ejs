@@ -88,10 +88,11 @@
 <div class="nav">
         <% if (games && games.length > 0) { %>
             <% games.forEach(dateEntry => { %>
-                <h2><%= dateEntry.date.split('-')[2] %></h2>
-                
+                <div><h2><%= dateEntry.games[0].day %></h2></div>              
                 <% dateEntry.games.forEach(game => { %>
+                   
                     <div class="nav-item">
+                        <div style="display: block;"> </div>
                         <div><%= game.formattedStartTime %></div>
                         <div>
                             <img src="<%= game.awayTeam.logo %>" alt="<%= game.awayTeam.name %>">
@@ -110,24 +111,8 @@
         <% } else { %>
             <div class="nav-item">Aucun match en cours</div>
         <% } %>
-    </div>
-    <% if (games && games.length > 0) { %>
-        <% games.forEach(dateEntry => { %>
-            <h2>Matchs du <%= dateEntry.date %></h2>
-            <% dateEntry.games.forEach(game => { %>
-                <div>
-                    <h3>Jour : <%= game.day %></h3>
-                    <h3>Heure : <%= game.formattedStartTime %></h3>
-                    <p><%= game.homeTeam.name %> vs <%= game.awayTeam.name %></p>
-                    <p>Status : <%= game.status %></p>
-                </div>
-            <% }) %>
-        <% }) %>
-    <% } else { %>
-        <p>Aucun match en cours aujourd'hui.</p>
-    <% } %>
+    </div>  
     
-
     <script>
         function goToPreviousDate() {
             // Logic to navigate to the previous date
