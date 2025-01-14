@@ -14,13 +14,23 @@ const getGamesLive = async () => {
                 id: game.id,
                 date: game.gameDate,
                 venue: game.venue.default,
+                status: game.status,
+                startTime:game.startTimeUTC,
+                period: game.period,
+                periodDescriptor:{
+                    number: game.periodDescriptor
+                    //periodType: game.periodDescriptor.periodType,
+                    //maxRegulationPeriods: game.periodDescriptor
+                },
                 homeTeam: {
                     name: game.homeTeam.name.default,
+                    abbrev: game.homeTeam.abbrev,
                     score: game.homeTeam.score,
                     logo: game.homeTeam.logo
                 },
                 awayTeam: {
                     name: game.awayTeam.name.default,
+                    abbrev: game.awayTeam.abbrev,
                     score: game.awayTeam.score,
                     logo: game.awayTeam.logo
                 }
