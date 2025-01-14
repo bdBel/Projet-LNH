@@ -1,5 +1,4 @@
 const Equipe = require('../models/Equipe');
-const mongoose = require('mongoose');
 const connectDB = require('../config/db');
 
 

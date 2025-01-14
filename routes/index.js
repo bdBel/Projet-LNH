@@ -1,9 +1,16 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('acceuil', { title: 'alloa' });
+
+router.get('/', async (req, res) => {
+  try {
+      
+      res.render('acceuil', ); // Passer les données à la vue
+  } catch (error) {
+      console.error('Erreur lors de la récupération des matchs :', error);
+      res.status(500).send('Erreur interne du serveur');
+  }
 });
 
 module.exports = router;
+

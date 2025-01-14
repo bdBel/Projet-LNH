@@ -9,6 +9,10 @@ const cors = require('cors');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/userRoutes');
 const equipeRoutes = require('./routes/equipeRoutes');
+const joueurRoutes = require('./routes/joueurRoutes');
+const liveScoreRoutes = require('./routes/liveScoreRoutes');
+
+
 //Route vers statitique
 const statistiqueGardienRoutes = require('./routes/statistiqueGardienRoutes');
 const statistiqueEquipeRoutes = require('./routes/statistiqueEquipeRoutes');
@@ -30,11 +34,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', equipeRoutes);
+app.use('/', joueurRoutes);
+app.use('/', liveScoreRoutes);
 
 // Routes des statistiques
-app.use('/gardien', statistiqueGardienRoutes);
+app.use('/stats/gardien', statistiqueGardienRoutes);
 app.use('/equipe', statistiqueEquipeRoutes);
-app.use('/joueur', statistiqueJoueurRoutes);
+app.use('/stats/joueur', statistiqueJoueurRoutes);
 
 
 
@@ -56,6 +62,6 @@ app.use(function(err, req, res, next) {
 
 // Démarrer le serveur
 app.listen(3000, () => {
-  console.log('Serveur démarré sur http://localhost:3030');
+  console.log('Serveur démarré sur http://localhost:3000');
 });
 module.exports = app;

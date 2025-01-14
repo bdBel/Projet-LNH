@@ -39,7 +39,7 @@ async function insererUpdateJoueur() {
         position: playerData.positionCode,
         team: playerData.currentTeamAbbrev,
         sweaterNumber: playerData.sweaterNumber,
-        birthDate: new Date(playerData.birthDate),
+        birthDate: playerData.birthDate,
         nationality: playerData.birthCountry,
         heightInInches: playerData.heightInInches,
         weightInPounds: playerData.weightInPounds,
@@ -84,8 +84,8 @@ async function insererUpdateEquipe() {
 
 
 //appel de la fonction insererUpdateJoueur pour soit ajouter ou mettre à jour les données des joueurs
-//insererUpdateJoueur();
-insererUpdateEquipe();
+insererUpdateJoueur();
+//insererUpdateEquipe();
 
 // Export de la fonction insererUpdateJoueur pour la rendre accessible pour la mise à jour des données
 module.exports = insererUpdateJoueur;
