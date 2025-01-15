@@ -3,200 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scores des matchs de hockey</title>
+    <title>Hockey Schedule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .header button {
+            background-color: white;
+            color: #0073e6;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .header button:hover {
+            background-color: #e6f3ff;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .team img {
+            height: 20px;
+            width: 20px;
+            margin-right: 8px;
+        }
+
+        .nav {
+            display: flex;
+            overflow-x: auto;
+            background-color: #005bb5;
+            padding: 10px;
+            white-space: nowrap;
+        }
+
+        .nav-item {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin: 0 10px;
+            background-color: #0073e6;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background-color: #004080;
+        }
+
+        .nav-item img {
+            height: 40px;
+            width: 50px;
+            margin-right: 8px;
+        }
+    </style>
 </head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f5f5f5;
-    }
 
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #0073e6;
-        color: white;
-        padding: 10px 20px;
-    }
-
-    .header button {
-        background-color: white;
-        color: #0073e6;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .header button:hover {
-        background-color: #e6f3ff;
-    }
-
-    .calendar {
-        text-align: center;
-        margin: 20px;
-    }
-
-    .schedule-container {
-        display: flex;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 10px;
-        padding: 20px;
-    }
-
-    .game-card {
-        background: rgb(89, 26, 26);
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        padding: 10px;
-        text-align: center;
-    }
-
-    .game-time {
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    .team {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 5px 0;
-    }
-
-    .team img {
-        height: 20px;
-        width: 20px;
-        margin-right: 8px;
-    }
-
-    .team-name {
-        flex-grow: 1;
-        text-align: left;
-    }
-
-    .score {
-        font-weight: bold;
-    }
-</style>
-</head>
-<body>
-<!--
-<div class="header">
-    <% if (games && games.length > 0) { %>
-    <button onclick="goToPreviousDate()">&lt; Previous</button>  
-        <% games.forEach(dateEntry => { %>
-        <h2>Date : <%= dateEntry.date %></h2>  
-    <div class="schedule-container" id="schedule-container">
-        <div class="game-card">  
-            <% dateEntry.games.forEach(game => { %>
-            <div class="game-time">7:00 PM EST</div>
-          
-            <div class="team">
-                <!--<img src="https://via.placeholder.com/20" alt="TBL">
-                <div class="team-name"><%= game.awayTeam.name %></div>
-                <div class="score">23-15-3</div>
-            </div>
-            <div class="team">
-                
-                <div class="team-name"><%= game.homeTeam.name %></div>
-                <div class="score">21-19-5</div>
-            </div>
-            <% }) %>
-        </div>
-        <% }) %>
-        <% } else { %>
-            <p>Aucun match en cours.</p>
-        <% } %>        
-    </div>
-    <button onclick="goToNextDate()">Next &gt;</button>
-</div>
-
-<div class="calendar">
-    <label for="date-picker">Select a date: </label>
-    <input type="date" id="date-picker" onchange="selectDate()">
-</div>
--->
-
-
-<script>
-    function goToPreviousDate() {
-        const datePicker = document.getElementById('date-picker');
-        const currentDate = new Date(datePicker.value || new Date());
-        currentDate.setDate(currentDate.getDate() - 1);
-        datePicker.value = currentDate.toISOString().split('T')[0];
-        updateSchedule(datePicker.value);
-    }
-
-    function goToNextDate() {
-        const datePicker = document.getElementById('date-picker');
-        const currentDate = new Date(datePicker.value || new Date());
-        currentDate.setDate(currentDate.getDate() + 1);
-        datePicker.value = currentDate.toISOString().split('T')[0];
-        updateSchedule(datePicker.value);
-    }
-
-    function selectDate() {
-        const date = document.getElementById('date-picker').value;
-        updateSchedule(date);
-    }
-
-    function updateSchedule(date) {
-        const scheduleContainer = document.getElementById('schedule-container');
-        scheduleContainer.innerHTML = `<div>Loading schedule for ${date}...</div>`;
-        // Simulate fetching data (replace with actual API call if needed)
-        setTimeout(() => {
-            scheduleContainer.innerHTML = `
-                <div class="game-card">
-                    <div class="game-time">7:00 PM EST</div>
-                    <div class="team">
-                        <img src="https://via.placeholder.com/20" alt="Example">
-                        <div class="team-name">Example Team 1</div>
-                        <div class="score">0-0-0</div>
-                    </div>
-                    <div class="team">
-                        <img src="https://via.placeholder.com/20" alt="Example">
-                        <div class="team-name">Example Team 2</div>
-                        <div class="score">0-0-0</div>
-                    </div>
-                </div>`;
-        }, 500);
-    }
-</script>
-
-
-
-    <h1>Scores des matchs de hockey</h1>
-    <% if (games && games.length > 0) { %>
-        <% games.forEach(dateEntry => { %>
-            <h2>Date : <%= dateEntry.date %></h2>
-            <ul>
+<div class="nav">
+        <% if (games && games.length > 0) { %>
+            <% games.forEach(dateEntry => { %>
+                <div><h2><%= dateEntry.games[0].day %></h2></div>              
                 <% dateEntry.games.forEach(game => { %>
-                    <li>
-                        <ul><%= game.period %></ul>
-                        <ul><strong><%= game.awayTeam.abbrev %></strong></ul>
-                        <ul>
-                            <strong>
-                                <img style="max-width: 5%;" src="<%= game.awayTeam.logo %>" alt="<%= game.homeTeam.name %>"></strong>
-                                <strong><%= game.awayTeam.name %></strong>-<%= game.awayTeam.score %>
-                            </strong>
-                        </ul>
-                        <ul>
-                            <strong>
-                                <img style="max-width: 5%;" src="<%= game.homeTeam.logo %>" alt="<%= game.homeTeam.name %>"></strong>
-                                <strong><%= game.homeTeam.name %></strong>-<%= game.homeTeam.score %>
-                            </strong>
-                        </ul>
-                    </li>
+                   
+                    <div class="nav-item">
+                        <div style="display: block;"> </div>
+                        <div><%= game.formattedStartTime %></div>
+                        <div>
+                            <img src="<%= game.awayTeam.logo %>" alt="<%= game.awayTeam.name %>">
+                            <%= game.awayTeam.abbrev %>
+                            <%= game.awayTeam.score %>
+                        </div>
+                   
+                        <div>
+                            <img src="<%= game.homeTeam.logo %>" alt="<%= game.homeTeam.name %>">
+                            <%= game.homeTeam.abbrev %>
+                            <%= game.awayTeam.score %>
+                        </div>
+                    </div>
                 <% }) %>
-            </ul>
-        <% }) %>
-    <% } else { %>
-        <p>Aucun match en cours.</p>
-    <% } %>
-  
+            <% }) %>
+        <% } else { %>
+            <div class="nav-item">Aucun match en cours</div>
+        <% } %>
+    </div>  
+    
+    <script>
+        function goToPreviousDate() {
+            // Logic to navigate to the previous date
+        }
+
+        function goToNextDate() {
+            // Logic to navigate to the next date
+        }
+    </script>
 </body>
 </html>
