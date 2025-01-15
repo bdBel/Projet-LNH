@@ -36,7 +36,7 @@ app.use('/', liveScoreRoutes);
 
 // Routes des statistiques
 app.use('/stats/gardien', statistiqueGardienRoutes);
-app.use('/equipe', statistiqueEquipeRoutes);
+app.use('/stats/equipe', statistiqueEquipeRoutes);
 app.use('/stats/joueur', statistiqueJoueurRoutes);
 
 
