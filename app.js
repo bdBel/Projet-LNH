@@ -3,7 +3,12 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const connectDB = require('./config/db');  // Adjust path as needed
+
+require('dotenv').config();
+
 const cors = require('cors');
+
 
 
 const indexRouter = require('./routes/index');
@@ -19,7 +24,7 @@ const statistiqueEquipeRoutes = require('./routes/statistiqueEquipeRoutes');
 const statistiqueJoueurRoutes = require('./routes/statistiqueJoueurRoutes');
 
 const app = express();
-
+connectDB();  
 // view engine setup
 app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
