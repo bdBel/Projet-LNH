@@ -103,7 +103,7 @@
                         <div>
                             <img src="<%= game.homeTeam.logo %>" alt="<%= game.homeTeam.name %>">
                             <%= game.homeTeam.abbrev %>
-                            <%= game.awayTeam.score %>
+                            <%= game.homeTeam.score %>
                         </div>
                     </div>
                 <% }) %>
@@ -112,15 +112,5 @@
             <div class="nav-item">Aucun match en cours</div>
         <% } %>
     </div>  
-    
-    <script>
-        function goToPreviousDate() {
-            // Logic to navigate to the previous date
-        }
-
-        function goToNextDate() {
-            // Logic to navigate to the next date
-        }
-    </script>
 </body>
 </html>
