@@ -91,15 +91,22 @@
                         <div class="row">
                             <div class="col-12">
                                 <p class="mt-5 mb-4 text-center">Create your account with us</p>
-
-                                <form id="signupForm" action="/register" method="POST">
+                                
+                                <form id="signup-Form" action="/signup" method="POST">
                                     <div class="row gy-3 overflow-hidden">
                                         <div class="col-12">
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" name="fullName" id="fullName" placeholder="John Doe" required>
-                                                <label for="fullName" class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" name="nom" id="nom" placeholder="nom" required>
+                                                <label for="nom" class="form-label" >Nom</label>
                                             </div>
                                         </div>
+                                        <div class="row gy-3 overflow-hidden">
+                                            <div class="col-12">
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" name="prenom" id="prenom" placeholder="prenom" required>
+                                                    <label for="prenom" class="form-label" >Prénom</label>
+                                                </div>
+                                            </div>
                                         <div class="col-12">
                                             <div class="form-floating mb-3">
                                                 <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
@@ -108,22 +115,23 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                                                <input type="password" class="form-control" name="password" id="password" placeholder="Mot de passe" required>
                                                 <label for="password" class="form-label">Password</label>
                                             </div>
                                         </div>
-                                        <div class="col-12">
+                                        <!-- <div class="col-12">
                                             <div class="form-floating mb-3">
                                                 <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
                                                 <label for="confirmPassword" class="form-label">Confirm Password</label>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-12">
                                             <div class="d-grid">
-                                                <button class="btn btn-primary" type="submit">Sign Up Now</button>
+                                                <button class="sign-up btn btn-primary" type="submit">Sign Up Now</button>
                                             </div>
                                             <br>
-                                            <a href="/login" class="link-secondary text-decoration-none">Already a member? Log in</a>
+                                            <div id="confirmation"></div>
+                                            <a href="/users/login" class="link-secondary text-decoration-none">Already a member? Log in</a>
                                         </div>
                                     </div>
                                 </form>
@@ -144,6 +152,77 @@
         </div>
     </div>
 </section>
+<script>
+    // Function to handle form submission
+    document.getElementById('signup-Form').addEventListener('submit', async function(event) {
+     event.preventDefault(); // Prevent default form submission
+
+     // Collect the form data
+     const formData = new FormData(event.target);
+     const data = {
+
+         nom: formData.get('nom'),
+         prenom: formData.get('prenom'),
+         email : formData.get('email'),
+         password: formData.get('password'),
+         
+     };
+
+     console.log('Data to send:', data); // Debugging
+
+     try {
+         // Make a PUT request to the backend to reserve the court
+         const response = await fetch('http://localhost:3000/users/signup', {  // Keep /users prefix here if needed
+             method: 'POST', // Use post method as intended by your backend
+             headers: {
+                 'Content-Type': 'application/json',
+             },
+             body: JSON.stringify(data)
+         });
+
+         console.log('Server response:', response); // Check server response
+
+         if (response.ok) {
+             // If the reservation was successful, show the confirmation message
+             const result = await response.json();
+             document.getElementById('confirmation').innerHTML = `Merci ${data.prenom}, pour votre inscription est confirmée.`;
+         } else {
+             // If there's an error with the reservation, show the message returned from the server
+             const result = await response.json();
+             alert(result.message || 'Une erreur s\'est produite, veuillez recommencer.');
+         }
+
+     } catch (error) {
+         // Handle any errors that occur during the fetch request
+         console.log('Error:', error);
+         alert('An error occurred while signing up.');
+     }
+ });
+
+ // Pre-fill today's date in the date input field when the page loads
+//  document.addEventListener("DOMContentLoaded", function() {
+//      let today = new Date();
+//      let formattedDate = today.toISOString().split('T')[0];
+//      document.getElementById('date').value = formattedDate;
+//  });
+ 
+     // Function to delete a user
+     async function deleteUser(id) {
+         try {
+             const response = await fetch(`/users/${id}`, { method: 'DELETE' });
+             if (response.ok) {
+                 alert("User deleted successfully");
+                 location.reload();
+             } else {
+                 alert("Failed to delete the user");
+             }
+         } catch (error) {
+             console.error("Error deleting user:", error);
+         }
+     }
+ </script>
+</body>
+</html>
 
 </body>
 </html>

@@ -11,7 +11,7 @@ connectDB()
             nom: 'fan',
             prenom: 'Doe',
             password: '1111',
-            Email: 'john.doe@example.com'
+            email: 'john.doe@example.com'
         });
 
         newUser.save()
