@@ -40,7 +40,6 @@
         border-radius: 5px;
      
     }
-
     .score-awayTeam, .score-homeTeam {
         display: flex;
         align-items: center;
@@ -58,6 +57,17 @@
       width: 200px;
       height: 150px;
     }   
+
+    .player-card {
+      margin-top: 10px;
+      width: 60%; /* Ajuster la largeur des cartes */
+      box-shadow: 4px 4px 8px rgb(219, 40, 40);
+      display: flex;
+    }
+
+    .player-card img{
+     width: 150px;
+    }
   </style>
   
 </head>
@@ -109,17 +119,35 @@
             <div ><img class="image-logo" src="<%= game.homeTeam.logo %>" alt="<%= game.homeTeam.abbrev %>"></div>       
     </div>
 </div>
-   
-  <%= game.id %>
-    <div class="box">
-      <h2><%= game.awayTeam.commonName.default %></h2>
 
-
-        <% game.summary.scoring.forEach(scoring => { %>
-            <% scoring.goals.forEach(goal => { %>
-                <%= goal.playerId %>
-            <% }) %>
+<div class="box">
+    <h2>Buts Marqué</h2>
+    <% game.summary.scoring.forEach(scoring => { %>
+        <h1><%= scoring.periodDescriptor.number %> Période</h1>
+        <% scoring.goals.forEach(goal => { %>
+            <div class="player-card">
+                <div><img src="<%= goal.headshot %>" alt="<%= goal.name.default %>"></div>
+                <div>
+                    <div><%= goal.name.default %>(<%= goal.goalsToDate %>)</div>
+                    <div>
+                        <% goal.assists.forEach(assist => { %>
+                            <div><%= assist.name.default %>(<%= assist.assistsToDate %>)</div>
+                        <% }) %>
+                    </div>
+                </div>
+                <div><%= goal.period %></div>
+                <div><%= goal.timeInPeriod %></div>
+                <div><%= goal.shotType %></div>
+            </div>
         <% }) %>
+    <% }) %>
+  </div>
+   
+ 
+
+        
+          
+        
 
        
     </div>       
