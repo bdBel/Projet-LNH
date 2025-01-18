@@ -160,11 +160,11 @@
      // Collect the form data
      const formData = new FormData(event.target);
      const data = {
-
+        
          nom: formData.get('nom'),
          prenom: formData.get('prenom'),
          email : formData.get('email'),
-         password: formData.get('password'),
+         password: formData.get('password').trim(),
          
      };
 
@@ -183,7 +183,7 @@
          console.log('Server response:', response); // Check server response
 
          if (response.ok) {
-             // If the reservation was successful, show the confirmation message
+             // If the registration was successful, show the confirmation message
              const result = await response.json();
              document.getElementById('confirmation').innerHTML = `Merci ${data.prenom}, pour votre inscription est confirmée.`;
          } else {

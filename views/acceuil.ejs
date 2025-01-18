@@ -6,11 +6,20 @@
     <title>Document</title>
 </head>
 <body>
+
     <!--Navbar-->
     <%- include('composant/navbar') %>
     <!--Navbar-->
 
-  
+  <h1>Bienvenue sur la page d'accueil!</h1>
+
+    <% if (username) { %>
+        <p>Bienvenue, <%= username %>!</p>
+        <a href="/users/logout">Se déconnecter</a>
+    <% } else { %>
+        <p>Veuillez vous connecter pour accéder à votre espace personnel.</p>
+        <a href="/users/login">Se connecter</a>
+    <% } %>
 
 
 </body>

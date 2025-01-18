@@ -11,6 +11,10 @@
             color: white;
             transform: scale(0.85);
         }
+        .invalid {
+            font-size:1rem;
+            color:wheat;
+        }
         .card {
             background-color: red;
             color: white;
@@ -76,7 +80,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <p class="mt-5 mb-4">Already a member? Log in with email</p>
-                                <form id="loginForm" action="/members" method="GET">
+                                <form id="loginForm" action="/users/login" method="POST">
                                     <div class="row gy-3 overflow-hidden">
                                         <div class="col-12">
                                             <div class="form-floating mb-3">
@@ -92,7 +96,7 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid">
-                                                <button class="btn btn-primary" type="submit">Log in now</button>
+                                                <button class="btn btn-primary" id="btn-login" type="submit">Log in now</button>
                                             </div>
                                             <br>
                                             <a href="#!" class="link-secondary text-decoration-none">Forgot password? Reset password</a>
@@ -101,7 +105,7 @@
                                 </form>
 
                                 <!-- Error or success message handling -->
-                                <div class="error mt-4" style="display: none;">
+                                <div  class="error mt-4 invalid" style="display: none;">
                                     <p>Invalid credentials. Please try again.</p>
                                 </div>
 
@@ -111,7 +115,7 @@
 
                                 <!-- Sign up link -->
                                 <div class="signup-link">
-                                    <p>Not a member? <a href= "http://localhost:3030/users/signup" class="link-secondary">Sign up</a></p>
+                                    <p>Not a member? <a href= "http://localhost:3000/users/signup" class="link-secondary">Sign up</a></p>
                                 </div>
                             </div>
                         </div>
@@ -121,6 +125,48 @@
         </div>
     </div>
 </section>
+<script>
 
+document.getElementById('login-Form').addEventListener('submit', async function(event) {
+   event.preventDefault(); // Prevent default form submission
+
+    
+    const formData = new FormData(event.target);
+    const data = {
+        email: formData.get('email'),
+        password: formData.get('password').trim(),
+    };
+
+    
+    try {
+        const response = await fetch('http://localhost:3000/users/login', {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json', 
+            },
+            body: JSON.stringify(data) 
+           
+        });
+
+     
+        if (response.ok) {
+            // If login is successful, redirect to the members page
+            window.location.href = 'http://localhost:3000/users/members';  
+        } else {
+            // If login fails, show an alert with the error message
+            const result = await response.json();
+            document.getElementById('login-fail').innerHTML = `Données invalides, veuillez recommencer`;
+            //alert(result.message || 'Login failed');
+        }
+
+    } catch (error) {
+        console.error('Error during login:', error);
+        console.log(data);
+        alert('An error occurred during login. Please try again.');
+    }
+});
+
+
+</script>
 </body>
 </html>
