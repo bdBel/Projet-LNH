@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const connectDB = async () => {
     try {
         await mongoose.connect('mongodb+srv://Gabriel:jqhR0COFgKdPrMTH@cluster0.9cpa4.mongodb.net/test',{
-                        
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
             bufferCommands: true,
         });
         console.log('Connecter à la base de donner');

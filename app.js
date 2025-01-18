@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const session = require('express-session');
 const connectDB = require('./config/db');  // Adjust path as needed
 
 require('dotenv').config();
@@ -25,14 +24,8 @@ const statistiqueEquipeRoutes = require('./routes/statistiqueEquipeRoutes');
 const statistiqueJoueurRoutes = require('./routes/statistiqueJoueurRoutes');
 
 const app = express();
-
 connectDB();  
 // view engine setup
-app.use(session({
-  secret: 'nhl', // use a secret key for session
-  resave: false,
-  saveUninitialized: true
-}));
 app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
