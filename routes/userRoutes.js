@@ -1,8 +1,14 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const User = require('../models/User'); // Assuming you have a User model
+const User = require('../models/User'); 
 const router = express.Router();
+const userService = require('../service/userService');
 
+
+// const { 
+//     registerUser, 
+//     loginUser 
+//       } = require('../service/userService');
 
 router.get("/login", async (req,res)=>{
     res.render('../views/loginRegister.ejs');
@@ -14,70 +20,61 @@ router.get("/signup", async (req,res)=>{
 
 // Signup Route
 
-
 router.post('/signup', async (req, res) => {
+ 
+
     const { nom, prenom, email, password } = req.body;
 
-    // Check if all fields are provided
-    if (!nom || !prenom || !email || !password) {
-        return res.status(400).json({ message: 'All fields are required' });
-    }
-
     try {
-        // Check if the user already exists
-        const userExists = await User.findOne({ email });
-        if (userExists) {
-            console.log('User already exists:', userExists); // Debugging user exists
-            return res.status(400).json({ message: 'User already exists' });
-        }
-
-        // Create a new user without manually hashing the password (middleware will handle it)
-        const newUser = new User({
-            nom,
-            prenom,
-            email,
-            password, // Password will be hashed in the pre('save') middleware
-        });
-
-        await newUser.save();
-
-        res.status(201).json({ message: 'User registered successfully' });
+        const user = await userService.registerUser(nom, prenom, email, password);
+        res.status(201).json({ message: 'User registered successfully', user });
     } catch (error) {
-        console.error("Error during registration:", error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(400).json({ message: error.message });
     }
 });
+
 
 // Login Route
 router.post('/login', async (req, res) => {
+
     const { email, password } = req.body;
 
-    if (!email || !password) {
-        return res.status(400).json({ message: 'Email and password are required' });
-    }
+    // if (!email || !password) {
+    //     return res.status(400).json({ message: 'Email and password are required' });
+    // }
 
     try {
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(400).json({ message: 'Invalid credentials' });
-        }
+        // Using userService.loginUser to handle user login
+        const user = await userService.loginUser(email, password);
 
-        // Compare the entered password with the hashed password
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid credentials' });
-        }
-        // store the users' first name for the session
+        // Store the user's first name (prenom) in the session
         req.session.username = user.prenom; 
+
+        // Redirect to members page
         res.redirect('/users/members');
-        //res.status(200).json({ message: 'Login successful' });
 
     } catch (error) {
         console.error("Error during login:", error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(400).json({ message: error.message });
     }
 });
 
+//=======================================================================
+
+// router.post('/login', async (req, res) => {
+//     const { email, password } = req.body;
+
+//     try {
+//         const user = await loginUser(email, password);
+        
+//         // Set user in session or token (if using sessions or JWT)
+//         req.session.username = user.prenom;  // Example, assuming you're using session
+        
+//         res.status(200).json({ message: 'Login successful' });
+//     } catch (error) {
+//         res.status(400).json({ message: error.message });
+//     }
+// });
 
 // Members Route (Dashboard or Personalized Page)
 router.get('/members', (req, res) => {
