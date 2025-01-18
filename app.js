@@ -15,7 +15,8 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/userRoutes');
 const equipeRoutes = require('./routes/equipeRoutes');
 const joueurRoutes = require('./routes/joueurRoutes');
-const liveScoreRoutes = require('./routes/liveScoreRoutes');
+const liveScoreRoutes = require('./routes/index');
+const boxScoreRoutes = require('./routes/boxScoreRoutes');
 
 
 //Route vers statitique
@@ -41,10 +42,11 @@ app.use('/users', usersRouter);
 app.use('/', equipeRoutes);
 app.use('/', joueurRoutes);
 app.use('/', liveScoreRoutes);
+app.use('/game', boxScoreRoutes);
 
 // Routes des statistiques
 app.use('/stats/gardien', statistiqueGardienRoutes);
-app.use('/equipe', statistiqueEquipeRoutes);
+app.use('/stats/equipe', statistiqueEquipeRoutes);
 app.use('/stats/joueur', statistiqueJoueurRoutes);
 
 

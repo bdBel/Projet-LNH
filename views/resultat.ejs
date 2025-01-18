@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des Équipes</title>
+  <style> 
+    body{
+      font-family: Arial, sans-serif;
+
+    }
+    .container {
+      display: flex;
+      justify-content: space-between; 
+      padding-left: 10%;
+      padding-right: 10%;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      max-height: 190px;
+    }
+    
+
+    .boxscore{
+        display: flex;
+        align-items: center;
+    }
+
+    .gamestate{
+        display: block;
+        margin: 0 30px;
+    }
+
+
+    .container-awayTeam, .container-homeTeam {
+        display: flex;
+        justify-content: space-between; 
+        align-items: center;
+        padding: 10px;
+        
+        border-radius: 5px;
+     
+    }
+    .score-awayTeam, .score-homeTeam {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #42486463;
+        color: rgb(5, 5, 5);
+        font-size: 24px;
+        font-weight: bold;
+        padding: 10px;
+        width: 80px; /* Taille fixe pour un bon alignement */
+        text-align: center;
+        border-radius: 5px;
+    }
+    .image-logo {
+      width: 200px;
+      height: 150px;
+    }   
+
+    .player-card {
+      margin-top: 10px;
+      width: 60%; /* Ajuster la largeur des cartes */
+      box-shadow: 4px 4px 8px rgb(219, 40, 40);
+      display: flex;
+    }
+
+    .player-card img{
+     width: 150px;
+    }
+  </style>
+  
+</head>
+<body>
+  <!--navbar-->
+  <%- include('composant/navbar') %>
+  <!--navbar-->
+
+  <div class="container" >
+    <div class="container-awayTeam ">
+        <div ><img class="image-logo" src="<%= game.awayTeam.logo %>" alt="<%= game.awayTeam.abbrev %>"></div>
+        <div>
+            <h1>
+                <div >
+                    <div><%= game.awayTeam.commonName.default %></div>
+                    <div><%= game.awayTeam.placeNameWithPreposition.fr %></div>
+                    <div>Tir au buts: <%= game.awayTeam.sog %></div>                   
+                </div>
+            </h1>
+        </div>
+        
+    </div>
+
+    <div class="boxscore">
+        <div class="score-awayTeam"><h1><%= game.awayTeam.score %></h1></div>
+        <% if (game.gameState === "OFF") { %>
+            <% game.gameState = "Final"; %>
+        <% } else { %>
+            <% game.gameState = game.gameState; %>
+        <% } %>       
+        <div class="gamestate"><h1>
+            <div><h4><%= game.gameState %></h4></div>
+            <div><h4><%= game.clock.timeRemaining %></h4></div>
+        </div>
+        <div class="score-homeTeam"><h1><%= game.homeTeam.score %></h1></div>
+    </div>
+    
+    <div  class="container-homeTeam">         
+            
+            <div>
+                <h1>
+                    <div style="display: block;">
+                        <div><%= game.homeTeam.commonName.default %></div>
+                        <div><%= game.homeTeam.placeNameWithPreposition.fr %></div>
+                        <div>Tir au buts: <%= game.homeTeam.sog %></div>                   
+                    </div>
+                </h1>
+            </div>        
+            <div ><img class="image-logo" src="<%= game.homeTeam.logo %>" alt="<%= game.homeTeam.abbrev %>"></div>       
+    </div>
+</div>
+
+<div class="box">
+    <h2>Buts Marqué</h2>
+    <% game.summary.scoring.forEach(scoring => { %>
+        <h1><%= scoring.periodDescriptor.number %> Période</h1>
+        <% scoring.goals.forEach(goal => { %>
+            <div class="player-card">
+                <div><img src="<%= goal.headshot %>" alt="<%= goal.name.default %>"></div>
+                <div>
+                    <div><%= goal.name.default %>(<%= goal.goalsToDate %>)</div>
+                    <div>
+                        <% goal.assists.forEach(assist => { %>
+                            <div><%= assist.name.default %>(<%= assist.assistsToDate %>)</div>
+                        <% }) %>
+                    </div>
+                </div>
+                <div><%= goal.period %></div>
+                <div><%= goal.timeInPeriod %></div>
+                <div><%= goal.shotType %></div>
+            </div>
+        <% }) %>
+    <% }) %>
+  </div>
+   
+ 
+
+        
+          
+        
+
+       
+    </div>       
+  
+</body>
+</html>
