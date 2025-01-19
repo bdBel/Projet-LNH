@@ -61,19 +61,26 @@
         .nav {
             display: flex;
             overflow-x: auto;
-            background-color: #005bb5;
+            background-color: #a3a3a3;
             padding: 10px;
             white-space: nowrap;
         }
 
         .nav-item {
             display: inline-block;
-            color: white;      
+            color: rgb(7, 7, 7);      
             padding: 10px;
             margin: 0 10px;
-            background-color: #0073e6;
+            background-color: #fafafa;
             border-radius: 8px;
             cursor: pointer;
+            
+        }
+        .nav-item a {
+            font-size: large;
+            text-decoration: none;
+            color: rgb(7, 7, 7);
+            
         }
 
         .nav-item:hover {
@@ -86,33 +93,42 @@
         }
     </style>
 
-    <div class="nav">    
-        <% if (games && games.length > 0) { %>        
-            <% games.forEach(dateEntry => { %>            
-                <div><h2><%= dateEntry.games[0].day %></h2></div>
-                <% dateEntry.games.forEach(game => { %>                    
-                    <div class="nav-item "> 
-                        <a href="/game/boxscore/<%= game.id %>">                      
-                        <div style="display: block;"><%= game.formattedStartTime %></div>
-                       <!--<div><a href="https:www.nhl.com<%= game.recapLink %>">Recap</a></div> A changer de place dans resultat.ejs (boxescore)-->
-                        <div class="team">
-                            <img src="<%= game.awayTeam.logo %>" alt="<%= game.awayTeam.name %>">
-                            <div class="team-abrrev"><%= game.awayTeam.abbrev %></div>
-                            <div class="team-score"><%= game.awayTeam.score %></div>
-                        </div>
-                        <div class="team">
-                            <img src="<%= game.homeTeam.logo %>" alt="<%= game.homeTeam.name %>">
-                            <div class="team-abrrev"><%= game.homeTeam.abbrev %></div>
-                            <div class="team-score"><%= game.homeTeam.score %></div>
-                        </div>
+<div class="nav">
+    <% if (games && games.length > 0) { %>
+        <% games.forEach(dateEntry => { %>           
+                <div><h2><%= dateEntry.games[0].today %></h2></div>
+                <% dateEntry.games.forEach(game => { %>
+                    <div class="nav-item">
+                        <a href="/game/boxscore/<%= game.id %>">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div><%= game.gameState %></div>
+                                <div><%= game.formattedStartTime %></div>
+                                
+                            </div>
+                            <div class="team">
+                                <img src="<%= game.awayTeam.logo %>" alt="<%= game.awayTeam.name %>">
+                                <div class="team-abrrev"><%= game.awayTeam.abbrev %></div>
+                                <div class="team-score"><%= game.awayTeam.score %></div>
+                            </div>
+                            <div class="team">
+                                <img src="<%= game.homeTeam.logo %>" alt="<%= game.homeTeam.name %>">
+                                <div class="team-abrrev"><%= game.homeTeam.abbrev %></div>
+                                <div class="team-score"><%= game.homeTeam.score %></div>
+                            </div>
+                        </a>
                     </div>
-                    </a>
                 <% }) %>
-            <% }) %>
-        <% } else { %>
-            <div class="nav-item">Aucun match en cours</div>
-        <% } %>
-    </div>
+        <% }) %>
+    <% } else { %>
+        <div class="nav-item">Aucun match en cours</div>
+    <% } %>
+</div>
+
+
+
+
+
+    
 
 
 
