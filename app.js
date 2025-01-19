@@ -1,14 +1,14 @@
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const connectDB = require('./config/db');  // Adjust path as needed
-
+//const session = require('express-session');
 require('dotenv').config();
 
 const cors = require('cors');
-
 
 
 const indexRouter = require('./routes/index');
@@ -31,6 +31,12 @@ app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
+// app.use(session({
+//   secret: 'nhl', // use a secret key for session
+//   resave: false,
+//   saveUninitialized: true
+// }));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
