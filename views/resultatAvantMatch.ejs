@@ -84,7 +84,7 @@
                 <div >
                     <div><%= game.awayTeam.commonName.default %></div>
                     <div><%= game.awayTeam.placeNameWithPreposition.fr %></div>
-                    <div>Tir au buts: <%= game.awayTeam.sog %></div>                   
+                    <div><%= game.awayTeam.record %></div>                   
                 </div>
             </h1>
         </div>
@@ -92,12 +92,12 @@
     </div>
 
     <div class="boxscore">
-        <div class="score-awayTeam"><h1><%= game.awayTeam.score %></h1></div>    
+        
         <div class="gamestate"><h1>
             <div><h4><%= game.gameState %></h4></div>
-            <div><h4><%= game.clock.timeRemaining %></h4></div>
+            <div><h4><%= game.gameDate %></h4></div>
         </div>
-        <div class="score-homeTeam"><h1><%= game.homeTeam.score %></h1></div>
+       
     </div>
     
     <div  class="container-homeTeam">         
@@ -107,45 +107,13 @@
                     <div style="display: block;">
                         <div><%= game.homeTeam.commonName.default %></div>
                         <div><%= game.homeTeam.placeNameWithPreposition.fr %></div>
-                        <div>Tir au buts: <%= game.homeTeam.sog %></div>                   
+                        <div><%= game.homeTeam.record %></div>                   
                     </div>
                 </h1>
             </div>        
             <div ><img class="image-logo" src="<%= game.homeTeam.logo %>" alt="<%= game.homeTeam.abbrev %>"></div>       
     </div>
-</div>
-
-<div class="box">
-    <h2>Buts Marqué</h2>
-    <% game.summary.scoring.forEach(scoring => { %>
-        <h1><%= scoring.periodDescriptor.number %> Période</h1>
-        <% scoring.goals.forEach(goal => { %>
-            <div class="player-card">
-                <div><img src="<%= goal.headshot %>" alt="<%= goal.name.default %>"></div>
-                <div>
-                    <div><%= goal.name.default %>(<%= goal.goalsToDate %>)</div>
-                    <div>
-                        <% goal.assists.forEach(assist => { %>
-                            <div><%= assist.name.default %>(<%= assist.assistsToDate %>)</div>
-                        <% }) %>
-                    </div>
-                </div>
-                <div><%= goal.period %></div>
-                <div><%= goal.timeInPeriod %></div>
-                <div><%= goal.shotType %></div>
-            </div>
-        <% }) %>
-    <% }) %>
-  </div>
-   
- 
-
-        
-          
-        
-
-       
-    </div>       
+</div>     
   
 </body>
 </html>
