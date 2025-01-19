@@ -1,0 +1,119 @@
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .header button {
+            background-color: white;
+            color: #0073e6;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .header button:hover {
+            background-color: #e6f3ff;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .team{
+            display: flex;        
+            align-items: center;
+        }
+
+        .team-abrrev {
+            justify-content: center;
+            width: 70px;
+            padding-right: 30px;
+        }
+
+        .team img {
+            height: 20px;
+            width: 40px;            
+        }
+
+        .nav {
+            display: flex;
+            overflow-x: auto;
+            background-color: #005bb5;
+            padding: 10px;
+            white-space: nowrap;
+        }
+
+        .nav-item {
+            display: inline-block;
+            color: white;      
+            padding: 10px;
+            margin: 0 10px;
+            background-color: #0073e6;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background-color: #6592c2;
+        }
+
+        .nav-item img {
+            height: 60px;
+            width: 60px;
+        }
+    </style>
+
+    <div class="nav">    
+        <% if (games && games.length > 0) { %>        
+            <% games.forEach(dateEntry => { %>            
+                <div><h2><%= dateEntry.games[0].day %></h2></div>
+                <% dateEntry.games.forEach(game => { %>                    
+                    <div class="nav-item "> 
+                        <a href="/game/boxscore/<%= game.id %>">                      
+                        <div style="display: block;"><%= game.formattedStartTime %></div>
+                       <!--<div><a href="https:www.nhl.com<%= game.recapLink %>">Recap</a></div> A changer de place dans resultat.ejs (boxescore)-->
+                        <div class="team">
+                            <img src="<%= game.awayTeam.logo %>" alt="<%= game.awayTeam.name %>">
+                            <div class="team-abrrev"><%= game.awayTeam.abbrev %></div>
+                            <div class="team-score"><%= game.awayTeam.score %></div>
+                        </div>
+                        <div class="team">
+                            <img src="<%= game.homeTeam.logo %>" alt="<%= game.homeTeam.name %>">
+                            <div class="team-abrrev"><%= game.homeTeam.abbrev %></div>
+                            <div class="team-score"><%= game.homeTeam.score %></div>
+                        </div>
+                    </div>
+                    </a>
+                <% }) %>
+            <% }) %>
+        <% } else { %>
+            <div class="nav-item">Aucun match en cours</div>
+        <% } %>
+    </div>
+
+
+
+
