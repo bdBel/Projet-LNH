@@ -12,12 +12,15 @@ router.get('/', async (req, res) => {
 
     gamesByDate.forEach(dateEntry => {
         dateEntry.games.forEach(game => {        
-         if (game.gameState === 'FUT') {
-            game.gameState = 'À VENIR';
-            console.log('game.gameState:', game.gameState)}else if(game.gameState === 'OFF'){
+            if (game.gameState === 'FUT' || game.gameState === 'PRE') {
+                game.gameState = 'À VENIR';
+            }else if(game.gameState === 'OFF'){
                 game.gameState = 'FINAL';
-                game.formattedStartTime = ""
-            };    
+                
+            }else if(game.gameState === 'LIVE'){
+                game.gameState = 'EN DIRECT';
+                game.formattedStartTime = " "
+            }
         });       
        
     });             

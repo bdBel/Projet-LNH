@@ -7,7 +7,7 @@
   <style> 
     body{
       font-family: Arial, sans-serif;
-
+      margin: 25px;
     }
     .container {
       display: flex;
@@ -49,7 +49,7 @@
         font-size: 24px;
         font-weight: bold;
         padding: 10px;
-        width: 80px; /* Taille fixe pour un bon alignement */
+        width: 80px; 
         text-align: center;
         border-radius: 5px;
     }
@@ -59,15 +59,77 @@
     }   
 
     .player-card {
-      margin-top: 10px;
-      width: 60%; /* Ajuster la largeur des cartes */
-      box-shadow: 4px 4px 8px rgb(219, 40, 40);
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%; 
+      height: 150px;     
+      margin-top: 20px; 
+      box-shadow: 4px 4px 8px rgb(219, 40, 40);      
     }
 
-    .player-card img{
-     width: 150px;
+    .player-card img {
+    margin: 0 20px; 
+    width: 130px; 
+    height: 130px; 
+    border-radius: 50%; 
+    background-color: rgba(105, 105, 105, 0.541);
+    
+    }   
+
+    .matchupContainer{
+      margin-left: 100px;
+      margin-right: 100px;
+      border: 2px solid #ccc;
+      padding-bottom: 50px;
     }
+
+    .matchupPoints {
+      font-size: 32px;
+      line-height: 32px;
+      font-weight: 900;
+      text-align: center;
+      width: 72px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .matchupPlayer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-left: 50px;
+      margin-right: 50px;
+      
+    }
+
+    .matchupPlayerInfo{
+      display: flex;
+      flex-direction: column;      
+      margin-left: 12px;
+      margin-right: 0;     
+      min-width: 800px;
+      font-size: 24px;
+    }
+
+    .matchupHeader{
+      margin-left: 50px;
+      margin-right: 50px;
+      
+    }
+
+    .matchupHeader ul{
+      list-style-type: none;
+      font-size: 25px;
+    }
+    .joueursContainer{
+     border: 2px solid #f80b0b;
+     padding-bottom: 50px;
+     margin: 100px;
+    }
+   
+
   </style>
   
 </head>
@@ -113,7 +175,186 @@
             </div>        
             <div ><img class="image-logo" src="<%= game.homeTeam.logo %>" alt="<%= game.homeTeam.abbrev %>"></div>       
     </div>
-</div>     
+  </div>     
+
+<div class="joueursContainer" >
+          <!--DIV qui contient les joueurs a surveiller  et l'entête-->
+    <div class="matchupContainer">
+        <div class="matchupHeader" >
+          <div>
+            <ul >
+              <li ><h1>Joueur à surveiller</h1></li>
+              <li><h4>5 Derniers matchs</h4></li>
+            </ul> 
+          </div>
+            <hr style="background-color: #ccc;">
+          <div style="display: flex;">
+            <div style="width: 100%;"><img style="width: 130px;" src="<%= game.awayTeam.logo %>" alt="<%= game.awayTeam.abbrev %>"></div>
+            <div><img style="width: 130px;" src="<%= game.homeTeam.logo %>" alt="<%= game.homeTeam.abbrev %>"></div>
+          </div>
+        </div>
+    
+        <div><!--DIV qui contient les joueurs a surveiller  et l'entête-->
+          <div class="matchupPlayer"><!--Points-->
+            <div>
+              <% game.matchup.teamLeaders.leaders.forEach(leader => { %>
+                <% if (leader.category === 'points') { %>
+                  <div class="player-card">
+                    <div><img src="<%= leader.awayLeader.headshot %>" alt="<%= leader.awayLeader.name.default %>"></div>
+                    <div style="display: flex;">
+                      <div class="matchupPlayerInfo">
+                        <div><%= leader.awayLeader.firstName.default %></div>
+                        <div><%= leader.awayLeader.lastName.default %></div>
+                        <div>#<%= leader.awayLeader.sweaterNumber %><strong>&nbsp;---&nbsp;</strong><%= leader.awayLeader.positionCode %></div>
+                      </div>
+                      <div class="matchupPoints"><%= leader.awayLeader.value %></div>
+                    </div>
+                  </div>
+                <% } %>
+              <% }) %>          
+            </div>
+            <div class="matchupPlayer"><h1>Points</h1></div>
+            <div>
+              <% game.matchup.teamLeaders.leaders.forEach(leader => { %>
+                <% if (leader.category === 'points') { %>
+                  <div class="player-card">                
+                      <div style="display: flex; width: 80%;">
+                      <div class="matchupPoints" style="padding-left:15px ;"><%= leader.homeLeader.value %></div>
+                    <div class="matchupPlayerInfo" style="align-items: flex-end;">
+                      <div><%= leader.homeLeader.firstName.default %></div>
+                      <div><%= leader.homeLeader.lastName.default %></div>
+                      <div style="display:flex ;">#<%= leader.homeLeader.sweaterNumber %><strong>&nbsp;---&nbsp;</strong><%= leader.homeLeader.positionCode %></div>
+                    </div>                 
+                  </div>
+                  <div  style="justify-content: end;"><img src="<%= leader.homeLeader.headshot %>" alt="<%= leader.homeLeader.name.default %>"></div>
+                  </div>
+                <% } %>
+              <% }) %> 
+            </div>
+          </div><!--Fin de matchupPlayer: Points-->
+
+        <div class="matchupPlayer">
+          <div>
+            <% game.matchup.teamLeaders.leaders.forEach(leader => { %>
+              <% if (leader.category === 'goals') { %>
+                <div class="player-card">
+                  <div><img src="<%= leader.awayLeader.headshot %>" alt="<%= leader.awayLeader.name.default %>"></div>
+                  <div style="display: flex;">
+                    <div class="matchupPlayerInfo">
+                      <div><%= leader.awayLeader.firstName.default %></div>
+                      <div><%= leader.awayLeader.lastName.default %></div>
+                      <div>#<%= leader.awayLeader.sweaterNumber %><strong>&nbsp;---&nbsp;</strong><%= leader.awayLeader.positionCode %></div>
+                    </div>
+                    <div class="matchupPoints"><%= leader.awayLeader.value %></div>
+                  </div>
+                </div>
+              <% } %>
+            <% }) %>          
+          </div>
+          <div class="matchupPlayer"><h1>Buts</h1></div>
+          <div>
+            <% game.matchup.teamLeaders.leaders.forEach(leader => { %>
+              <% if (leader.category === 'goals') { %>
+                <div class="player-card">                
+                  <div style="display: flex; width: 80%;">
+                    <div class="matchupPoints" style="padding-left:15px ;"><%= leader.homeLeader.value %></div>
+                    <div class="matchupPlayerInfo" style="align-items: flex-end;">
+                      <div><%= leader.homeLeader.firstName.default %></div>
+                      <div><%= leader.homeLeader.lastName.default %></div>
+                      <div style="display:flex ;">#<%= leader.homeLeader.sweaterNumber %><strong>&nbsp;---&nbsp;</strong><%= leader.homeLeader.positionCode %></div>
+                    </div>                 
+                  </div>
+                  <div  style="justify-content: end;"><img src="<%= leader.homeLeader.headshot %>" alt="<%= leader.homeLeader.name.default %>"></div>
+                </div>
+              <% } %>
+            <% }) %> 
+          </div>
+        </div><!--Fin de matchupPlayer: Buts-->
+
+        <div class="matchupPlayer">
+          <div>
+            <% game.matchup.teamLeaders.leaders.forEach(leader => { %>
+              <% if (leader.category === 'assists') { %>
+                <div class="player-card">
+                  <div><img src="<%= leader.awayLeader.headshot %>" alt="<%= leader.awayLeader.name.default %>"></div>
+                  <div style="display: flex;">
+                    <div class="matchupPlayerInfo">
+                      <div><%= leader.awayLeader.firstName.default %></div>
+                      <div><%= leader.awayLeader.lastName.default %></div>
+                      <div>#<%= leader.awayLeader.sweaterNumber %><strong>&nbsp;---&nbsp;</strong><%= leader.awayLeader.positionCode %></div>
+                    </div>
+                    <div class="matchupPoints"><%= leader.awayLeader.value %></div>
+                  </div>
+                </div>
+              <% } %>
+            <% }) %>          
+          </div>
+          <div class="matchupPlayer"><h1>Passes</h1></div>
+          <div>
+            <% game.matchup.teamLeaders.leaders.forEach(leader => { %>
+              <% if (leader.category === 'assists') { %>
+                <div class="player-card">                
+                  <div style="display: flex; width: 80%;">
+                    <div class="matchupPoints" style="padding-left:15px ;"><%= leader.homeLeader.value %></div>
+                    <div class="matchupPlayerInfo" style="align-items: flex-end;">
+                      <div><%= leader.homeLeader.firstName.default %></div>
+                      <div><%= leader.homeLeader.lastName.default %></div>
+                      <div style="display:flex ;">#<%= leader.homeLeader.sweaterNumber %><strong>&nbsp;---&nbsp;</strong><%= leader.homeLeader.positionCode %></div>
+                    </div>                 
+                  </div>
+                  <div  style="justify-content: end;"><img src="<%= leader.homeLeader.headshot %>" alt="<%= leader.homeLeader.name.default %>"></div>
+                </div>
+              <% } %>
+            <% }) %> 
+          </div><!--Fin de matchupPlayer: Passes-->   
+      </div><!--Fin de matchupContainer-->
+
+    </div>
+  </div>
+  <div class="matchupContainer">
+    <div class="matchupHeader" >
+      <div>
+        <ul >
+          <li ><h1>Gardien </h1></li>
+          <li><h4>En saison régulière</h4></li>
+        </ul> 
+      </div>
+        <hr style="background-color: #ccc;">
+      <div style="display: flex;">
+        <div style="width: 20%;"><img style="width: 130px;" src="<%= game.awayTeam.logo %>" alt="<%= game.awayTeam.abbrev %>"></div>
+        <div><%= game.matchup.goalieComparison.homeTeam.teamTotals.record %></div>
+      </div>
+
+    <div><!--DIV qui contient les joueurs a surveiller  et l'entête-->
+      <div class="matchupPlayer"><!--Points-->
+        <div>
+          <% game.matchup.goalieComparison.homeTeam.leaders.forEach(leader => { %>
+            
+              <div class="player-card">
+                <div><img src="<%= leader.headshot %>" alt="<%= leader.name.default %>"></div>
+                
+                  <div style="display: flex;">
+                    <div><%= leader.firstName.default %></div>
+                    <div><%= leader.lastName.default %></div>
+                    <div>#<%= leader.sweaterNumber %></div>
+                    <div><%= leader.record %></div>
+                    <div><%= leader.gaa %></div>
+                    <div><%= leader.savePctg %></div>
+                    <div><%= leader.shutouts %></div>
+                  </div>
+                  
+                
+              </div>
+            
+          <% }) %>          
+        </div> 
+
+</div>
+</div>
+
+</div><!--Fin de joueursContainer-->
+
+
   
 </body>
 </html>
