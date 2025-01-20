@@ -16,10 +16,10 @@ router.get('/', async (req, res) => {
                 game.gameState = 'À VENIR';
             }else if(game.gameState === 'OFF'){
                 game.gameState = 'FINAL';
+                game.formattedStartTime = " "
                 
             }else if(game.gameState === 'LIVE'){
-                game.gameState = 'EN DIRECT';
-                game.formattedStartTime = " "
+                game.gameState = 'EN DIRECT';                
             }
         });       
        
