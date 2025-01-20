@@ -12,7 +12,7 @@ router.get("/boxscore/:id", async (req, res) => {
         const game = await data.getSummary(id);
         
 
-        if(game.gameState === "FUT"){
+        if(game.gameState === "FUT" || game.gameState === "PRE"){
             game.gameState = "À VENIR" 
             res.render('resultatAvantMatch', {game});
         }else{
