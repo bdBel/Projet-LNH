@@ -4,9 +4,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const session = require('express-session');
 const connectDB = require('./config/db');  // Adjust path as needed
-//const session = require('express-session');
+const session = require('express-session');
 require('dotenv').config();
 
 const cors = require('cors');
@@ -27,24 +26,24 @@ const statistiqueJoueurRoutes = require('./routes/statistiqueJoueurRoutes');
 
 const app = express();
 connectDB();  
+
 // view engine setup
-app.use(session({
-  secret: 'nhl', // use a secret key for session
-  resave: false,
-  saveUninitialized: true
-}));
 app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser());  // Cookie parsing
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: 'nhl', // use a secret key for session
+  resave: false,
+  saveUninitialized: true
+}));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', equipeRoutes);

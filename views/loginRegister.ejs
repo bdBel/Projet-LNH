@@ -6,9 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
-        body {
-            background-color: #e25050;
+        
+        .signup-link {
             color: #f8f9fa;
+            background-color: purple;
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.3rem;
+        }
+        body {
+            background-color: #0a0a0a;
+            color: #f8f9fa;
+        }
+        h3{
+            background-color: purple;
         }
         .card {
             background-color: #1e1e1e;
@@ -18,15 +30,22 @@
         .card-body {
             padding: 2rem;
         }
+        #register{
+            margin-top: 20px;
+            background-color: purple;
+        }
         .form-label {
             color: #f8f9fa;
         }
         .btn-primary {
-            background-color: #007bff;
+            background-color: purple;
             border: none;
         }
         .btn-primary:hover {
             background-color: #0056b3;
+        }
+        .z{
+            background-color: purple;
         }
         .link-secondary {
             color: #adb5bd;
@@ -57,32 +76,49 @@
         #forgot {
             font-size: 1rem;
             margin-top: 1rem;
+            color: #f8f9fa;
         }
         #retour-accueil {
             font-size: 1rem;
             margin-top: 1rem;
-            display: inline-block;
             color: #f8f9fa;
             text-decoration: none;
         }
         #retour-accueil:hover {
             text-decoration: underline;
         }
+        /* Align and style links */
+        .links-container {
+            margin-top: 1rem;
+            color: #f8f9fa;
+        }
+        .links-container a {
+            color: #f8f9fa;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+        .links-container a:hover {
+            text-decoration: underline;
+        }
+        .links-container .left-align {
+            text-align: left;
+            display: block;
+        }
     </style>
 </head>
 <body>
-<section class="bg-dark py-5">
     <div class="container">
+    <section class="bg-dark py-5">
+    
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
                 <div class="card shadow-sm rounded-4">
                     <div class="card-body">
-                        <h3 class="text-center mb-4">Connexion Membres</h3>
+                        <h3 class="text-center mb-5">Connexion Membres</h3>
 
-                        <p class="text-center">Pas encore membre? <a href="http://localhost:3000/users/signup" class="link-secondary">S'enregistrer</a></p>
-
-                        <p class="text-center mt-3 mb-4">Already a member? Log in with email</p>
-
+                        <div id="register">
+                        <p class="text-center register">Pas encore membre? <a href="http://localhost:3000/users/signup" class="text-center text-bg-primary fw-bolder ">S'enregistrer içi</a></p>
+                        </div>
                         <form id="loginForm" action="/users/login" method="POST">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
@@ -93,7 +129,10 @@
                                 <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                             </div>
                             <div class="d-grid">
-                                <button class="btn btn-primary" id="btn-login" type="submit">Log in now</button>
+
+                        
+        
+                                <button class="signup-link" id="btn-login" type="submit">Se connecter</button>
                             </div>
                         </form>
 
@@ -105,12 +144,10 @@
                             <p>Welcome back! You are now logged in.</p>
                         </div>
 
-                        <div id="forgot" class="text-center">
-                            <a href="#" class="link-secondary">Forgot password? Reset password</a>
-                        </div>
-
-                        <div class="text-center mt-4">
-                            <a id="retour-accueil" href="http://localhost:3000">Retour à l'accueil</a>
+                        <!-- Align and style the links (Mot de passe oublié & Retour à l'accueil) -->
+                        <div class="links-container mt-5">
+                            <a href="#" id="forgot" class="left-align">Mot de passe oublié</a>
+                            <a href="http://localhost:3000" id="retour-accueil" class="left-align">Retour à l'accueil</a>
                         </div>
                     </div>
                 </div>
@@ -118,6 +155,7 @@
         </div>
     </div>
 </section>
+
 <script>
     document.getElementById('loginForm').addEventListener('submit', async function(event) {
         event.preventDefault();

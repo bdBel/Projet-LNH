@@ -49,6 +49,7 @@ router.post('/login', async (req, res) => {
 
         // Store the user's first name (prenom) in the session
         req.session.username = user.prenom; 
+        //req.session.imageUrl = '/images/puck.jpg';
 
         // Redirect to members page
         res.redirect('/users/members');

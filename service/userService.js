@@ -25,7 +25,7 @@ const registerUser = async (nom, prenom, email, password) => {
         });
 
         await newUser.save();
-        return newUser;
+        return newUser;zzz
     };
 
     // Login user
