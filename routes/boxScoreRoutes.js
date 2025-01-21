@@ -22,6 +22,7 @@ router.get("/boxscore/:id", async (req, res) => {
                 game.clock.timeRemaining = " ";
             } else if (game.gameState === "LIVE") {
                 game.gameState === "En Direct" 
+                
             }else if (data.gameState === "FUT") {
                 game.gameState === "À venir" 
             }

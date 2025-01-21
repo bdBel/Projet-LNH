@@ -19,7 +19,8 @@ router.get('/', async (req, res) => {
                 game.formattedStartTime = " "
                 
             }else if(game.gameState === 'LIVE'){
-                game.gameState = 'EN DIRECT';                
+                game.gameState = 'EN DIRECT'; 
+                game.formattedStartTime = " ";               
             }
         });       
        
