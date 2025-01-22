@@ -5,11 +5,6 @@ const router = express.Router();
 const userService = require('../service/userService');
 
 
-// const { 
-//     registerUser, 
-//     loginUser 
-//       } = require('../service/userService');
-
 router.get("/login", async (req,res)=>{
     res.render('../views/loginRegister.ejs');
 });
@@ -51,8 +46,7 @@ router.post('/login', async (req, res) => {
         req.session.username = user.prenom; 
         //req.session.imageUrl = '/images/puck.jpg';
 
-        // Redirect to members page
-        res.redirect('/users/members');
+                res.redirect('/users/members');
 
     } catch (error) {
         console.error("Error during login:", error);
@@ -60,24 +54,6 @@ router.post('/login', async (req, res) => {
     }
 });
 
-//=======================================================================
-
-// router.post('/login', async (req, res) => {
-//     const { email, password } = req.body;
-
-//     try {
-//         const user = await loginUser(email, password);
-        
-//         // Set user in session or token (if using sessions or JWT)
-//         req.session.username = user.prenom;  // Example, assuming you're using session
-        
-//         res.status(200).json({ message: 'Login successful' });
-//     } catch (error) {
-//         res.status(400).json({ message: error.message });
-//     }
-// });
-
-// Members Route (Dashboard or Personalized Page)
 
 router.get('/members', (req, res) => {
     if (req.session.username) {
@@ -86,7 +62,7 @@ router.get('/members', (req, res) => {
         res.render('accueilMembre.ejs', { username: req.session.username });
                     
     } else {
-        // If not logged in, redirect to the login page
+        
         res.redirect('/users/login');
     }
 });
@@ -99,7 +75,7 @@ router.get('/logout', (req, res) => {
             return res.redirect('/');
         }
 
-        res.redirect('/');  // Redirect to accueil page after logging out
+        res.redirect('/');  // Redirect to accueil page
     });
 });
   

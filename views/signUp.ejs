@@ -196,7 +196,7 @@
                             </div>
                         </form>
 
-                        <!-- Error or success message handling -->
+                        <!-- Error handling -->
                         <div class="error mt-4" style="display: none;">
                             <p>Something went wrong. Please try again.</p>
                         </div>
@@ -227,16 +227,16 @@
         console.log('Data to send:', data); // Debugging
 
         try {
-            // Make a PUT request to the backend to reserve the court
+            
             const response = await fetch('http://localhost:3000/users/signup', {
-                method: 'POST', // Keep post method as intended by your backend
+                method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data)
             });
 
-            console.log('Server response:', response); // Check server response
+            console.log('Server response:', response); 
 
             if (response.ok) {
                 const result = await response.json();
