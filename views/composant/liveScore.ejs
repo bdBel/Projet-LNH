@@ -1,10 +1,4 @@
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
         .header button:hover {
             background-color: #e6f3ff;
         }
@@ -17,7 +11,6 @@
         .game-card {
             background: white;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 10px;
             text-align: center;
             margin-bottom: 20px;
@@ -32,6 +25,10 @@
             justify-content: center;
             width: 70px;
             padding-right: 30px;
+            font-size: x-large;
+        }
+        .team-score {
+            font-size: x-large;
         }
 
         .team img {
@@ -54,8 +51,9 @@
             margin: 0 10px;
             background-color: #fafafa;
             border-radius: 8px;
-            cursor: pointer;
-            
+            cursor: pointer;  
+
+                   
         }
         .nav-item a {
             font-size: large;
@@ -81,7 +79,7 @@
                 <% dateEntry.games.forEach(game => { %>
                     <div class="nav-item">
                         <a href="/game/boxscore/<%= game.id %>">
-                            <div style="display: flex; justify-content: space-between;">
+                            <div style="display: flex; justify-content: space-between; font-size: x-large; ">
                                 <div><%= game.gameState %></div>
                                 <div><%= game.formattedStartTime %></div>
                                 
