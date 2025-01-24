@@ -8,6 +8,8 @@ const getJoueursByEquipe = async (teamsABV) => {
     console.log("Tu es dans le service");
     const joueurs = await Joueur.find({ team: teamsABV });
     console.log('Joueurs trouvés :', joueurs);
+    
+    
     return joueurs;
   } catch (err) {
     throw new Error('Erreur lors de la récupération des joueurs: ' + err.message);

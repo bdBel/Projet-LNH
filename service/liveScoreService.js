@@ -1,8 +1,5 @@
 const axios = require('axios');
 
-
-
-
 const getGamesLive = async () => {
     const API_URL = 'https://api-web.nhle.com/v1/scoreboard/now';
     try {
@@ -53,7 +50,7 @@ const getGamesLive = async () => {
                     gameState: game.gameState,
                     recapLink: game.threeMinRecap,
                     today: today,
-                    date: game.gameDate, // La date du match au format "YYYY-MM-DD"
+                    dateGame: game.gameDate, // La date du match au format "YYYY-MM-DD"
                     startTime: game.startTimeUTC,
                     formattedStartTime: formattedTime,
                     homeTeam: {
