@@ -1,38 +1,46 @@
 const express = require('express');
 const router = express.Router();
 const liveScoreService = require('../service/liveScoreService');
-
 router.get('/', async (req, res) => {
   try {
 
-    const gamesByDate = await liveScoreService.getGamesLive();
+    //APPEL des partie en direct
+    const gamesByDate = await liveScoreService.getGamesLive(); 
+    
+    
+    // Obtenez la date actuelle au format "YYYY-MM-DD"
+    const currentDate = new Date().toISOString().split('T')[0]; 
+    
     if (!gamesByDate || gamesByDate.length === 0) {
         return res.status(404).send('Aucun match en cours.');
     }
 
-    gamesByDate.forEach(dateEntry => {
+    gamesByDate.forEach(dateEntry => {     
         dateEntry.games.forEach(game => {        
             if (game.gameState === 'FUT' || game.gameState === 'PRE') {
-                game.gameState = 'À VENIR';
+                if(game.dateGame === currentDate){
+                    game.gameState = 'Aujourdhui | ';
+                }else{
+                    game.gameState = 'À VENIR | ';
+                }               
+                
             }else if(game.gameState === 'OFF'){
                 game.gameState = 'FINAL';
-                game.formattedStartTime = " "
-                
+                game.formattedStartTime = " "                
             }else if(game.gameState === 'LIVE'){
                 game.gameState = 'EN DIRECT'; 
-                game.formattedStartTime = " ";               
+                game.formattedStartTime = "";               
             }
-        });       
-       
-    });             
-          
+        });  
+    });     
 
     // Rendu des jeux avec les données modifiées
-    res.render('acceuil', { games: gamesByDate }); // Rendre la vue avec les données formatées
+    res.render('acceuil', { games: gamesByDate}); // Rendre la vue avec les données formatées
 } catch (error) {
     console.error('Erreur lors de la récupération des données:', error.message);
     res.status(500).send('Erreur lors de la récupération des données.');
 }
+ 
 });
 
 module.exports = router;

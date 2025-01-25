@@ -6,109 +6,171 @@
   <title></title>
 </head>
 <style>
-  table {
-    border-collapse: collapse;
-    width: 80%;
-    margin-top: 10px;
-    border-top: 2px solid #ccc;    
-  }
-  table th, td{
-    text-align: center;
-  }
-  .box-img-player{
+  
+  body{
+        margin-left: 8%;
+        margin-right: 8%;
+        background-color: #ccc;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+  .mainContainer{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    background-color: #ffffff;
+  }
+  .containerEntete, .containerJoueur{
+    display: flex;
+    justify-content: space-around;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-top: 2px solid #ccc;
+    text-align: center;
     align-items: center;
   }
+   /* Styles pour alterner les couleurs des lignes */
+   .containerEntete:nth-child(odd), .containerJoueur:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  
+  .containerEntete div, .containerJoueur div {
+    width: 150px;
+    align-items: center;  
+    font-size: 20px;  
+    font: bold;
+  }
+  .playerContainer h1{
+    font-size: 60px;
+    margin-left: 10px;
+  } 
+  .playerContainer h3{
+    font-size: 40px;
+    border-top: 2px solid #ccc;
+    padding-top: 30px;
+    justify-items: center;
+    margin-left: 10px;
+  } 
+
+ 
 </style>
 <body>
   <%- include('composant/navbar') %> 
 
-  <div>
-    <div><h1>Formation</h1></div>
+  <div class="mainContainer">
+    <div class="playerContainer">
+      <h1>Formation</h1>      
+      <h3>Attaquant</h3>
+      <div class="listeJoueur">
+        <!--Entête-->
+       <div class="containerEntete">
+        <div>Joueur</div>
+        <div>#</div>
+        <div>Position</div>
+        <div>Nationnaliter</div>
+        <div>Grandeur</div>
+        <div>Hauteur</div>
+        <div>Date de naissance</div>
+      </div>
+       
+       <!--Joueur-->
+       <% const attaquant = joueurs.filter(joueur => joueur.position == "C" || joueur.position == "L" || joueur.position == "R"); %>
+       <% attaquant.forEach(joueur => { %>
+      <div class="containerJoueur">
+        <div style="display: flex; ">
+          <div>
+            <img style="width: 120px; border-radius: 50%; background-color: rgb(73, 72, 72); margin-right: 10px;" src="<%= joueur.headshot%>" alt="<%= joueur.firstName%> <%= joueur.lastName%>">
+          </div>
+          <div class="" style="width: 300px;">
+            <%= joueur.firstName%> <%= joueur.lastName%>
+          </div>
+        </div>
+        <div><%= joueur.sweaterNumber%></div>
+        <div><%= joueur.position%></div>
+        <div><%= joueur.nationality%></div>
+        <div><%= joueur.heightInInches%></div>
+        <div><%= joueur.weightInPounds%></div>
+        <div><%= joueur.birthDate%></div>   
+      </div>
+      <% }) %>
+    </div>  
 
-    <% const attaquant = joueurs.filter(joueur => joueur.position == "C" || joueur.position == "L" || joueur.position == "R"); %>
-    <h1>Attaquant</h1>
-    <div>
-    <% attaquant.forEach(joueur => { %>
-      <table>
-        <thead>
-          <th>Joueur</th>
-          <th>#</th>
-          <th>Position</th>
-          <th>Nationnaliter</th>
-          <th>Grandeur</th>
-          <th>Hauteur</th>
-          <th>Date de naissance</th>
-        </thead>
-        <td class="box-img-player">
+    <!--Défenseur-->
+    <div class="playerContainer">     
+      <h3>Défenseur</h3>
+      <div class="listeJoueur">
+        <!--Entête-->
+       <div class="containerEntete">
+        <div>Joueur</div>
+        <div>#</div>
+        <div>Position</div>
+        <div>Nationnaliter</div>
+        <div>Grandeur</div>
+        <div>Hauteur</div>
+        <div>Date de naissance</div>
+      </div>
+       
+       <!--Joueur-->
+       <% const def = joueurs.filter(joueur => joueur.position == "D"); %>
+       <% def.forEach(joueur => { %>
+      <div class="containerJoueur">
+        <div style="display: flex; ">
           <div>
             <img style="width: 75px; border-radius: 30%;" src="<%= joueur.headshot%>" alt="<%= joueur.firstName%> <%= joueur.lastName%>">
           </div>
-          <div class="box-img-player">
+          <div class="" style="width: 300px;">
             <%= joueur.firstName%> <%= joueur.lastName%>
           </div>
-        </td>
-        <td><%= joueur.sweaterNumber%></td>
-        <td><%= joueur.position%></td>
-        <td><%= joueur.nationality%></td>
-        <td><%= joueur.heightInInches%></td>
-        <td><%= joueur.weightInPounds%></td>
-        <td><%= joueur.birthDate%></td>
-      </table>
-    <% }) %>
-    </div>
+        </div>
+        <div><%= joueur.sweaterNumber%></div>
+        <div><%= joueur.position%></div>
+        <div><%= joueur.nationality%></div>
+        <div><%= joueur.heightInInches%></div>
+        <div><%= joueur.weightInPounds%></div>
+        <div><%= joueur.birthDate%></div>
+        
+      </div>
+      <% }) %>
+    </div> 
 
-    <div>
-    <% const defenseur = joueurs.filter(joueur => joueur.position === "D"); %>
-    <h1>Défenseur</h1>
-    <% defenseur.forEach(joueur => { %>
-      <table>
-        <thead>
-          <th>Joueur</th>
-          <th>#</th>
-          <th>Position</th>
-          <th>Nationnaliter</th>
-          <th>Grandeur</th>
-          <th>Hauteur</th>
-          <th>Date de naissance</th>
-        </thead>
-        <td><img style="width: 100px; border-radius: 30%;" src="<%= joueur.headshot%>" alt="<%= joueur.firstName%> <%= joueur.lastName%>">|<%= joueur.firstName%> <%= joueur.lastName%></td>
-        <td><%= joueur.sweaterNumber%></td>
-        <td><%= joueur.position%></td>
-        <td><%= joueur.nationality%></td>
-        <td><%= joueur.heightInInches%></td>
-        <td><%= joueur.weightInPounds%></td>
-        <td><%= joueur.birthDate%></td>
-      </table>
-    <% }) %>
+    <!--Gardien-->
+    <div class="playerContainer">     
+      <h3>Gardien</h3>
+      <div class="listeJoueur">
+        <!--Entête-->
+       <div class="containerEntete">
+        <div>Joueur</div>
+        <div>#</div>
+        <div>Position</div>
+        <div>Nationnaliter</div>
+        <div>Grandeur</div>
+        <div>Hauteur</div>
+        <div>Date de naissance</div>
+      </div>
+       
+       <!--Joueur-->
+       <% const gardien = joueurs.filter(joueur => joueur.position === "G"); %>
+       <% gardien.forEach(joueur => { %>
+      <div class="containerJoueur">
+        <div style="display: flex; ">
+          <div>
+            <img style="width: 75px; border-radius: 30%;" src="<%= joueur.headshot%>" alt="<%= joueur.firstName%> <%= joueur.lastName%>">
+          </div>
+          <div class="" style="width: 300px;">
+            <%= joueur.firstName%> <%= joueur.lastName%>
+          </div>
+        </div>
+        <div><%= joueur.sweaterNumber%></div>
+        <div><%= joueur.position%></div>
+        <div><%= joueur.nationality%></div>
+        <div><%= joueur.heightInInches%></div>
+        <div><%= joueur.weightInPounds%></div>
+        <div><%= joueur.birthDate%></div>
+        
+      </div>
+      <% }) %>
+    </div>   
+
+    
   </div>
-
-    <% const gardien = joueurs.filter(joueur => joueur.position === "G"); %>
-    <h1>Gardien</h1>
-    <div>
-    <% gardien.forEach(joueur => { %>
-      <table>
-        <thead>
-          <th>Joueur</th>
-          <th>#</th>
-          <th>Position</th>
-          <th>Nationnaliter</th>
-          <th>Grandeur</th>
-          <th>Hauteur</th>
-          <th>Date de naissance</th>
-        </thead>
-        <td><img style="width: 100px; border-radius: 30%;" src="<%= joueur.headshot%>" alt="<%= joueur.firstName%> <%= joueur.lastName%>">|<%= joueur.firstName%> <%= joueur.lastName%></td>
-        <td><%= joueur.sweaterNumber%></td>
-        <td><%= joueur.position%></td>
-        <td><%= joueur.nationality%></td>
-        <td><%= joueur.heightInInches%></td>
-        <td><%= joueur.weightInPounds%></td>
-        <td><%= joueur.birthDate%></td>
-      </table>
-    <% }) %>
-  </div>
-</div>
-
 </body>
 </html>
