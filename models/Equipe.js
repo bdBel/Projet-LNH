@@ -4,6 +4,7 @@ const equipeSchema = new mongoose.Schema({
   _id: String, // ID unique fourni par une API ou similaire
   teamsABV: { type: String, required: true }, // Abbréviation de l'équipe
   name: { type: String, required: true }, // Nom de l'équipe
+  full_name: { type: String, required: true }, // Nom complet de l'équipe
   logo: { type: String, required: true }, // URL du logo
   city: { type: String, required: true }, // Ville de l'équipe
   conference: { type: String, enum: ['Eastern', 'Western'], required: true }, // Conférencen de l'équipe (Est ou Ouest)

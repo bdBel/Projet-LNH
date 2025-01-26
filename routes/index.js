@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const liveScoreService = require('../service/liveScoreService');
+const { getVideosFromDb } = require('../service/videoService');
+
 router.get('/', async (req, res) => {
   try {
-
-    //APPEL des partie en direct
+    // APPEL des partie en direct
     const gamesByDate = await liveScoreService.getGamesLive(); 
-    
     
     // Obtenez la date actuelle au format "YYYY-MM-DD"
     const currentDate = new Date().toISOString().split('T')[0]; 
@@ -33,9 +33,16 @@ router.get('/', async (req, res) => {
             }
         });  
     });     
+    //Fin appel des partie en direct
+   // Récupérer les vidéos
+   const videos = await getVideosFromDb();
+   console.log("Dans la route index",videos);
+
+
+
 
     // Rendu des jeux avec les données modifiées
-    res.render('acceuil', { games: gamesByDate}); // Rendre la vue avec les données formatées
+    res.render('acceuil', { games: gamesByDate, videos}); // Rendre la vue avec les données formatées
 } catch (error) {
     console.error('Erreur lors de la récupération des données:', error.message);
     res.status(500).send('Erreur lors de la récupération des données.');
@@ -43,5 +50,6 @@ router.get('/', async (req, res) => {
  
 });
 
-module.exports = router;
 
+
+module.exports = router;
