@@ -36,10 +36,6 @@ router.get('/', async (req, res) => {
     //Fin appel des partie en direct
    // Récupérer les vidéos
    const videos = await getVideosFromDb();
-   console.log("Dans la route index",videos);
-
-
-
 
     // Rendu des jeux avec les données modifiées
     res.render('acceuil', { games: gamesByDate, videos}); // Rendre la vue avec les données formatées
