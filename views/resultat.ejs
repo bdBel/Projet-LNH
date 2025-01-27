@@ -6,17 +6,13 @@
   <title>Liste des Équipes</title>
   <style> 
     body{
-      font-family: Arial, sans-serif;
-
     }
     .container {
       display: flex;
       justify-content: space-between; 
-      padding-left: 10%;
-      padding-right: 10%;
       border: 1px solid #ccc;
       background-color: #f9f9f9;
-      max-height: 190px;
+      max-height: 120px;
     }
     
 
@@ -36,7 +32,6 @@
         justify-content: space-between; 
         align-items: center;
         padding: 10px;
-        
         border-radius: 5px;
      
     }
@@ -46,7 +41,7 @@
         justify-content: center;
         background-color: #42486463;
         color: rgb(5, 5, 5);
-        font-size: 24px;
+        font-size: 16px;
         font-weight: bold;
         padding: 10px;
         width: 80px; /* Taille fixe pour un bon alignement */
@@ -55,7 +50,7 @@
     }
     .image-logo {
       width: 200px;
-      height: 150px;
+      height: 100px;
     }   
 
     .player-card {
@@ -66,7 +61,8 @@
     }
 
     .player-card img{
-     width: 150px;
+     width: 100px;
+     border-radius: 50%;
     }
   </style>
   
@@ -94,7 +90,7 @@
     <div class="boxscore">
         <div class="score-awayTeam"><h1><%= game.awayTeam.score %></h1></div>    
         <div class="gamestate"><h1>
-            <div><h4><%= game.gameState %></h4></div>
+            <div><h5><%= game.gameState %></h5></div>
             <div><h4><%= game.clock.timeRemaining %></h4></div>
         </div>
         <div class="score-homeTeam"><h1><%= game.homeTeam.score %></h1></div>
@@ -115,37 +111,36 @@
     </div>
 </div>
 
+
+
 <div class="box">
-    <h2>Buts Marqué</h2>
+    <h2>Buts Marqués</h2>
     <% game.summary.scoring.forEach(scoring => { %>
-        <h1><%= scoring.periodDescriptor.number %> Période</h1>
-        <% scoring.goals.forEach(goal => { %>
+        <h3><%= scoring.periodDescriptor.number %> Période</h3>
+        <% scoring.goals.forEach((goal, index) => { %>
             <div class="player-card">
-                <div><img src="<%= goal.headshot %>" alt="<%= goal.name.default %>"></div>
+                <div>
+                    <img src="<%= goal.headshot %>" alt="<%= goal.name.default %>">
+                </div>
                 <div>
                     <div><%= goal.name.default %>(<%= goal.goalsToDate %>)</div>
                     <div>
-                        <% goal.assists.forEach(assist => { %>
-                            <div><%= assist.name.default %>(<%= assist.assistsToDate %>)</div>
-                        <% }) %>
+                        <% if (goal.assists && goal.assists.length > 0) { %>
+                            <% goal.assists.forEach(assist => { %>
+                                <div><%= assist.name.default %>(<%= assist.assistsToDate %>)</div>
+                            <% }) %>
+                        <% } else { %>
+                            <div>No assists</div>
+                        <% } %>
                     </div>
                 </div>
                 <div><%= goal.period %></div>
                 <div><%= goal.timeInPeriod %></div>
                 <div><%= goal.shotType %></div>
+                
             </div>
         <% }) %>
     <% }) %>
-  </div>
-   
- 
-
-        
-          
-        
-
-       
-    </div>       
-  
+</div>  
 </body>
 </html>

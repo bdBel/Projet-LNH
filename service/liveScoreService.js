@@ -1,8 +1,5 @@
 const axios = require('axios');
 
-
-
-
 const getGamesLive = async () => {
     const API_URL = 'https://api-web.nhle.com/v1/scoreboard/now';
     try {
@@ -53,7 +50,7 @@ const getGamesLive = async () => {
                     gameState: game.gameState,
                     recapLink: game.threeMinRecap,
                     today: today,
-                    date: game.gameDate, // La date du match au format "YYYY-MM-DD"
+                    dateGame: game.gameDate, // La date du match au format "YYYY-MM-DD"
                     startTime: game.startTimeUTC,
                     formattedStartTime: formattedTime,
                     homeTeam: {
@@ -97,8 +94,15 @@ const getSummary = async (id) => {
     }
 };
 
+const getGamesByDate = async (date) => {
+    const API_URL = `https://api-web.nhle.com/v1/score/${date}`;
+    try {
+        const response = await axios.get(API_URL);
+        return response.data.games;
+    } catch (error) {
+        console.error('Error fetching games:', error);
+        throw error;
+    }
+};
 
-
-
-
-module.exports = { getGamesLive,getSummary};
+module.exports = { getGamesLive,getSummary,getGamesByDate};
