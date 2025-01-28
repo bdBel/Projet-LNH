@@ -82,7 +82,13 @@
 
             <!-- Membres Dropdown -->
             <li class="dropdown">
-                
+               <!-- Check if the user is logged in by checking session username -->
+                <% if (typeof username !== 'undefined') { %> 
+                    <a href="#" class="dropdown-link">
+                        <img src="/images/puck.jpg" alt="User Image" style="width: 30px; height: 30px; border-radius: 50%;" />
+                        <span><%= username %></span>
+                    </a>
+                <% } %> 
                 <a href="#" class="dropdown-link">Membres</a>
                 <div class="dropdown-content">
                     <a href="/users/login">Se connecter</a>
