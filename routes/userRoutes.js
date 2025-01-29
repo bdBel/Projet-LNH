@@ -34,19 +34,17 @@ router.post('/login', async (req, res) => {
 
     const { email, password } = req.body;
 
-    // if (!email || !password) {
-    //     return res.status(400).json({ message: 'Email and password are required' });
-    // }
+     if (!email || !password) {
+         return res.status(400).json({ message: 'Email and password are required' });
+     }
 
     try {
-        // Using userService.loginUser to handle user login
+        
         const user = await userService.loginUser(email, password);
 
-        // Store the user's first name (prenom) in the session
+        // store firstname in session
         req.session.username = user.prenom; 
-        //req.session.imageUrl = '/images/puck.jpg';
-
-                res.redirect('/users/members');
+        res.redirect('/users/members');
 
     } catch (error) {
         console.error("Error during login:", error);
@@ -75,12 +73,13 @@ router.get('/logout', (req, res) => {
             return res.redirect('/');
         }
 
-        res.redirect('/');  // Redirect to accueil page
+        res.redirect('/');  
     });
 });
   
 
-/* GET users listing. */
+//list of users 
+
 router.get('/userList', function(req, res, next) {
     res.send('respond with a resource');
   });
