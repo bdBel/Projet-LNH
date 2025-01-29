@@ -218,7 +218,7 @@
         <div><!--DIV qui contient les joueurs a surveiller  et l'entête-->
           <div class="matchupPlayer"><!--Points-->
             <div>
-              <% game.matchup.teamLeaders.leaders.forEach(leader => { %>
+              <% game.matchup.skaterComparison.leaders.forEach(leader => { %>
                 <% if (leader.category === 'points') { %>
                   <div class="player-card">
                     <div><img src="<%= leader.awayLeader.headshot %>" alt="<%= leader.awayLeader.name.default %>"></div>
@@ -236,7 +236,7 @@
             </div>
             <div class="matchupPlayer"><h1>Points</h1></div>
             <div>
-              <% game.matchup.teamLeaders.leaders.forEach(leader => { %>
+              <% game.matchup.skaterComparison.leaders.forEach(leader => { %>
                 <% if (leader.category === 'points') { %>
                   <div class="player-card">                
                       <div style="display: flex; width: 80%;">
@@ -256,7 +256,7 @@
 
         <div class="matchupPlayer">
           <div>
-            <% game.matchup.teamLeaders.leaders.forEach(leader => { %>
+            <% game.matchup.skaterComparison.leaders.forEach(leader => { %>
               <% if (leader.category === 'goals') { %>
                 <div class="player-card">
                   <div><img src="<%= leader.awayLeader.headshot %>" alt="<%= leader.awayLeader.name.default %>"></div>
@@ -274,7 +274,7 @@
           </div>
           <div class="matchupPlayer"><h1>Buts</h1></div>
           <div>
-            <% game.matchup.teamLeaders.leaders.forEach(leader => { %>
+            <% game.matchup.skaterComparison.leaders.forEach(leader => { %>
               <% if (leader.category === 'goals') { %>
                 <div class="player-card">                
                   <div style="display: flex; width: 80%;">
@@ -294,7 +294,7 @@
 
         <div class="matchupPlayer">
           <div>
-            <% game.matchup.teamLeaders.leaders.forEach(leader => { %>
+            <% game.matchup.skaterComparison.leaders.forEach(leader => { %>
               <% if (leader.category === 'assists') { %>
                 <div class="player-card">
                   <div><img src="<%= leader.awayLeader.headshot %>" alt="<%= leader.awayLeader.name.default %>"></div>
@@ -312,7 +312,7 @@
           </div>
           <div class="matchupPlayer"><h1>Passes</h1></div>
           <div>
-            <% game.matchup.teamLeaders.leaders.forEach(leader => { %>
+            <% game.matchup.skaterComparison.leaders.forEach(leader => { %>
               <% if (leader.category === 'assists') { %>
                 <div class="player-card">                
                   <div style="display: flex; width: 80%;">

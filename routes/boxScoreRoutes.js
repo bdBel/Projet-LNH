@@ -35,7 +35,8 @@ router.get("/boxscore/:id", async (req, res) => {
             } 
             res.render('resultat', {game});
         };
-        
+        console.log(game.matchup);
+
     return game;
         
     } catch (error) {
