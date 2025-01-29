@@ -40,7 +40,7 @@ const getVideoIds = async () => {
                         { $set: videoData },
                         { upsert: true }
                     );
-                    console.log('Video data:', videoData);
+                    //console.log('Video data:', videoData);
 
                     }
 
@@ -79,7 +79,6 @@ const getVideosFromDb = async () => {
     }
 };
 
-getVideoIds().then(videos => console.log('Video URLs:', videos));
 module.exports = {
     getVideoIds,
     getVideosFromDb
