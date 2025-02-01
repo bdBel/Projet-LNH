@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Page du membre <%= username %></title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-left: 20px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: red;
+            color: white;
+        }
+
+        .card-body {
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar a {
+            color: white;
+        }
+
+        .dropdown-menu {
+            background-color: #343a40;
+        }
+
+        .dropdown-item {
+            color: white;
+        }
+
+        /* Personalize box in the top-right corner */
+        .personalize-box {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .modal-content {
+            background-color: #f8f9fa;
+        }
+
+        .modal-header {
+            background-color: red;
+            color: white;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .col-md-6 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <%- include('composant/navbar') %>
+    <!-- Navbar -->
+
+    <!-- Personalize Dropdown Box (Outside Navbar) -->
+    <div class="personalize-box">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Personnaliser
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Ajouter photo</a>
+                <a class="dropdown-item" href="#">Chatter avec les autres membres</a>
+                <a class="dropdown-item" href="#">Votre boutique</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 container">
+        <h1>Bienvenue, <%= username %>!</h1> <!-- Display the user's name -->
+        <p>Personnalisez votre page en choisissant votre équipe et vos joueurs favoris</p>
+
+        <div class="row">
+            <!-- First Column: Favorite Teams -->
+            <div class="col-md-5">
+                <h3>Ajouter vos équipes favorites</h3>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#teamModal">Choisir votre équipe</button>
+
+                <!-- Modal for Selecting Team -->
+                <div class="modal fade" id="teamModal" tabindex="-1" role="dialog" aria-labelledby="teamModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="teamModalLabel">Sélectionner une équipe</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Placeholder for the list of teams (dynamic data) -->
+                                <ul id="teamList">
+                                    <!-- Example placeholder for teams -->
+                                    <li><a href="#" class="team-item">Équipe 1</a></li>
+                                    <li><a href="#" class="team-item">Équipe 2</a></li>
+                                    <li><a href="#" class="team-item">Équipe 3</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cards for Favorite Teams (Dynamic) -->
+                <div id="teamCards">
+                    <!-- Example card -->
+                    <div class="card">
+                        <div class="card-header">Équipe 1</div>
+                        <div class="card-body">
+                            <h5>Choisir vos données</h5>
+                            <select class="form-control">
+                                <option>Dernières nouvelles</option>
+                                <option>Derniers scores</option>
+                                <option>Historique</option>
+                                <option>Head to Head</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Column: Favorite Players -->
+            <div class="col-md-5">
+                <h3>Ajouter vos joueurs favoris</h3>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#playerModal">Choisir votre joueur</button>
+
+                <!-- Modal for Selecting Player -->
+                <div class="modal fade" id="playerModal" tabindex="-1" role="dialog" aria-labelledby="playerModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="playerModalLabel">Sélectionner un joueur</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Placeholder for the list of players (dynamic data) -->
+                                <ul id="playerList">
+                                    <!-- Example placeholder for players -->
+                                    <li><a href="#" class="player-item">Joueur 1</a></li>
+                                    <li><a href="#" class="player-item">Joueur 2</a></li>
+                                    <li><a href="#" class="player-item">Joueur 3</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cards for Favorite Players (Dynamic) -->
+                <div id="playerCards">
+                    <!-- Example card -->
+                    <div class="card">
+                        <div class="card-header">Joueur 1</div>
+                        <div class="card-body">
+                            <h5>Choisir vos données</h5>
+                            <select class="form-control">
+                                <option>Dernières nouvelles</option>
+                                <option>Historique</option>
+                                <option>Head to Head</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // JavaScript to dynamically add team/player cards can go here
+    </script>
+</body>
+</html>
+
+
+<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Personnaliser
+</button>
