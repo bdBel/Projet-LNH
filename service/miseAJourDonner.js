@@ -1,11 +1,10 @@
 const cron = require('node-cron');
-const insererUpdateJoueur = require('./InformationApi');
+const insererUpdateJoueur = require('./InformationApi/insererUpdateJoueur');
+const getVideoIds = require('./videoService/getVideoIds');
 // Planifier la tâche cron pour exécuter les fonctions qui ont besoin de mise a jour toutes les 24 heures 3h du matin
-cron.schedule('0 3 * * *', () => {
+cron.schedule('0 4 * * *', () => {
     console.log('Exécution de la tâche cron pour mettre à jour les données des joueurs');
-    insererUpdateJoueur();  
-  });
-
-// Appeler la fonction pour récupérer et insérer les joueurs
-insererUpdateJoueur();
-//Ajout des fonction equipe et statistique
+    //insererUpdateJoueur(); 
+    getVideoIds();
+    console.log('Données des joueurs mises à jour: \n -Joueur \n -Video');
+});

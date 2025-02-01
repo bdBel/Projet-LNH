@@ -36,13 +36,12 @@ router.get('/', async (req, res) => {
     //Fin appel des partie en direct
    // Récupérer les vidéos
    const videos = await getVideosFromDb();
-   console.log("Dans la route index",videos);
-
-
-
 
     // Rendu des jeux avec les données modifiées
-    res.render('acceuil', { games: gamesByDate, videos}); // Rendre la vue avec les données formatées
+    // membre logged in
+    const username = req.session.username;
+       
+    res.render('acceuil', { games: gamesByDate, videos, username}); // Rendre la vue avec les données formatées + user connecté
 } catch (error) {
     console.error('Erreur lors de la récupération des données:', error.message);
     res.status(500).send('Erreur lors de la récupération des données.');

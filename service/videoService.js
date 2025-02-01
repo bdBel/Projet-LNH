@@ -11,6 +11,7 @@ const getVideoIds = async () => {
 
     try {
         await connectDb(); // Connectez-vous à la base de données
+       
 
         const games = await getGamesByDate(formattedDate);
         const videoPromises = games.map(async (game) => {
@@ -27,6 +28,7 @@ const getVideoIds = async () => {
                 if (data.items && data.items.length > 0) {
                     const videoData = {
                         channelID : NHLID,
+                        channelTitle: data.items[0].snippet.channelTitle,
                         videoId: data.items[0].id.videoId,
                         title: data.items[0].snippet.title,
                         description: data.items[0].snippet.description,
@@ -40,7 +42,7 @@ const getVideoIds = async () => {
                         { $set: videoData },
                         { upsert: true }
                     );
-                    console.log('Video data:', videoData);
+                    //console.log('Video data:', videoData);
 
                     }
 
@@ -69,7 +71,7 @@ const getVideoIds = async () => {
 const getVideosFromDb = async () => {
     try {
         await connectDb(); // Connectez-vous à la base de données
-        const videos = await Video.find({});
+        const videos = await Video.find({}); // Récupérer les vidéos de la base de données
 
         console.log('Videos from database:', videos);
         return videos;
@@ -79,7 +81,7 @@ const getVideosFromDb = async () => {
     }
 };
 
-getVideoIds().then(videos => console.log('Video URLs:', videos));
+getVideoIds();
 module.exports = {
     getVideoIds,
     getVideosFromDb

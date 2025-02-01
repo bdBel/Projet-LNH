@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const equipeSchema = new mongoose.Schema({
-  _id: String, // ID unique fourni par une API ou similaire
+  _id: String, 
   teamsABV: { type: String, required: true }, // Abbréviation de l'équipe
   name: { type: String, required: true }, // Nom de l'équipe
   full_name: { type: String, required: true }, // Nom complet de l'équipe

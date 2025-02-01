@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Liste des Équipes</title>
   <style> 
-    body{
-    }
     .container {
       display: flex;
       justify-content: space-between; 
@@ -19,6 +17,14 @@
     .boxscore{
         display: flex;
         align-items: center;
+    }
+
+    .box{
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
     }
 
     .gamestate{
@@ -44,7 +50,7 @@
         font-size: 16px;
         font-weight: bold;
         padding: 10px;
-        width: 80px; /* Taille fixe pour un bon alignement */
+        width: 80px;
         text-align: center;
         border-radius: 5px;
     }
@@ -58,11 +64,21 @@
       width: 60%; /* Ajuster la largeur des cartes */
       box-shadow: 4px 4px 8px rgb(219, 40, 40);
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 10px;
+      padding-right: 10px;
     }
 
     .player-card img{
      width: 100px;
      border-radius: 50%;
+    }
+
+    .goal {
+        background-color: rgb(173, 175, 175);
+        padding: 10px;
+        border: 10%;
     }
   </style>
   
@@ -72,7 +88,7 @@
   <%- include('composant/navbar') %>
   <!--navbar-->
 
-  <div class="container" >
+<div class="container" >
     <div class="container-awayTeam ">
         <div ><img class="image-logo" src="<%= game.awayTeam.logo %>" alt="<%= game.awayTeam.abbrev %>"></div>
         <div>
@@ -116,18 +132,21 @@
 <div class="box">
     <h2>Buts Marqués</h2>
     <% game.summary.scoring.forEach(scoring => { %>
+        <hr style="border-top: 2px solid #acacac; margin-top: 30px;">
         <h3><%= scoring.periodDescriptor.number %> Période</h3>
         <% scoring.goals.forEach((goal, index) => { %>
             <div class="player-card">
                 <div>
                     <img src="<%= goal.headshot %>" alt="<%= goal.name.default %>">
                 </div>
-                <div>
-                    <div><%= goal.name.default %>(<%= goal.goalsToDate %>)</div>
-                    <div>
+                <div class="goal">
+                    <div ><h3><%= goal.name.default %>(<%= goal.goalsToDate %>)</h3></div>
+                    <div >
                         <% if (goal.assists && goal.assists.length > 0) { %>
                             <% goal.assists.forEach(assist => { %>
-                                <div><%= assist.name.default %>(<%= assist.assistsToDate %>)</div>
+                                <div style="display: inline-block;">                                    
+                                    <%= assist.name.default %>(<%= assist.assistsToDate %>)
+                                </div>
                             <% }) %>
                         <% } else { %>
                             <div>No assists</div>

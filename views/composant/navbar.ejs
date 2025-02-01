@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Page Title</title>
 
-    <!-- Your custom styles -->
-    <style>
+        <style>
         nav {
             background-color: #333;
             padding: 10px;
@@ -16,7 +15,8 @@
         nav ul {
             list-style: none;
             display: flex;
-            justify-content: space-around;            
+            justify-content: space-around; 
+            align-items: center;          
             margin: 0;
             padding: 0;
         }
@@ -24,7 +24,7 @@
         nav ul li {
             margin: 0;
             font-family: Arial, sans-serif;
-            font-size:small;
+            font-size: small;
         }
 
         nav ul li a {
@@ -38,7 +38,7 @@
             text-decoration: underline;
         }
 
-        /* Dropdown specific styles */
+        /* Dropdown  styles */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -82,19 +82,25 @@
 
             <!-- Membres Dropdown -->
             <li class="dropdown">
-               <!-- Check if the user is logged in by checking session username -->
+                <!-- if logged in: -->
                 <% if (typeof username !== 'undefined') { %> 
-                    <a href="#" class="dropdown-link">
-                        <img src="/images/puck.jpg" alt="User Image" style="width: 30px; height: 30px; border-radius: 50%;" />
+                    <a href="#" class="dropdown-link" style="display: flex; align-items: center;">
+                        <img src="/images/puck.jpg" alt="User Image" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 8px;" />
                         <span><%= username %></span>
                     </a>
-                <% } %> 
-                <a href="#" class="dropdown-link">Membres</a>
+                    <!-- member page+ dropdown options -->
                 <div class="dropdown-content">
-                    <a href="/users/login">Se connecter</a>
-                    <a href="http://localhost:3000/users/logout">Logout</a>
-                    <a href="http://localhost:3000/users/signup">Créer un compte</a>
-                </div>
+                <a href="/users/logout">Se déconnecter</a>
+                <a href="/users/members">Votre espace</a>
+            </div>
+                <% } else { %>
+                    <a href="#" class="dropdown-link">Membres</a>
+                    <div class="dropdown-content">
+                        <a href="/users/login">Se connecter</a>
+                        <a href="http://localhost:3000/users/signup">Créer un compte</a>
+                        <a href="/users/login">Se déconnecter</a>
+                    </div>
+                <% } %>
             </li>
         </ul>
     </nav>
