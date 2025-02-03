@@ -1,91 +1,97 @@
 const axios = require('axios');
-const mongoose = require('mongoose');
-const fs = require('fs');
-const Joueur = require('../models/Joueur');
-const connectDB = require('../config/db');
-const Equipe = require('../models/Equipe');
+const connectDB = require('../config/db.js');
+connectDB();
+const StatistiqueJoueur = require('../models/StatistiqueJoueur');
+const StatistiqueGardien = require('../models/StatistiqueGardien');
 
-
-// Fonction pour lire le fichier players.txt qui contient toutes les id et insérer les informations des joueurs avec le id récupérer
-async function insererUpdateJoueur() {
+// Statistiques Joueurs
+const insererStatistiquesJoueurs = async () => {
   try {
-    // Connexion à la base de données MongoDB
-    connectDB();
-    const data = fs.readFileSync('c:/Users/gabla/VisualStudioCode/Projet-LNH/listeJoueur/players.txt', 'utf8');
-    const lines = data.split('\n');
+    const response = await axios.get('https://api-web.nhle.com/v1/skater-stats-leaders/current');
+    const stats = response.data.goals;
 
-    for (const line of lines) {
-      const playerId = line.trim();
+    console.log('Nombre de joueurs récupérés depuis l\'API:', stats.length);
 
-      if (playerId === '') continue;
+    const joueursAInserer = [];
 
-      // Vérifiez que playerId est un identifiant numérique
-      if (isNaN(playerId)) {
-        console.error(`Invalid playerId: ${playerId}`);
-        continue;
-      }
-
-      console.log(`Fetching data for playerId: ${playerId}`);
-
-      // Obtenir les informations détaillées pour chaque joueur
-      const playerResponse = await axios.get(`https://api-web.nhle.com/v1/player/${playerId}/landing`);
-      const playerData = playerResponse.data;
-
-      const playerInfo = {
-        _id: playerData.playerId,
-        headshot: playerData.headshot,
-        firstName: playerData.firstName.default,
-        lastName: playerData.lastName.default,
-        position: playerData.positionCode,
-        team: playerData.currentTeamAbbrev,
-        sweaterNumber: playerData.sweaterNumber,
-        birthDate: playerData.birthDate,
-        nationality: playerData.birthCountry,
-        heightInInches: playerData.heightInInches,
-        weightInPounds: playerData.weightInPounds,
-      };
-
-      // Insérer ou mettre à jour le joueur dans la base de données
-      await Joueur.updateOne({ _id: playerData.playerId }, playerInfo, { upsert: true });
+    for (const stat of stats) {
+        joueursAInserer.push({
+            playerId: stat.id,
+            firstName: stat.firstName?.default || 'N/A',
+            lastName: stat.lastName?.default || 'N/A',
+            sweaterNumber: stat.sweaterNumber,
+            team: stat.teamAbbrev,
+            position: stat.position,
+            goals: stat.value,
+            headshot: stat.headshot,
+        });
     }
 
-    console.log('Les données du joueur ont été mis à jour avec succès');
+    const batchSize = 100;
+    for (let i = 0; i < joueursAInserer.length; i += batchSize) {
+        const batch = joueursAInserer.slice(i, i + batchSize);
+        await StatistiqueJoueur.insertMany(batch, { ordered: false });
+    }
+
+    console.log(`✅ ${joueursAInserer.length} joueurs insérés dans MongoDB.`);
   } catch (error) {
-    console.error('Erreur pendant l\'insertion des données', error);
+    console.error('Erreur lors de la mise à jour des statistiques des joueurs :', error);
   }
-}
+};
 
-//insererUpdateEquipe
-async function insererUpdateEquipe() {
-  // Connexion à la base de données MongoDB
-  connectDB();
-  const data = fs.readFileSync('c:/Users/gabla/VisualStudioCode/Projet-LNH/config/teams.json', 'utf8');
-  const teams = JSON.parse(data);
-  const teamsData = teams.teams;
+// Statistiques Gardiens
+const insererStatistiquesGardiens = async () => {
+  try {
+    const response = await axios.get('https://api-web.nhle.com/v1/goalie-stats-leaders/current');
+    const stats = response.data.wins;
 
-  for (const team of teamsData) {
-    const teamInfo = {
-      _id: team._id,
-      teamsABV: team.abbreviation,
-      name: team.name,
-      logo: team.logo,
-      city: team.city,
-      conference: team.conference,
-      division: team.division,
-      founded: team.founded,
-      championships: team.championships,
-    };
+    console.log('Nombre de gardiens récupérés depuis l\'API:', stats.length);
 
-    // Insérer ou mettre à jour l'équipe dans la base de données
-    await Equipe.updateOne({ _id: team.id }, teamInfo, { upsert: true });
+    const gardiensAInserer = [];
+
+    for (const stat of stats) {
+        gardiensAInserer.push({
+            playerId: stat.id,
+            firstName: stat.firstName?.default || 'N/A',
+            lastName: stat.lastName?.default || 'N/A',
+            sweaterNumber: stat.sweaterNumber,
+            team: stat.teamAbbrev,
+            position: stat.position,
+            wins: stat.value,
+            headshot: stat.headshot,
+        });
+    }
+
+    const batchSize = 100;
+    for (let i = 0; i < gardiensAInserer.length; i += batchSize) {
+        const batch = gardiensAInserer.slice(i, i + batchSize);
+        await StatistiqueGardien.insertMany(batch, { ordered: false });
+    }
+
+    console.log(`✅ ${gardiensAInserer.length} gardiens insérés dans MongoDB.`);
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour des statistiques des gardiens :', error);
   }
-}
+};
 
+// Mettre à jour toutes les statistiques
+const mettreAJourToutesStatistiques = async () => {
+  try {
+    console.log('Début de la mise à jour des statistiques...');
+    
+    await insererStatistiquesJoueurs();
+    await insererStatistiquesGardiens();
 
+    console.log('Mise à jour de toutes les statistiques terminée.');
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour des statistiques :', error);
+  }
+};
 
-//appel de la fonction insererUpdateJoueur pour soit ajouter ou mettre à jour les données des joueurs
-insererUpdateJoueur();
-//insererUpdateEquipe();
+mettreAJourToutesStatistiques();
 
-// Export de la fonction insererUpdateJoueur pour la rendre accessible pour la mise à jour des données
-module.exports = insererUpdateJoueur;
+module.exports = {
+  insererStatistiquesJoueurs,
+  insererStatistiquesGardiens,
+  mettreAJourToutesStatistiques,
+};

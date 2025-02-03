@@ -1,0 +1,194 @@
+body {
+    background-color: #ffffff;
+    color: black;
+}
+
+/* style titre page */
+.page-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    color: #b71c1c;
+    margin-bottom: 20px;
+}
+
+/* ajouter image en arriere-plan */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/inkplayer.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.2;
+    z-index: -1;
+}
+
+/* conteneur des statistiques */
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+/* style titre des blocs de stats */
+.stat-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    margin-bottom: 10px;
+}
+
+/* style bloc stats */
+.stat-box {
+    background: linear-gradient(to bottom, white 70%, #ff4d4d);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(173, 216, 230, 0.5);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: 30%;
+    max-width: 280px;
+    color: #0a3d62;
+    position: relative;
+    overflow: hidden;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+}
+
+/* effet au survol des blocs */
+.stat-box:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* style liste des joueurs */
+.list-group {
+    list-style: none;
+    padding-left: 0;
+    margin: 10;
+}
+
+/* style chaque joueur */
+.list-group-item {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    transition: all 0.2s ease-in-out;
+    line-height: 2.5;
+    margin-bottom: 10px;
+}
+
+/* effet au survol d'un joueur */
+.list-group-item:hover {
+    background: linear-gradient(90deg, #ffffff 20%, #ff4d4d 100%);
+    color: #0a3d62;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0px 3px 10px rgba(90, 153, 212, 0.4);
+}
+
+/* effet leger d'agrandissement au survol */
+.list-group-item:hover {
+    transform: scale(1.02);
+}
+
+/* style boite info joueur */
+.tooltip-box {
+    position: absolute;
+    background: linear-gradient(to bottom, white 70%, #ff4d4d);
+    border: 3px solid transparent;
+    padding: 15px;
+    box-shadow: 0px 4px 20px rgba(255, 77, 77, 0.5);
+    border-radius: 12px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+/* effet bordure degrade */
+.tooltip-box::before {
+    content: "";
+    position: absolute;
+    top: -3px; left: -3px; right: -3px; bottom: -3px;
+    background: linear-gradient(45deg, #ff4d4d, #ff9999);
+    z-index: -1;
+    border-radius: 15px;
+}
+
+/* style texte info */
+.tooltip-box p {
+    color: black;
+    font-size: 16px;
+    margin: 5px 0;
+    text-align: center;
+}
+
+/* style nom joueur dans info */
+.tooltip-box h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff4d4d;
+    text-align: center;
+}
+
+/* style valeur des points */
+.tooltip-box .points-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+
+/* style logo equipe */
+.team-icon {
+    width: 75px;
+    height: 75px;
+}
+
+/* style bouton general */
+.btn {
+    font-family: 'Bebas Neue', sans-serif;
+    display: inline-block;
+    padding: 12px 20px;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* style bouton principal rouge */
+.btn-primary {
+    background: linear-gradient(to right, #d32f2f, #b71c1c);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* effet au survol bouton */
+.btn-primary:hover {
+    background: linear-gradient(to right, #b71c1c, #d32f2f);
+    transform: scale(1.05);
+}
+
+/* effet bouton enfonce */
+.btn-primary:active {
+    transform: scale(0.95);
+}

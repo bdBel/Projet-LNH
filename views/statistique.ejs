@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classement Meneurs de la ligue 2024-25</title>
+    <link rel="stylesheet" href="/statistique.css"> <!-- fichier css principal -->
+    <link rel="stylesheet" href="/footer.css"> <!-- style du pied de page -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <%- include('composant/navbar') %> <!-- inclure la barre de navigation -->
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="page-title">Classement Meneurs de la ligue 2024-25</h1>
+
+        <div class="stats-container">
+            <!-- classement des patineurs -->
+            <div class="stat-box">
+                <h3>Meilleurs Patineurs</h3>
+                <ul class="list-group">
+                    <% stats.patineurs.forEach((player, index) => { %>
+                        <li class="list-group-item player-item" 
+                            data-name="<%= player.firstName %> <%= player.lastName %>"
+                            data-photo="<%= player.headshot %>"
+                            data-stat="<%= player.points %> pts"
+                            data-number="Numero : <%= player.sweaterNumber || 'N/A' %>"
+                            data-team="<img src='<%= player.teamLogo %>' class='team-icon' alt='logo equipe'>"
+                            data-position="Position : <%= player.position || 'N/A' %>"
+                        >
+                            <span class="rank"><%= index + 1 %>.</span>
+                            <%= player.firstName %> <%= player.lastName %>
+                            <span class="stat-value"><%= player.points %> pts</span>
+                        </li>
+                    <% }); %>
+                </ul>
+                <% if (!voirTout) { %>
+                    <a href="/stats/patineurs" class="btn btn-primary mt-2">Voir tous les patineurs</a>
+                <% } %>
+            </div>
+
+            <!-- classement des defenseurs -->
+            <div class="stat-box">
+                <h3>Meilleurs Defenseurs</h3>
+                <ul class="list-group">
+                    <% if (stats.defenseurs) { %>
+                        <% stats.defenseurs.forEach((def, index) => { %>
+                            <li class="list-group-item player-item" 
+                                data-name="<%= def.firstName %> <%= def.lastName %>"
+                                data-photo="<%= def.headshot %>"
+                                data-stat="<%= def.points %> pts"
+                                data-number="Numero : <%= def.sweaterNumber || 'N/A' %>"
+                                data-team="<img src='<%= def.teamLogo %>' class='team-icon' alt='logo equipe'>"
+                                data-position="Position : <%= def.position || 'N/A' %>"
+                            >
+                                <span class="rank"><%= index + 1 %>.</span>
+                                <%= def.firstName %> <%= def.lastName %>
+                                <span class="stat-value"><%= def.points %> pts</span>
+                            </li>
+                        <% }); %>
+                    <% } else { %>
+                        <p>Aucun defenseur trouve.</p>
+                    <% } %>
+                </ul>
+                <% if (!voirTout) { %>
+                    <a href="/stats?voirTout=true" class="btn btn-primary mt-2">Voir tous les defenseurs</a>
+                <% } %>
+            </div>
+
+            <!-- classement des gardiens -->
+            <div class="stat-box">
+                <h3>Arrets</h3>
+                <ul class="list-group">
+                    <% stats.gardiens.forEach((goalie, index) => { %>
+                        <li class="list-group-item player-item" 
+                            data-name="<%= goalie.firstName %> <%= goalie.lastName %>"
+                            data-photo="<%= goalie.headshot %>"
+                            data-stat="<%= goalie.savePercentage || goalie.savePctg || 'N/A' %>%"
+                            data-number="Numero : <%= goalie.sweaterNumber || 'N/A' %>"
+                            data-team="<img src='<%= goalie.teamLogo %>' class='team-icon' alt='logo equipe'>"
+                            data-position="Position : <%= goalie.position || 'N/A' %>"
+                        >
+                            <span class="rank"><%= index + 1 %>.</span>
+                            <%= goalie.firstName %> <%= goalie.lastName %>
+                            <span class="stat-value"><%= goalie.savePercentage || goalie.savePctg || 'N/A' %>%</span>
+                        </li>
+                    <% }); %>
+                </ul>
+                <% if (!voirTout) { %>
+                    <a href="/stats?voirTout=true" class="btn btn-primary mt-2">Voir tous les gardiens</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <script src="/statistique.js"></script> <!-- script pour interactions -->
+
+    <%- include('composant/footer') %> <!-- inclure le pied de page -->
+</body>
+</html>

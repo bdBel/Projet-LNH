@@ -1,137 +1,162 @@
 const axios = require('axios');
+const connectDB = require('../config/db.js');
+connectDB();
 const StatistiqueJoueur = require('../models/StatistiqueJoueur');
 const StatistiqueGardien = require('../models/StatistiqueGardien');
 const StatistiqueEquipe = require('../models/StatistiqueEquipe');
 
-// Statistiques Joueurs
+// recuperer stats joueurs depuis api et stocker dans mongodb
 const insererStatistiquesJoueurs = async () => {
   try {
-    const response = await axios.get(
-      'https://api-web.nhle.com/v1/skater-stats-leaders/current?categories=goals&limit=5'
-    );
-    const stats = response.data.goals;// extraction des donnee
+    const response = await axios.get('https://api-web.nhle.com/v1/skater-stats-leaders/current');
+    const data = response.data;
 
+    let joueursMap = {};
 
-    for (const stat of stats) {
-      const joueurData = {
-        playerId: stat.id,
-        firstName: stat.firstName?.default || 'N/A',
-        lastName: stat.lastName?.default || 'N/A',
-        sweaterNumber: stat.sweaterNumber,
-        team: stat.teamAbbrev,
-        position: stat.position,
-        goals: stat.value,
-        headshot: stat.headshot,
-      };
+    for (const [categorie, joueurs] of Object.entries(data)) {
+      for (const stat of joueurs) {
+        const playerId = stat.id;
+        
+        if (!joueursMap[playerId]) {
+          joueursMap[playerId] = {
+            playerId,
+            firstName: stat.firstName?.default || 'N/A',
+            lastName: stat.lastName?.default || 'N/A',
+            sweaterNumber: stat.sweaterNumber,
+            team: stat.teamAbbrev,
+            position: stat.position,
+            headshot: stat.headshot
+          };
+        }
 
-      console.log('Insertion/Mise à jour joueur:', joueurData);
+        joueursMap[playerId][categorie] = stat.value;
+      }
+    }
+
+    for (const joueurData of Object.values(joueursMap)) {
+      console.log('insertion mise a jour joueur:', joueurData);
 
       await StatistiqueJoueur.updateOne(
-        { playerId: stat.id },
+        { playerId: joueurData.playerId },
         { $set: joueurData },
-        { upsert: true }
+        { upsert: true, new: true }
       );
     }
 
-    console.log('Statistiques des joueurs mises à jour avec succès.');
+    console.log('statistiques joueurs mises a jour avec succes');
   } catch (error) {
-    console.error('Erreur lors de la mise à jour des statistiques des joueurs :', error);
+    console.error('erreur mise a jour statistiques joueurs :', error);
   }
 };
 
-// Statistiques Gardiens
+// recuperer stats gardiens depuis api et stocker dans mongodb
 const insererStatistiquesGardiens = async () => {
   try {
-    const response = await axios.get(
-      'https://api-web.nhle.com/v1/goalie-stats-leaders/current?categories=wins&limit=5'
-    );
-    const stats = response.data.wins; // Extraction données
+    const response = await axios.get('https://api-web.nhle.com/v1/goalie-stats-leaders/current');
+    const data = response.data;
 
-    for (const stat of stats) {
-      const gardienData = {
-        playerId: stat.id,
-        firstName: stat.firstName?.default || 'N/A',
-        lastName: stat.lastName?.default || 'N/A',
-        sweaterNumber: stat.sweaterNumber,
-        team: stat.teamAbbrev,
-        position: stat.position,
-        wins: stat.value,
-        headshot: stat.headshot,
-      };
+    let gardiensMap = {};
 
-      console.log('Insertion/Mise à jour gardien:', gardienData);
+    for (const [categorie, gardiens] of Object.entries(data)) {
+      for (const stat of gardiens) {
+        const playerId = stat.id;
+        
+        if (!gardiensMap[playerId]) {
+          gardiensMap[playerId] = {
+            playerId,
+            firstName: stat.firstName?.default || 'N/A',
+            lastName: stat.lastName?.default || 'N/A',
+            sweaterNumber: stat.sweaterNumber,
+            team: stat.teamAbbrev,
+            position: stat.position,
+            headshot: stat.headshot
+          };
+        }
+
+        gardiensMap[playerId][categorie] = stat.value;
+      }
+    }
+
+    for (const gardienData of Object.values(gardiensMap)) {
+      console.log('insertion mise a jour gardien:', gardienData);
 
       await StatistiqueGardien.updateOne(
-        { playerId: stat.id },
+        { playerId: gardienData.playerId },
         { $set: gardienData },
         { upsert: true }
       );
     }
 
-    console.log('Statistiques des gardiens mises à jour avec succès.');
+    console.log('statistiques gardiens mises a jour avec succes');
   } catch (error) {
-    console.error('Erreur lors de la mise à jour des statistiques des gardiens :', error);
+    console.error('erreur mise a jour statistiques gardiens :', error);
   }
 };
 
-// **Statistiques Équipes**
+// recuperer stats equipes depuis api et stocker dans mongodb
 const insererStatistiquesEquipes = async () => {
   try {
-    const response = await axios.get(
-      'https://api.nhle.com/stats/rest/en/team/summary?sort=shotsForPerGame&cayenneExp=seasonId=20242025%20and%20gameTypeId=2'
-    );
-    const equipes = response.data.data; // Extraction des données
+    const response = await axios.get('https://api.nhle.com/stats/rest/en/team/summary');
+    const data = response.data.data;
 
-    for (const equipe of equipes) {
-      const equipeData = {
-        teamId: equipe.teamId,
-        teamName: equipe.teamFullName,
-        gamesPlayed: equipe.gamesPlayed,
-        wins: equipe.wins,
-        losses: equipe.losses,
-        otLosses: equipe.otLosses,
-        points: equipe.points,
-        goalsFor: equipe.goalsFor,
-        goalsAgainst: equipe.goalsAgainst,
-        shotsForPerGame: equipe.shotsForPerGame,
-        shotsAgainstPerGame: equipe.shotsAgainstPerGame,
-        powerPlayPercentage: equipe.powerPlayPct,
-        penaltyKillPercentage: equipe.penaltyKillPct,
-      };
+    let equipesMap = {};
 
-      console.log('Insertion/Mise à jour équipe:', equipeData);
+    for (const equipe of data) {
+      const teamId = equipe.teamId;
+      
+      if (!equipesMap[teamId]) {
+        equipesMap[teamId] = {
+          teamId,
+          teamName: equipe.teamFullName,
+          gamesPlayed: equipe.gamesPlayed,
+          wins: equipe.wins,
+          losses: equipe.losses,
+          otLosses: equipe.otLosses,
+          points: equipe.points,
+          goalsFor: equipe.goalsFor,
+          goalsAgainst: equipe.goalsAgainst,
+          shotsForPerGame: equipe.shotsForPerGame,
+          shotsAgainstPerGame: equipe.shotsAgainstPerGame,
+          powerPlayPercentage: equipe.powerPlayPct,
+          penaltyKillPercentage: equipe.penaltyKillPct
+        };
+      }
+    }
+
+    for (const equipeData of Object.values(equipesMap)) {
+      console.log('insertion mise a jour equipe:', equipeData);
 
       await StatistiqueEquipe.updateOne(
-        { teamId: equipe.teamId },
+        { teamId: equipeData.teamId },
         { $set: equipeData },
         { upsert: true }
       );
     }
 
-    console.log('Statistiques des équipes mises à jour avec succès.');
+    console.log('statistiques equipes mises a jour avec succes');
   } catch (error) {
-    console.error('Erreur lors de la récupération ou de l\'insertion des statistiques des équipes :', error);
+    console.error('erreur recuperation ou insertion statistiques equipes :', error);
   }
 };
 
-// Mettre à jour toutes les statistiques
+// mettre a jour toutes les statistiques en appelant chaque fonction
 const mettreAJourToutesStatistiques = async () => {
   try {
-    console.log('Début de la mise à jour des statistiques...');
+    console.log('debut mise a jour statistiques');
     
-    await insererStatistiquesJoueurs(); // Update des joueurs
-    await insererStatistiquesGardiens(); // Update des gardiens
-    await insererStatistiquesEquipes(); // Updates des équipes
+    await insererStatistiquesJoueurs();
+    await insererStatistiquesGardiens();
+    await insererStatistiquesEquipes();
 
-    console.log('Mise à jour de toutes les statistiques terminée.');
+    console.log('mise a jour statistiques terminee');
   } catch (error) {
-    console.error('Erreur lors de la mise à jour des statistiques :', error);
+    console.error('erreur mise a jour statistiques :', error);
   }
 };
+
 mettreAJourToutesStatistiques();
 
-
-// Pour exporter les fonctions
+// exporter les fonctions pour utilisation ailleurs
 module.exports = {
   insererStatistiquesJoueurs,
   insererStatistiquesGardiens,

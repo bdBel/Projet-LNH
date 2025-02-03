@@ -6,6 +6,7 @@ const connectDB = async () => {
         await mongoose.connect('mongodb+srv://Gabriel:jqhR0COFgKdPrMTH@cluster0.9cpa4.mongodb.net/test',{
            
             bufferCommands: true,
+            serverSelectionTimeoutMS: 10000,
         });
         console.log('Connecter à la base de donner');
        // console.log(mongoose.connection.readyState);
