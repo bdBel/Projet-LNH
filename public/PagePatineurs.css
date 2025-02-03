@@ -1,0 +1,125 @@
+.page-title {
+    font-family: 'Bebas Neue', sans-serif; /* police principale du titre */
+    font-size: 40px; /* taille du texte */
+    font-weight: bold; /* texte en gras */
+    color: #d32f2f; /* couleur rouge fonce */
+    text-align: center; /* centrage horizontal */
+    margin-bottom: 20px; /* espace sous le titre */
+}
+
+/* conteneur du tableau */
+.classement-container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* tableau affichant le classement */
+.classement-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* style des en-tetes du tableau */
+.classement-table thead {
+    background: linear-gradient(to bottom, #d32f2f, #b71c1c);
+    color: white;
+    font-weight: bold;
+}
+
+/* style des cellules d'en-tete */
+.classement-table th {
+    background: linear-gradient(to bottom, #d32f2f, #b71c1c); /* degrade rouge */
+    color: white;
+    font-weight: bold;
+    padding: 15px;
+}
+
+/* style des cellules du tableau */
+.classement-table th, .classement-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+/* couleur de fond pour lignes impaires */
+.classement-table tr:nth-child(odd) {
+    background-color: #fce4ec;
+}
+
+/* effet au survol des lignes */
+.classement-table tr:hover {
+    background-color: rgba(255, 87, 87, 0.2);
+}
+
+/* image de profil du joueur */
+.player-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* icone du logo d'equipe */
+.team-icon {
+    width: 40px;
+    height: auto;
+    margin-right: 5px;
+}
+
+/* style de la pagination */
+.pagination {
+    font-family: 'Bebas Neue', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+/* style des liens de pagination */
+.pagination a {
+    padding: 8px 12px;
+    text-decoration: none;
+    background-color: #d32f2f;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+/* effet au survol des liens de pagination */
+.pagination a:hover {
+    background-color: #b71c1c;
+}
+
+/* style du bouton de page active */
+.pagination .active {
+    background-color: #7f0000;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* style du bouton desactive */
+.pagination .disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* espacement en bas de page */
+.page-content {
+    margin-bottom: 50px; 
+}
+
+/* style pour la colonne du classement */
+.player-rank {
+    font-weight: bold;
+    text-align: center;
+    width: 50px;
+}

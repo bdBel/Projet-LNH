@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classement des Equipes</title>
+    <link rel="stylesheet" href="/footer.css"> <!-- style du pied de page -->
+    <link rel="stylesheet" href="/classement.css"> <!-- style principal classement -->
+    <%- include('composant/navbar') %> <!-- inclure la barre de navigation -->
+</head>
+<body>
+    <header>
+    </header>
+
+    <main>
+        <h1>Classement des Equipes</h1>
+
+        <!-- tableau classement conference ouest -->
+        <h2>Conference Ouest</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Position</th> <!-- position dans le classement -->
+                    <th>Logo</th> <!-- logo equipe -->
+                    <th>Equipe</th> <!-- nom equipe -->
+                    <th>Points</th> <!-- total points -->
+                    <th>Victoires</th> <!-- nombre victoires -->
+                    <th>Defaites</th> <!-- nombre defaites -->
+                    <th>Buts Pour</th> <!-- buts marques -->
+                    <th>Buts Contre</th> <!-- buts encaisses -->
+                </tr>
+            </thead>
+            <tbody>
+                <% equipesOuest.forEach((equipe, index) => { %>
+                    <tr>
+                        <td><%= index + 1 %></td> <!-- affichage position classement -->
+                        <td><img src="<%= equipe.logo %>" alt="<%= equipe.name %>" width="40"></td> <!-- logo equipe -->
+                        <td><%= equipe.full_name %></td> <!-- affichage nom equipe -->
+                        <td><%= equipe.stats.points || 'N/A' %></td> <!-- affichage points -->
+                        <td><%= equipe.stats.wins || 'N/A' %></td> <!-- affichage victoires -->
+                        <td><%= equipe.stats.losses || 'N/A' %></td> <!-- affichage defaites -->
+                        <td><%= equipe.stats.goalsFor || 'N/A' %></td> <!-- affichage buts marques -->
+                        <td><%= equipe.stats.goalsAgainst || 'N/A' %></td> <!-- affichage buts encaisses -->
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    
+        <!-- tableau classement conference est -->
+        <h2>Conference Est</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Position</th>
+                    <th>Logo</th>
+                    <th>Equipe</th>
+                    <th>Points</th>
+                    <th>Victoires</th>
+                    <th>Defaites</th>
+                    <th>Buts Pour</th>
+                    <th>Buts Contre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% equipesEst.forEach((equipe, index) => { %>
+                    <tr>
+                        <td><%= index + 1 %></td> <!-- affichage position classement -->
+                        <td><img src="<%= equipe.logo %>" alt="<%= equipe.name %>" width="40"></td> <!-- logo equipe -->
+                        <td><%= equipe.full_name %></td> <!-- affichage nom equipe -->
+                        <td><%= equipe.stats.points || 'N/A' %></td> <!-- affichage points -->
+                        <td><%= equipe.stats.wins || 'N/A' %></td> <!-- affichage victoires -->
+                        <td><%= equipe.stats.losses || 'N/A' %></td> <!-- affichage defaites -->
+                        <td><%= equipe.stats.goalsFor || 'N/A' %></td> <!-- affichage buts marques -->
+                        <td><%= equipe.stats.goalsAgainst || 'N/A' %></td> <!-- affichage buts encaisses -->
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </main>
+    <%- include('composant/footer') %> <!-- inclure le pied de page -->
+</body>
+</html>

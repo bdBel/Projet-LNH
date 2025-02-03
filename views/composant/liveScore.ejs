@@ -1,73 +1,126 @@
-    <style>
-        .header button:hover {
-            background-color: #e6f3ff;
-        }
+<style>
+    .header button:hover {
+        background-color: #e6f3ff;
+    }
 
-        ul {
-            list-style: none;
-            padding: 0;
-        }
+    ul {
+        list-style: none;
+        padding: 0;
+    }
 
-        .game-card {
-            background: white;
-            border-radius: 8px;
-            padding: 1px;
-            text-align: center;
-            margin-bottom: 20px;
-            
-        }
+    .game-card {
+        background: white;
+        border-radius: 8px;
+        padding: 1px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-        .team{
-            display: flex;        
-            align-items: center;
-        }
+    /* alignement noms equipes et scores */
+    .team {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
 
-        .team-abrrev {
-            justify-content: center;
-            width: 70px;
-            padding-right: 30px;
-            font-size: medium;
-        }
-        .team-score {
-            font-size: medium;
-        }      
+    /* style nom abrege equipes */
+    .team-abrrev {
+        font-size: 14px;
+        font-weight: bold;
+        margin-right: 8px;
+    }
 
-        .nav {
-            display: flex;
-            overflow-x: auto;
-            background-color: #a3a3a3;
-            padding: 1px;
-            white-space: nowrap;            
-        }
+    /* style score equipe */
+    .team-score {
+        font-size: 16px;
+        font-weight: bold;
+        color: #d32f2f;
+        margin-left: 8px;
+    }   
 
-        .nav-item {
-            display: inline-block;
-            color: rgb(7, 7, 7);      
-            padding: 10px;
-            margin: 0 10px;
-            background-color: #fafafa;
-            border-radius: 8px;
-            cursor: pointer;  
+    /* style heure et etat match */
+    .game-time {
+        font-size: 12px;
+        color: #666;
+        margin-top: 3px;
+    }
 
-                   
-        }
-        .nav-item a {
-            font-size: medium;
-            text-decoration: none;
-            color: rgb(7, 7, 7);
-            
-        }
+    /* conteneur principal des matchs en direct */
+    .nav {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        background: #ffffff;
+        padding: 8px 0;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        scrollbar-width: thin;
+        scrollbar-color: #d32f2f #f5f5f5;
+        z-index: 2000 !important;
+        position: relative;
+    }
 
-        .nav-item:hover {
-            background-color: #6592c2;
-        }
+    /* style scrollbar chrome safari edge */
+    .nav::-webkit-scrollbar {
+        height: 8px;
+    }
 
-        .nav-item img {
-            height: 30px;
-            width: 40px;
-        }
-    </style>
+    .nav::-webkit-scrollbar-track {
+        background: #f5f5f5;
+        border-radius: 10px;
+    }
 
+    .nav::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #d32f2f, #b71c1c);
+        border-radius: 10px;
+        background: linear-gradient(to bottom, #d32f2f 0%, #b71c1c 100%);
+    }
+
+    .nav::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(to bottom, #d32f2f, #b71c1c);
+        opacity: 0.8;
+    }
+
+    /* style carte match */
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 120px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        margin: 5px;
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .nav-item a {
+        font-size: medium;
+        text-decoration: none;
+        color: rgb(7, 7, 7);
+    }
+
+    .nav-item:hover {
+        background-color: #f0f0f0;
+        transform: scale(1.05);
+    }
+
+    /* style logo equipe */
+    .nav-item img {
+        height: 47px;
+        width: 47px;
+        object-fit: contain;
+        margin-bottom: 5px;
+    }
+</style>
+
+<!-- affichage des matchs en direct -->
 <div class="nav">
     <% if (games && games.length > 0) { %>
         <% games.forEach(dateEntry => { %> 
@@ -96,19 +149,25 @@
             <% } else { %> <!-- Handle case where there are no games for this date -->
                 <div>No games for this date.</div>
             <% } %>
+        <% games.forEach(dateEntry => { %>
+            <% dateEntry.games.forEach(game => { %>
+                <div class="nav-item">
+                    <div class="game-time"><%= game.formattedStartTime %></div>
+                    <div class="team">
+                        <img src="<%= game.awayTeam.logo %>" alt="<%= game.awayTeam.name %>">
+                        <div class="team-abrrev"><%= game.awayTeam.abbrev %></div>
+                        <div class="team-score"><%= game.awayTeam.score %></div>
+                    </div>
+                    <div class="team">
+                        <img src="<%= game.homeTeam.logo %>" alt="<%= game.homeTeam.name %>">
+                        <div class="team-abrrev"><%= game.homeTeam.abbrev %></div>
+                        <div class="team-score"><%= game.homeTeam.score %></div>
+                    </div>
+                </div>
+            <% }) %>
         <% }) %>
     <% } else { %>
-        <div class="nav-item">Aucun match en cours</div>
+        <div class="nav-item">aucun match en cours</div>
     <% } %>
     
 </div>
-
-
-
-
-
-    
-
-
-
-

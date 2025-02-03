@@ -1,0 +1,95 @@
+/* style global */
+body {
+    font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: #f8f9fa; /* fond clair pour lisibilite */
+    color: #333;
+    padding: 20px;
+}
+
+/* style des tableaux */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15); 
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* image de fond */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/hockeyplayer.png') no-repeat center;
+    background-size: contain; /* ajustement image */
+    opacity: 0.2; /* intensite reduite pour lisibilite */
+    z-index: -1; /* en arriere-plan */
+}
+
+/* couleur texte en-tete tableau */
+thead {
+    color: white;
+}
+
+/* style des cellules en-tete */
+th {
+    background: linear-gradient(to bottom, #d32f2f, #b71c1c); /* degrade rouge */
+    color: white;
+    font-weight: bold;
+    padding: 15px;
+}
+
+/* style general des cellules */
+th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+/* couleur alternative pour lignes impaires */
+tr:nth-child(odd) {
+    background-color: #fce4ec; /* rouge tres clair */
+}
+
+/* effet au survol */
+tr:hover {
+    background-color: rgba(255, 87, 87, 0.2);
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* style titre page */
+h1 {
+    text-align: center;
+    color: #d32f2f;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+/* style bouton retour */
+.button {
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background: linear-gradient(to bottom, #d32f2f, #b71c1c);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* effet au survol bouton */
+.button:hover {
+    background: linear-gradient(to bottom, #b71c1c, #d32f2f);
+}
+
+/* espacement entre tableaux */
+h2 {
+    margin-top: 40px;
+}

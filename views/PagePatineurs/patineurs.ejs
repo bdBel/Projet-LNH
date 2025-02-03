@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Patineurs</title>
+    <link rel="stylesheet" href="../PagePatineurs.css">
+    <link rel="stylesheet" href="/footer.css">
+    
+    <%- include('../composant/navbar') %> <!-- inclure barre de navigation -->
+</head>
+<body>
+    <div class="page-content">
+    <div class="classement-container">
+        <h1 class="page-title">Liste des Patineurs</h1>
+        
+        <table class="classement-table">
+            <thead>
+                <tr>
+                    <th>#</th> <!-- classement joueur -->
+                    <th>Joueur</th> <!-- nom joueur -->
+                    <th>Équipe</th> <!-- equipe du joueur -->
+                    <th>Position</th> <!-- poste du joueur -->
+                    <th>Numéro</th> <!-- numero maillot -->
+                    <th>Points</th> <!-- total points -->
+                </tr>
+            </thead>
+            <tbody>
+                <% patineurs.forEach((player, index) => { %>
+                    <tr>
+                        <td class="player-rank"><%= index + 1 %></td> <!-- affichage classement -->
+                        <td class="player-info">
+                            <img src="<%= player.headshot %>" alt="<%= player.firstName %> <%= player.lastName %>" class="player-img">
+                            <span><%= player.firstName %> <%= player.lastName %></span>
+                        </td>
+                        <td>
+                            <img src="<%= player.teamLogo %>" class="team-icon" alt="logo équipe">
+                            <span><%= player.team %></span>
+                        </td>
+                        <td><%= player.position || 'N/A' %></td> <!-- affichage poste joueur -->
+                        <td><%= player.sweaterNumber || 'N/A' %></td> <!-- affichage numero maillot -->
+                        <td><%= player.points %> pts</td> <!-- affichage points joueur -->
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+        <!-- pagination -->
+        <div class="pagination">
+            <% if (page > 1) { %>
+                <a href="/patineurs?page=<%= page - 1 %>" class="btn">← Précédent</a> <!-- bouton page precedente -->
+            <% } %>
+            <span>Page <%= page %> de <%= totalPages %></span> <!-- affichage numero page -->
+            <% if (page < totalPages) { %>
+                <a href="/patineurs?page=<%= page + 1 %>" class="btn">Suivant →</a> <!-- bouton page suivante -->
+            <% } %>
+        </div>
+    </div>
+</div> 
+
+    <%- include('../composant/footer') %> <!-- inclure pied de page -->
+</body>
+</html>
