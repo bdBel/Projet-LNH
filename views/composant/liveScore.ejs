@@ -70,15 +70,15 @@
 
 <div class="nav">
     <% if (games && games.length > 0) { %>
-        <% games.forEach(dateEntry => { %>           
+        <% games.forEach(dateEntry => { %> 
+            <% if (dateEntry.games && dateEntry.games.length > 0) { %> <!-- Ensure games exists -->
                 <div><h3><%= dateEntry.games[0].today %></h3></div>
                 <% dateEntry.games.forEach(game => { %>
                     <div class="nav-item">
                         <a href="/game/boxscore/<%= game.id %>">
-                            <div style="display: flex; justify-content: space-between; font-size: medium; ">
+                            <div style="display: flex; justify-content: space-between; font-size: medium;">
                                 <div><%= game.gameState %></div>
                                 <div><%= game.formattedStartTime %></div>
-                                
                             </div>
                             <div class="team">
                                 <img src="<%= game.awayTeam.logo %>" alt="<%= game.awayTeam.name %>">
@@ -93,10 +93,14 @@
                         </a>
                     </div>
                 <% }) %>
+            <% } else { %> <!-- Handle case where there are no games for this date -->
+                <div>No games for this date.</div>
+            <% } %>
         <% }) %>
     <% } else { %>
         <div class="nav-item">Aucun match en cours</div>
     <% } %>
+    
 </div>
 
 

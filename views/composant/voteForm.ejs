@@ -1,0 +1,20 @@
+<!-- voteForm.ejs -->
+<form action="/polls/<%= match.matchId %>/vote" method="POST">
+    <div>
+        <label for="scorePrediction">Score Prediction:</label>
+        <input type="text" name="scorePrediction" required placeholder="e.g. Team A 2-1 Team B">
+    </div>
+    <div>
+        <label for="playerPrediction">Player Prediction:</label>
+        <input type="text" name="playerPrediction" required placeholder="e.g. Player Name">
+    </div>
+    <div>
+        <label for="gameOutcome">Game Outcome:</label>
+        <select name="gameOutcome" required>
+            <option value="Team A wins">Team A wins</option>
+            <option value="Team B wins">Team B wins</option>
+            <option value="Draw">Draw</option>
+        </select>
+    </div>
+    <button type="submit">Vote</button>
+</form>

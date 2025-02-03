@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const PollSchema = require("../models/Poll");
 // Fonction pour se connecter à MongoDB
 const connectDB = async () => {
     try {

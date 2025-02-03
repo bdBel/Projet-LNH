@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = require('../models/User'); // Import the User model
+const User = require('../models/user'); // Import the User model
 const connectDB = require('./db');
 // Connect to MongoDB
 connectDB()

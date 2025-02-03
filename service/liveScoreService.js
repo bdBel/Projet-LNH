@@ -7,39 +7,32 @@ const getGamesLive = async () => {
         const data = response.data;
 
         const getAllowedDays = (baseDate) => {
-            // Crée une date locale basée sur le fuseau horaire
             const localDate = new Date(baseDate);
             const yesterday = new Date(localDate);
             const tomorrow = new Date(localDate);
         
-            // Ajuste les jours pour hier et demain
             yesterday.setDate(localDate.getDate() - 1);
             tomorrow.setDate(localDate.getDate() + 1);
         
-            // Formate les dates au format YYYY-MM-DD (locale)
             const formatDate = (date) => {
                 const year = date.getFullYear();
-                const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Ajoute un 0 si nécessaire
-                const day = date.getDate().toString().padStart(2, '0'); // Ajoute un 0 si nécessaire
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const day = date.getDate().toString().padStart(2, '0');
                 return `${year}-${month}-${day}`;
             };
         
             return [
-                formatDate(localDate),   // Aujourd'hui
-                formatDate(yesterday),  // Hier
-                formatDate(tomorrow)    // Demain
+                formatDate(localDate),
+                formatDate(yesterday),
+                formatDate(tomorrow)
             ];
         };
         
-
-        // Calcul des jours autorisés
         const allowedDays = getAllowedDays(new Date());
 
-        // Transformer les données de l'API
         const gamesByDate = data.gamesByDate.map(dateEntry => ({
-            date: dateEntry.date, // Date au format "YYYY-MM-DD"
+            date: dateEntry.date,
             games: dateEntry.games.map(game => {
-                // Formatage du startTimeUTC
                 const startTime = new Date(game.startTimeUTC);
                 const AmPM = startTime.getHours() >= 12 ? ' PM' : ' AM';
                 const formattedTime = (startTime.getHours() < 10 ? '0' : '') + startTime.getHours() + ':' + (startTime.getMinutes() < 10 ? '0' : '') + startTime.getMinutes() + AmPM;
@@ -50,7 +43,7 @@ const getGamesLive = async () => {
                     gameState: game.gameState,
                     recapLink: game.threeMinRecap,
                     today: today,
-                    dateGame: game.gameDate, // La date du match au format "YYYY-MM-DD"
+                    dateGame: game.gameDate,
                     startTime: game.startTimeUTC,
                     formattedStartTime: formattedTime,
                     homeTeam: {
@@ -69,10 +62,8 @@ const getGamesLive = async () => {
             })
         }));   
 
-        // Filtrage des jeux en fonction des jours autorisés
         const filteredGames = gamesByDate.filter(dateEntry => allowedDays.includes(dateEntry.date));
 
-        // Retourner les jeux filtrés
         return filteredGames;
     } catch (error) {
         console.error('Erreur lors de la récupération des données:', error.message);
@@ -87,10 +78,25 @@ const getSummary = async (id) => {
         const response = await axios.get(API_URL);
         const data = response.data;
 
-        return data; // Retourner les données après modification
+        return data;
     } catch (error) {
         console.error('Erreur lors de la récupération des données dans le service :', error.message);
         throw new Error('Impossible de récupérer les données du match.');
+    }
+};
+
+const getMatchData = async (gameId) => {
+    const API_URL = `https://api-web.nhle.com/v1/gamecenter/${gameId}/landing`;
+    try {
+        const response = await axios.get(API_URL);
+        if (response.data && response.data.summary) {
+            return response.data;
+        } else {
+            throw new Error('Invalid match data structure');
+        }
+    } catch (error) {
+        console.error(`Error fetching match data for ${gameId}: ${error.message}`);
+        throw error;
     }
 };
 
@@ -105,4 +111,9 @@ const getGamesByDate = async (date) => {
     }
 };
 
-module.exports = { getGamesLive,getSummary,getGamesByDate};
+module.exports = {  
+    getGamesLive,
+    getGamesByDate,
+    getMatchData,
+    getSummary,
+};

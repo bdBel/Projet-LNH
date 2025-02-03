@@ -1,181 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Page du membre <%= username %></title>
-
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: rgb(234, 233, 233); }
+        .container { margin-left: 20px; }
+        .card { margin-bottom: 20px; }
+        .card-header { background-color: red; color: white; }
+        .card-body { background-color: #97c0e9; }
+        .navbar { background-color: #343a40; }
+        .navbar a { color: white; }
+        .dropdown-menu { background-color: #343a40; }
+        .dropdown-item { color: white; }
+        .personalize-box { margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: flex-start; }
+        .personalize-box .dropdown { display: inline-block; margin-left: 80px; }
+        .modal-content { background-color: #f8f9fa; }
+        .modal-header { background-color: red; color: white; }
+        .row { display: flex; justify-content: space-between; }
+        .col-md-6 { margin-bottom: 20px; }
+    </style>
 </head>
-<style>
-   .container {
-        
-        margin-left: 20px;
-    }
-         
-         .modal {
-            display: none; 
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); 
-            padding-top: 60px;
-        }
-
-          
-        .modal-content {
-            background-color: #333; 
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            width: 80%;
-            max-width: 600px;
-            border-radius: 10px;
-            color: white; 
-        }
-
-       
-        .close {
-            color: white;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: red; 
-            text-decoration: none;
-        }
-
-       
-        .modal-header {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: red; 
-            margin-bottom: 15px;
-        }
-
-        .team-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .team-item {
-            display: flex;
-            justify-content: space-between; 
-            background-color: #444; 
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .team-item:hover {
-            background-color: #555; 
-            cursor: pointer;
-        }
-
-        .team-item .team-name {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: white; 
-        }
-
-        .team-item .team-name:hover {
-            color: red; 
-        }
-        
-        .ajouter-button {
-            background-color: red;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            font-size: 0.9rem;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .ajouter-button:hover {
-            background-color: #cc0000;
-        }
-</style>
 <body>
-     <!--Navbar-->
-     <%- include('composant/navbar') %>
-     <!--Navbar-->
-     <div class="mt-4 container">
-    <h1>Bienvenue, <%= username %>!</h1> 
-    <p>Personnaliser votre page</p>
-    <p>Choisissez votre équipe favorite <a id="fav" href="javascript:void(0);"><i>ici</i></a></p>
-
-    <a href="http://localhost:3000" id="retour-accueil" class="left-align">Retour à l'accueil</a>
-            <!-- Modal -->
-<div id="favModal" class="modal">
-        
-    <div class="modal-content">
-      <span class="close" id="closeModal">&times;</span>
-      <div class="modal-header">
-        <h2>Les Equipes</h2>
-      </div>
-      <div class="team-list">
-       <!-- LIST OF TEAMS -->
-        <div class="team-item">
-          <div class="team-name">Sabres de Buffalo</div>
-          <button class="ajouter-button">Ajouter</button>
-        </div>
+    <!-- Navbar -->
+    <%- include('composant/navbar') %>
+    <!-- LiveScore -->
+     
+    <%- include('composant/liveScore')%>
   
-        <div class="team-item">
-          <div class="team-name">Panthers de la Floride</div>
-          <button class="ajouter-button">Ajouter</button>
+    <!-- Personalize Dropdown Box (Below Navbar) -->
+    <div class="personalize-box mb-5">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton">
+                Personnaliser
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Ajouter votre photo</a>
+                <a class="dropdown-item" href="#">Personaliser votre thème</a>
+                <a class="dropdown-item" href="#">Chatter avec les autres membres</a>
+                <a class="dropdown-item" href="#">Votre boutique</a>
+            </div>
         </div>
-  
-        <div class="team-item">
-          <div class="team-name">Lightning de Tampa Bay</div>
-          <button class="ajouter-button">Ajouter</button>
-        </div>
-  
-        <div class="team-item">
-          <div class="team-name">Maple Leafs de Toronto</div>
-          <button class="ajouter-button">Ajouter</button>
-        </div>
-  
-        <div class="team-item">
-          <div class="team-name">Bruins de Boston</div>
-          <button class="ajouter-button">Ajouter</button>
-        </div>
-      </div>
     </div>
-  </div>
-  
-  <script>
-      
-      var modal = document.getElementById("favModal");
-  
-           var favButton = document.getElementById("fav");
-  
-     
-      var closeModal = document.getElementById("closeModal");
-  
-     
-      favButton.onclick = function() {
-          modal.style.display = "block";
-      }
-  
-      
-      closeModal.onclick = function() {
-          modal.style.display = "none";
-      }
-  
-      
-      window.onclick = function(event) {
-          if (event.target == modal) {
-              modal.style.display = "none";
-          }
-      }
-  </script>
-  
-  </body>
-  </html>
+
+    <!-- Main Content -->
+    <div class="mt-4 container">
+        <h1>Bienvenue, <%= username %>!</h1>
+
+        <div class="row">
+            <!-- Favorite Teams Section -->
+            <div class="col-md-5">
+                <h3>Ajouter vos équipes favorites</h3>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#teamModal">Choisir votre équipe</button>
+                <!-- Modal for Selecting Team -->
+                <div class="modal fade" id="teamModal" tabindex="-1" role="dialog" aria-labelledby="teamModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="teamModalLabel">Sélectionner une équipe</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <ul id="teamList">
+                                    <li><a href="#" class="team-item">Équipe 1</a></li>
+                                    <li><a href="#" class="team-item">Équipe 2</a></li>
+                                    <li><a href="#" class="team-item">Équipe 3</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team Cards -->
+                <div id="teamCards">
+                    <div class="card">
+                        <div class="card-header">Mes équipes favorites</div>
+                        <div class="card-body">
+                            <select class="form-control">
+                                <option>Dernières nouvelles</option>
+                                <option>Derniers scores</option>
+                                <option>Historique</option>
+                                <option>Head to Head</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+       <!-- Upcoming Matches & Predictions Section -->
+<div class="col-md-5">
+    <h3>Prochains matchs & Prédictions</h3>
+    
+    <% if (games && games.length > 0) { %>
+        <% games.forEach(function(match) { %> <!-- Loop through each match -->
+            <div class="card mb-4">
+                <div class="card-header"><%= match.teams %> - <%= match.date %></div>
+                <div class="card-body">
+                    <!-- Include the voting form partial -->
+                    <%- include('composant/voteForm', { match: match }) %>
+
+                </div>
+            </div>
+        <% }); %> <!-- End match loop -->
+    <% } else { %>
+        <p>Aucun match à venir.</p>
+    <% } %>
+</div>
+
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -17,7 +17,7 @@ const equipeRoutes = require('./routes/equipeRoutes');
 const joueurRoutes = require('./routes/joueurRoutes');
 const liveScoreRoutes = require('./routes/index');
 const boxScoreRoutes = require('./routes/boxScoreRoutes');
-
+const pollRoutes = require('./routes/pollRoutes');
 
 //Route vers statitique
 const statistiqueGardienRoutes = require('./routes/statistiqueGardienRoutes');
@@ -51,6 +51,8 @@ app.use('/', equipeRoutes);
 app.use('/', joueurRoutes);
 app.use('/', liveScoreRoutes);
 app.use('/game', boxScoreRoutes);
+
+app.use('/users/pollRoute', pollRoutes);
 
 // Routes des statistiques
 app.use('/stats/gardien', statistiqueGardienRoutes);
