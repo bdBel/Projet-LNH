@@ -123,32 +123,6 @@
 <!-- affichage des matchs en direct -->
 <div class="nav">
     <% if (games && games.length > 0) { %>
-        <% games.forEach(dateEntry => { %> 
-            <% if (dateEntry.games && dateEntry.games.length > 0) { %> <!-- Ensure games exists -->
-                <div><h3><%= dateEntry.games[0].today %></h3></div>
-                <% dateEntry.games.forEach(game => { %>
-                    <div class="nav-item">
-                        <a href="/game/boxscore/<%= game.id %>">
-                            <div style="display: flex; justify-content: space-between; font-size: medium;">
-                                <div><%= game.gameState %></div>
-                                <div><%= game.formattedStartTime %></div>
-                            </div>
-                            <div class="team">
-                                <img src="<%= game.awayTeam.logo %>" alt="<%= game.awayTeam.name %>">
-                                <div class="team-abrrev"><%= game.awayTeam.abbrev %></div>
-                                <div class="team-score"><%= game.awayTeam.score %></div>
-                            </div>
-                            <div class="team">
-                                <img src="<%= game.homeTeam.logo %>" alt="<%= game.homeTeam.name %>">
-                                <div class="team-abrrev"><%= game.homeTeam.abbrev %></div>
-                                <div class="team-score"><%= game.homeTeam.score %></div>
-                            </div>
-                        </a>
-                    </div>
-                <% }) %>
-            <% } else { %> <!-- Handle case where there are no games for this date -->
-                <div>No games for this date.</div>
-            <% } %>
         <% games.forEach(dateEntry => { %>
             <% dateEntry.games.forEach(game => { %>
                 <div class="nav-item">
@@ -169,5 +143,4 @@
     <% } else { %>
         <div class="nav-item">aucun match en cours</div>
     <% } %>
-    
 </div>
