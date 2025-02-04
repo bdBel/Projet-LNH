@@ -11,7 +11,7 @@ const Joueur = require('../models/Joueur');
 async function insererUpdateJoueur() {
   try {
     // Connexion à la base de données MongoDB
-    connectDB();
+    await connectDB();
     const data = fs.readFileSync('c:/Users/gabla/VisualStudioCode/Projet-LNH/listeJoueur/players.txt', 'utf8');
     const lines = data.split('\n');
 
@@ -32,25 +32,15 @@ async function insererUpdateJoueur() {
       const playerResponse = await axios.get(`https://api-web.nhle.com/v1/player/${playerId}/landing`);
       const playerData = playerResponse.data;
 
-      const playerInfo = {
-        _id: playerData.playerId,
-        headshot: playerData.headshot,
-        firstName: playerData.firstName.default,
-        lastName: playerData.lastName.default,
-        position: playerData.positionCode,
-        team: playerData.currentTeamAbbrev,
-        sweaterNumber: playerData.sweaterNumber,
-        birthDate: playerData.birthDate,
-        nationality: playerData.birthCountry,
-        heightInInches: playerData.heightInInches,
-        weightInPounds: playerData.weightInPounds,
-      };
-
       // Insérer ou mettre à jour le joueur dans la base de données
-      await Joueur.updateOne({ _id: playerData.playerId }, playerInfo, { upsert: true });
+      await Joueur.updateOne(
+        { _id: playerData.playerId },
+        { $set: playerData },
+        { upsert: true }
+      );
     }
 
-    console.log('Les données du joueur ont été mis à jour avec succès');
+    console.log('Les données du joueur ont été mises à jour avec succès');
   } catch (error) {
     console.error('Erreur pendant l\'insertion des données', error);
   }
@@ -170,8 +160,8 @@ const mettreAJourToutesStatistiques = async () => {
   }
 };
 
-mettreAJourToutesStatistiques();
 
+insererUpdateJoueur();
 module.exports = {
   insererStatistiquesJoueurs,
   insererStatistiquesGardiens,

@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const JoueurService = require('../service/JoueurService');
 const EquipeService = require('../service/EquipeService');
-const StatistiqueJoueur = require('../service/statistiqueService');
 
 // Récupérer une liste de joueurs
 router.get("/:teamsABV/joueur", async (req, res) => {
@@ -38,8 +37,8 @@ router.get("/:teamsABV/joueur", async (req, res) => {
 // GET un joueur par sont teamabbrev et id
 router.get('/:team/joueur/:id', async (req, res) => {
   try {
-    const stats = await StatistiqueJoueur.getStatsJoueursByEquipe(req.params.team);//Récupere les stats des joueurs de l'équipe
-    const playerStats = stats.find((player) => player.playerId == req.params.id);//Récupere les stats d'un joueur en particulier
+    const statsJoueur = await JoueurService.getJoueursByEquipe(req.params.team);//Récupere les stats des joueurs de l'équipe
+    const playerStats = statsJoueur.find((player) => player._id == req.params.id);//Récupere les stats d'un joueur en particulier
     res.render('playerStats', {playerStats : playerStats});//Retourne la vue playerStats avec les stats du joueur
   } catch (error) {
     res.status(500).json({ message: error.message });
