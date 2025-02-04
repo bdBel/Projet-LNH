@@ -88,7 +88,9 @@
             <img  src="<%= joueur.headshot%>" alt="<%= joueur.firstName%> <%= joueur.lastName%>">
           </div>
           <div class="" style="width: 300px;">
+            <a href="/<%= joueur.team %>/joueur/<%=joueur._id %>">  
             <%= joueur.firstName%> <%= joueur.lastName%>
+            </a>
           </div>
         </div>
         <div><%= joueur.sweaterNumber%></div>

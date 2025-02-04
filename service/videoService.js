@@ -11,6 +11,8 @@ const getVideoIds = async () => {
 
     try {
         await connectDb(); // Connectez-vous à la base de données
+
+        await Video.deleteMany({}); // Supprimer toutes les vidéos de la base de données
        
 
         const games = await getGamesByDate(formattedDate);

@@ -66,4 +66,5 @@ const StatistiqueService = {
     }
 };
 
+
 module.exports = StatistiqueService;

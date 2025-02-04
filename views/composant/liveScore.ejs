@@ -14,40 +14,36 @@
         padding: 1px;
         text-align: center;
         margin-bottom: 20px;
+        
     }
 
-    /* alignement noms equipes et scores */
-    .team {
+    .team{  
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
     }
 
-    /* style nom abrege equipes */
     .team-abrrev {
-        font-size: 14px;
+        justify-content: center;
+        width: 50px;
+        padding-right: 30px;
+        font-size: medium;
         font-weight: bold;
-        margin-right: 8px;
     }
-
-    /* style score equipe */
     .team-score {
-        font-size: 16px;
+        font-size: medium;
+        font-size: 18px;
         font-weight: bold;
-        color: #d32f2f;
-        margin-left: 8px;
-    }   
-
-    /* style heure et etat match */
-    .game-time {
+    } 
+    
+    /*.game-time {
         font-size: 12px;
         color: #666;
         margin-top: 3px;
-    }
+    }*/
 
-    /* conteneur principal des matchs en direct */
-    .nav {
+    .nav { 
         display: flex;
         overflow-x: auto;
         white-space: nowrap;
@@ -58,11 +54,11 @@
         scrollbar-width: thin;
         scrollbar-color: #d32f2f #f5f5f5;
         z-index: 2000 !important;
-        position: relative;
+        position: relative;      
     }
 
-    /* style scrollbar chrome safari edge */
-    .nav::-webkit-scrollbar {
+     /* style scrollbar chrome safari edge */
+     .nav::-webkit-scrollbar {
         height: 8px;
     }
 
@@ -82,65 +78,63 @@
         opacity: 0.8;
     }
 
-    /* style carte match */
-    .nav-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 120px;
-        padding: 10px;
-        background-color: #f9f9f9;
-        border-radius: 10px;
-        margin: 5px;
-        text-align: center;
-        font-family: 'Arial', sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        transition: transform 0.2s ease-in-out;
-    }
 
+    .nav-item {
+        display: inline-block;
+        color: rgb(7, 7, 7);      
+        padding: 10px;
+        margin: 0 10px;
+        background-color: #fafafa;
+        border-radius: 8px;
+        cursor: pointer;  
+
+               
+    }
     .nav-item a {
         font-size: medium;
         text-decoration: none;
         color: rgb(7, 7, 7);
+        
     }
 
-    .nav-item:hover {
-        background-color: #f0f0f0;
-        transform: scale(1.05);
-    }
-
-    /* style logo equipe */
     .nav-item img {
-        height: 47px;
-        width: 47px;
-        object-fit: contain;
-        margin-bottom: 5px;
+        height: 30px;
+        width: 40px;
     }
 </style>
 
-<!-- affichage des matchs en direct -->
 <div class="nav">
-    <% if (games && games.length > 0) { %>
-        <% games.forEach(dateEntry => { %>
+<% if (games && games.length > 0) { %>
+    <% games.forEach(dateEntry => { %>           
+            <div><h3><%= dateEntry.games[0].today %></h3></div>
             <% dateEntry.games.forEach(game => { %>
                 <div class="nav-item">
-                    <div class="game-time"><%= game.formattedStartTime %></div>
-                    <div class="team">
-                        <img src="<%= game.awayTeam.logo %>" alt="<%= game.awayTeam.name %>">
-                        <div class="team-abrrev"><%= game.awayTeam.abbrev %></div>
-                        <div class="team-score"><%= game.awayTeam.score %></div>
-                    </div>
-                    <div class="team">
-                        <img src="<%= game.homeTeam.logo %>" alt="<%= game.homeTeam.name %>">
-                        <div class="team-abrrev"><%= game.homeTeam.abbrev %></div>
-                        <div class="team-score"><%= game.homeTeam.score %></div>
-                    </div>
+                    <a href="/game/boxscore/<%= game.id %>">
+                        <div style="display: flex; justify-content: space-between; font-size: medium; ">
+                            <div><%= game.gameState %></div>
+                            <div><%= game.formattedStartTime %></div>
+                            
+                        </div>
+                        <div class="team">
+                            <img src="<%= game.awayTeam.logo %>" alt="<%= game.awayTeam.name %>">
+                            <div class="team-abrrev"><%= game.awayTeam.abbrev %></div>
+                            <div class="team-score"><%= game.awayTeam.score %></div>
+                        </div>
+                        <div class="team">
+                            <img src="<%= game.homeTeam.logo %>" alt="<%= game.homeTeam.name %>">
+                            <div class="team-abrrev"><%= game.homeTeam.abbrev %></div>
+                            <div class="team-score"><%= game.homeTeam.score %></div>
+                        </div>
+                    </a>
                 </div>
             <% }) %>
-        <% }) %>
-    <% } else { %>
-        <div class="nav-item">aucun match en cours</div>
-    <% } %>
+    <% }) %>
+<% } else { %>
+    <div class="nav-item">Aucun match en cours</div>
+<% } %>
 </div>
+
+
+
+
+
