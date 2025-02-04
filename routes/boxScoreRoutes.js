@@ -33,6 +33,25 @@ router.get("/boxscore/:id", async (req, res) => {
             } else {
                 game.clock.timeRemaining = game.clock.timeRemaining;
             } 
+
+
+            game.summary.scoring.forEach(scoring => {
+                scoring.goals.forEach(goal => {
+                    if(goal.shotType === 'wrist'){
+                        goal.shotType = 'Tir du Poignet';
+                    }else if(goal.shotType === 'snap'){
+                        goal.shotType = 'Tir Frappé';
+                    }else if(goal.shotType === 'deflected'){
+                        goal.shotType = 'Déviation';
+                    }else if(goal.shotType === 'bat'){
+                        goal.shotType = 'Coup de Baton';
+                    }else {
+                        goal.shotType = '';
+                    }
+                });
+            });
+
+            
             res.render('resultat', {game});
         };
         console.log(game.matchup);

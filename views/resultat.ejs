@@ -8,7 +8,7 @@
     .container {
       display: flex;
       justify-content: space-between; 
-      border: 1px solid #ccc;
+      border: 1px solid #d83838;
       background-color: #f9f9f9;
       max-height: 120px;
     }
@@ -17,6 +17,7 @@
     .boxscore{
         display: flex;
         align-items: center;
+        
     }
 
     .box{
@@ -25,6 +26,9 @@
         border: 1px solid #ccc;
         border-radius: 5px;
         background-color: #f9f9f9;
+        width: 75%;
+        justify-items: center;
+        margin-left: 12.5%;
     }
 
     .gamestate{
@@ -45,7 +49,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #42486463;
+        background-color:rgb(218, 221, 221);
         color: rgb(5, 5, 5);
         font-size: 16px;
         font-weight: bold;
@@ -65,7 +69,6 @@
       box-shadow: 4px 4px 8px rgb(219, 40, 40);
       display: flex;
       align-items: center;
-      justify-content: space-between;
       padding-left: 10px;
       padding-right: 10px;
     }
@@ -75,15 +78,27 @@
      border-radius: 50%;
     }
 
-    .goal {
-        background-color: rgb(173, 175, 175);
+    .goal-card {
+        background-color: rgb(218, 221, 221);
         padding: 10px;
         border: 10%;
+        border-radius: 30px;
+        min-width: 200px;
+        margin-left: 20px;
+    }
+    .goal-card-time {
+        background-color: rgb(218, 221, 221);
+        padding: 10px;
+        border: 10%;
+        border-radius: 30px;
+        min-width: 80px;
+        margin-left: 30px;
+        text-align: center;
     }
   </style>
   
 </head>
-<body>
+<body style="justify-content: center;">
   <!--navbar-->
   <%- include('composant/navbar') %>
   <!--navbar-->
@@ -139,7 +154,7 @@
                 <div>
                     <img src="<%= goal.headshot %>" alt="<%= goal.name.default %>">
                 </div>
-                <div class="goal">
+                <div class="goal-card">
                     <div ><h3><%= goal.name.default %>(<%= goal.goalsToDate %>)</h3></div>
                     <div >
                         <% if (goal.assists && goal.assists.length > 0) { %>
@@ -153,9 +168,8 @@
                         <% } %>
                     </div>
                 </div>
-                <div><%= goal.period %></div>
-                <div><%= goal.timeInPeriod %></div>
-                <div><%= goal.shotType %></div>
+                <div class="goal-card-time"><%= goal.timeInPeriod %></div>
+                <div class="goal-card-time"><%= goal.shotType %></div>
                 
             </div>
         <% }) %>
