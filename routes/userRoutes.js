@@ -3,7 +3,8 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User'); 
 const router = express.Router();
 const userService = require('../service/userService');
-
+//const liveScoreService = require('../service/liveScoreService');
+const { getGamesLive } = require('../service/liveScoreService');
 
 router.get("/login", async (req,res)=>{
     res.render('../views/loginRegister.ejs');
@@ -53,17 +54,17 @@ router.post('/login', async (req, res) => {
 });
 
 
-router.get('/members', (req, res) => {
-    if (req.session.username) {
+// router.get('/members', (req, res) => {
+//     if (req.session.username) {
         
-        // Render the 'members' page and pass the user's name for personalization
-        res.render('accueilMembre.ejs', { username: req.session.username });
+//         // Render the 'members' page and pass the user's name for personalization
+//         res.render('accueilMembre.ejs', { username: req.session.username });
                     
-    } else {
+//     } else {
         
-        res.redirect('/users/login');
-    }
-});
+//         res.redirect('/users/login');
+//     }
+// });
 
 
 // Logout Route
@@ -83,5 +84,30 @@ router.get('/logout', (req, res) => {
 router.get('/userList', function(req, res, next) {
     res.send('respond with a resource');
   });
+
+//incorpore les games
+
+router.get('/members', async (req, res) => {
+    try {
+        const liveGames = await getGamesLive();
+        const username = req.session.username; // Accès à la session
+        
+        if (!username) {
+            return res.status(401).json({ 
+                error: 'Vous devez être connecté pour accéder à cette page' 
+            });
+        }
+
+        res.render('accueilMembre', { 
+            games: liveGames, 
+            username 
+        });
+    } catch (error) {
+        console.error('Erreur lors de la récupération des données:', error.message);
+        res.status(500).send('Erreur lors de la récupération des données.');
+    }
+});
+
+
 
 module.exports = router;

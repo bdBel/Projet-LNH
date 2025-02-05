@@ -1,56 +1,56 @@
-const bcrypt =  require('bcryptjs');
+const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
 const registerUser = async (nom, prenom, email, password) => {
+    try {
+        if (!nom || !prenom || !email || !password) {
+            throw new Error('Tous les champs sont requis');
+        }
 
-    if (!nom || !prenom || !email || !password) {
-        throw new Error('All fields are required');
-    }
-    const userExists = await User.findOne({ email });
-    if(userExists){
-        
-        throw new Error('User already exists');
-        
-    }
+        const userExists = await User.findOne({ email });
+        if (userExists) {
+            throw new Error('L\'utilisateur existe déjà');
+        }
 
-   // Create a new user
-   //const hashedPassword = await bcrypt.hash(password, 10);
-   
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         const newUser = new User({
             nom, 
             prenom,
             email, 
-            password,
-
+            password: hashedPassword,
         });
 
         await newUser.save();
-        return newUser;zzz
-    };
+        return newUser;
+    } catch (err) {
+        throw new Error('Erreur lors de l\'inscription : ' + err.message);
+    }
+};
 
-    // Login user
 const loginUser = async (email, password) => {
-    if (!email || !password) {
-        throw new Error('Email and password are required');
-    }
+    try {
+        if (!email || !password) {
+            throw new Error('L\'email et le mot de passe sont requis');
+        }
 
-    // Find the user by email
-    const user = await User.findOne({ email });
-    if (!user) {
-        throw new Error('Invalid credentials');
-    }
+        const user = await User.findOne({ email });
+        if (!user) {
+            throw new Error('Identifiants invalides');
+        }
 
-    // Compare the entered password with the stored password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-        throw new Error('Invalid credentials');
-    }
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            throw new Error('Identifiants invalides');
+        }
 
-    return user;
+        return user;
+    } catch (err) {
+        throw new Error('Erreur lors de la connexion : ' + err.message);
+    }
 };
 
 module.exports = {
     registerUser,
     loginUser,
 };
-   

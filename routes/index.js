@@ -42,6 +42,7 @@ router.get('/', async (req, res) => {
     const username = req.session.username;
        
     res.render('acceuil', { games: gamesByDate, videos, username}); // Rendre la vue avec les données formatées + user connecté
+    
 } catch (error) {
     console.error('Erreur lors de la récupération des données:', error.message);
     res.status(500).send('Erreur lors de la récupération des données.');

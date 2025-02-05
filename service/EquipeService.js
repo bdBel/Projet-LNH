@@ -3,9 +3,10 @@ const connectDB = require('../config/db');
 
 
 // Récupérer une équipe par son abréviation
+
 const getEquipeByABV = async (teamsABV) => {
   try {
-    connectDB();
+    //connectDB();
     console.log('Recherche de l\'équipe avec l\'abréviation :', teamsABV);
     const equipe = await Equipe.findOne({ teamsABV: teamsABV });
     if (!equipe) {
@@ -23,7 +24,7 @@ const getEquipeByABV = async (teamsABV) => {
 // Récupérer toutes les équipes
 const getEquipes = async () => {
   try {
-    connectDB();
+  //  connectDB();
     const listeEquipes = await Equipe.find({});
     return listeEquipes;
   } catch (err) {

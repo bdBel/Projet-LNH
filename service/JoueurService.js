@@ -4,7 +4,7 @@ const connectDB = require('../config/db');
 // Réccupérer tous les joueurs d'une équipe donnée
 const getJoueursByEquipe = async (teamsABV) => {
   try {
-    connectDB();
+    //connectDB();
     console.log("Tu es dans le service");
     const joueurs = await Joueur.find({ team: teamsABV });
     console.log('Joueurs trouvés :', joueurs);
