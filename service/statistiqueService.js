@@ -3,7 +3,7 @@ const StatistiqueGardien = require('../models/StatistiqueGardien');
 const StatistiqueEquipe = require('../models/StatistiqueEquipe');
 
 const StatistiqueService = {
-    // recuperer stats joueur avec abrev equipe
+    // recuperer stats joueur avec abrev equipe dans la BD
     async getStatsJoueursByEquipe(teamAbbreviation) {
         try {
             return await StatistiqueJoueur.find({ team: teamAbbreviation });
