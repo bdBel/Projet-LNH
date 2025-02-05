@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const StatistiqueEquipeSchema = new mongoose.Schema({
+const StatistiqueEquipeSchema = new mongoose.Schema(
+  {
     teamId: { type: Number, required: true, unique: true },
     teamName: { type: String, required: true },
     gamesPlayed: { type: Number, default: 0 },
@@ -16,6 +17,8 @@ const StatistiqueEquipeSchema = new mongoose.Schema({
     penaltyKillPercentage: { type: Number, default: 0 },
     faceoffWinPct: { type: Number, default: 0 },
     penaltyMinutes: { type: Number, default: 0 },
-}, { strict: false });
+  },
+  { strict: false },
+);
 
-module.exports = mongoose.model('StatistiqueEquipe', StatistiqueEquipeSchema);
+module.exports = mongoose.model("StatistiqueEquipe", StatistiqueEquipeSchema);
