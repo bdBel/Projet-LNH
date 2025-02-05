@@ -12,4 +12,4 @@ const StatistiqueEquipeSchema = new mongoose.Schema({
     goalsAgainst: Number
 });
 
-module.exports = mongoose.model('StatistiqueEquipe', StatistiqueEquipeSchema);
+module.exports = mongoose.model("StatistiqueEquipe", StatistiqueEquipeSchema);

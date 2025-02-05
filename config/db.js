@@ -9,7 +9,6 @@ const connectDB = async () => {
             serverSelectionTimeoutMS: 10000,
         });
         console.log('Connecter à la base de donner');
-       // console.log(mongoose.connection.readyState);
     } catch (error) {
         console.error('Database connection error:', error);
         process.exit(1); // Sortir du programme si la connexion échoue
