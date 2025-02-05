@@ -39,7 +39,7 @@ const getVideoIds = async () => {
                     };
                     if(videoData.channelID === NHLID){
                          // Insérer ou mettre à jour la vidéo dans la base de données
-                    await Video.insertOne(
+                    await Video.updateOne(
                         { videoId: videoData.videoId },
                         { $set: videoData },
                         { upsert: true }
@@ -82,7 +82,6 @@ const getVideosFromDb = async () => {
     }
 };
 
-getVideoIds();
 module.exports = {
     getVideoIds,
     getVideosFromDb
