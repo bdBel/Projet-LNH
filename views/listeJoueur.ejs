@@ -74,8 +74,8 @@
         <div>#</div>
         <div>Position</div>
         <div>Nationnaliter</div>
-        <div>Grandeur</div>
-        <div>Hauteur</div>
+        <div>Grandeur(CM)</div>
+        <div>Poids(KG)</div>
         <div>Date de naissance</div>
       </div>
        
@@ -88,7 +88,9 @@
             <img  src="<%= joueur.headshot%>" alt="<%= joueur.firstName%> <%= joueur.lastName%>">
           </div>
           <div class="" style="width: 300px;">
-            <%= joueur.firstName%> <%= joueur.lastName%>
+            <a href="/<%= joueur.team %>/joueur/<%=joueur._id %>" style="text-decoration: none; color: black;">  
+              <%= joueur.firstName.default%> <%= joueur.lastName.default%>
+            </a>
           </div>
         </div>
         <div><%= joueur.sweaterNumber%></div>
@@ -111,12 +113,12 @@
         <div>#</div>
         <div>Position</div>
         <div>Nationnaliter</div>
-        <div>Grandeur</div>
-        <div>Hauteur</div>
+        <div>Grandeur(CM)</div>
+        <div>Poids(KG)</div>
         <div>Date de naissance</div>
       </div>
        
-       <!--Joueur-->
+       <!--DEF-->
        <% const def = joueurs.filter(joueur => joueur.position == "D"); %>
        <% def.forEach(joueur => { %>
       <div class="containerJoueur">
@@ -125,7 +127,9 @@
             <img src="<%= joueur.headshot%>" alt="<%= joueur.firstName%> <%= joueur.lastName%>">
           </div>
           <div class="" style="width: 300px;">
-            <%= joueur.firstName%> <%= joueur.lastName%>
+            <a href="/<%= joueur.team %>/joueur/<%=joueur._id %>" style="text-decoration: none; color: black;">  
+              <%= joueur.firstName.default%> <%= joueur.lastName.default%>
+            </a>
           </div>
         </div>
         <div><%= joueur.sweaterNumber%></div>
@@ -149,8 +153,8 @@
         <div>#</div>
         <div>Position</div>
         <div>Nationnaliter</div>
-        <div>Grandeur</div>
-        <div>Hauteur</div>
+        <div>Grandeur(CM)</div>
+        <div>Poids(KG)</div>
         <div>Date de naissance</div>
       </div>
        
@@ -163,7 +167,9 @@
             <img  src="<%= joueur.headshot%>" alt="<%= joueur.firstName%> <%= joueur.lastName%>">
           </div>
           <div class="" style="width: 300px;">
-            <%= joueur.firstName%> <%= joueur.lastName%>
+            <a href="/<%= joueur.team %>/joueur/<%=joueur._id %>" style="text-decoration: none; color: black;">  
+              <%= joueur.firstName.default%> <%= joueur.lastName.default%>
+            </a>
           </div>
         </div>
         <div><%= joueur.sweaterNumber%></div>

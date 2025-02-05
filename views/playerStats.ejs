@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/statsJoueur.css"> <!-- style principal classement -->
+    <title>Statistique Joueur</title>
+</head><style>
+  
+</style>
+<body >
+      <!--Footer-->
+      <%- include('composant/navbar') %>
+      <!--Footer-->
+
+      <main>
+        <div style="display: flex; ">
+            <div style="width: 25%; align-self: center; margin-left: 30px;">
+                <h1><%= playerStats.firstName.default%></h1>
+                <h1><%= playerStats.lastName.default%></h1>
+            </div>     
+            <div style="width: 30%;">
+                <img style="border-radius: 50%; max-width: 200px;" src="<%= playerStats.headshot%>" alt="">
+            </div>  
+            <div style="width: 25%;">
+                <h2>Repêchage:</h2>
+                <%= playerStats.draftDetails.year %>, 
+                <%= playerStats.draftDetails.teamAbbrev %>  (<%= playerStats.draftDetails.overallPick %> Choix au Total), 
+                <%= playerStats.draftDetails.round %> Tour, 
+                <%= playerStats.draftDetails.pickInRound %> Choix             
+            </div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Saison</th>
+                    <th>Équipe</th>
+                    <th>PJ</th>
+                    <th>B</th>
+                    <th>A</th>
+                    <th>P</th>
+                    <th>+/-</th>
+                    <th>PPG</th>
+                    <th>PPP</th>
+                    <th>SHG</th>
+                    <th>SHP</th>
+                    <th>SHG</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% playerStats.seasonTotals
+                        .filter(saison => saison.leagueAbbrev === 'NHL') // Filtrer uniquement les saisons NHL
+                        .forEach(saison => { %>
+                        <tr>
+                            <td><%= saison.season || "N/A" %></td>
+                            <td><%= playerStats.team %></td>
+                            <td><%= saison.gamesPlayed || 0 %></td>
+                            <td><%= saison.goals || 0 %></td>
+                            <td><%= saison.assists || 0 %></td>
+                            <td><%= saison.points || 0 %></td>
+                            <td><%= saison.plusMinus || 0 %></td>
+                            <td><%= saison.powerPlayGoals || 0 %></td>
+                            <td><%= saison.powerPlayPoints || 0 %></td>
+                            <td><%= saison.shortHandedGoals || 0 %></td>
+                            <td><%= saison.shortHandedPoints || 0 %></td>
+                            <td><%= saison.shots || 0 %></td>
+                        </tr>
+                    <% }) %>
+                
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

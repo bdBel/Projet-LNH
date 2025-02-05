@@ -11,6 +11,8 @@ const getVideoIds = async () => {
 
     try {
         await connectDb(); // Connectez-vous à la base de données
+
+        await Video.deleteMany({}); // Supprimer toutes les vidéos de la base de données
        
 
         const games = await getGamesByDate(formattedDate);
@@ -37,12 +39,11 @@ const getVideoIds = async () => {
                     };
                     if(videoData.channelID === NHLID){
                          // Insérer ou mettre à jour la vidéo dans la base de données
-                    await Video.updateOne(
+                    await Video.insertOne(
                         { videoId: videoData.videoId },
                         { $set: videoData },
                         { upsert: true }
                     );
-                    //console.log('Video data:', videoData);
 
                     }
 
