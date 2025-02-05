@@ -1,87 +1,91 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User'); 
+const Equipe = require('../models/Equipe'); 
 const router = express.Router();
 const userService = require('../service/userService');
 
-
-router.get("/login", async (req,res)=>{
-    res.render('../views/loginRegister.ejs');
+// affichage de la page de connexion
+router.get("/login", async (req, res) => {
+    res.render('../views/loginRegister.ejs', { error: null });
 });
-router.get("/signup", async (req,res)=>{
+
+// affichage de la page dinscription
+router.get("/signup", async (req, res) => {
     res.render('../views/signUp.ejs');
 });
 
-
-// Signup Route
-
+// inscription nouvel utilisateur
 router.post('/signup', async (req, res) => {
- 
-
     const { nom, prenom, email, password } = req.body;
 
     try {
         const user = await userService.registerUser(nom, prenom, email, password);
-        res.status(201).json({ message: 'User registered successfully', user });
+        res.status(201).json({ message: 'utilisateur inscrit avec succes', user });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 });
 
-
-// Login Route
+// connexion utilisateur
 router.post('/login', async (req, res) => {
-
     const { email, password } = req.body;
 
-     if (!email || !password) {
-         return res.status(400).json({ message: 'Email and password are required' });
-     }
+    if (!email || !password) {
+        return res.render('loginRegister.ejs', { error: "email et mot de passe requis" });
+    }
 
     try {
-        
         const user = await userService.loginUser(email, password);
-
-        // store firstname in session
-        req.session.username = user.prenom; 
+        req.session.username = user.prenom;
         res.redirect('/users/members');
-
     } catch (error) {
-        console.error("Error during login:", error);
-        res.status(400).json({ message: error.message });
+        console.error("erreur de connexion", error);
+        res.render('loginRegister.ejs', { error: "identifiants incorrects reessayez" });
     }
 });
 
+// affichage de la page membre avec equipes
+router.get('/members', async (req, res) => {
+    if (!req.session.username) {
+        return res.redirect('/users/login');
+    }
 
-router.get('/members', (req, res) => {
-    if (req.session.username) {
-        
-        // Render the 'members' page and pass the user's name for personalization
-        res.render('accueilMembre.ejs', { username: req.session.username });
-                    
-    } else {
-        
-        res.redirect('/users/login');
+    try {
+        // recuperation des equipes depuis mongodb
+        const equipes = await Equipe.find({}, 'full_name logo');
+
+        if (!equipes || equipes.length === 0) {
+            console.log("aucune equipe trouvee dans la base de donnees");
+        } else {
+            console.log(`${equipes.length} equipes chargees`);
+        }
+
+        // envoi des equipes et du username a la vue
+        res.render('accueilMembre.ejs', { 
+            username: req.session.username, 
+            equipes 
+        });
+
+    } catch (err) {
+        console.error("erreur lors du chargement des equipes", err);
+        res.status(500).send("erreur interne du serveur");
     }
 });
 
-
-// Logout Route
+// deconnexion utilisateur
 router.get('/logout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             return res.redirect('/');
         }
-
         res.redirect('/');  
     });
 });
-  
 
-//list of users 
-
+// liste des utilisateurs
 router.get('/userList', function(req, res, next) {
     res.send('respond with a resource');
-  });
+});
 
 module.exports = router;

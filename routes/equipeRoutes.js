@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const Equipe = require('../models/Equipe');
 const EquipeService = require('../service/EquipeService');
 
 // Récupérer une équipe par son abréviation
@@ -43,5 +43,21 @@ router.get("/listeEquipes", async (req, res) => {
     res.status(500);
   }
 });
+
+// Route pour afficher la page members avec les logos
+router.get('/members', async (req, res) => {
+  try {
+      const equipes = await Equipe.find({}, 'teamCommonName logo'); // Récupère le nom et le logo
+
+      res.render('accueilMembre', { 
+          username: req.session.username || "Invité", 
+          equipes 
+      });
+  } catch (err) {
+      console.error(err);
+      res.status(500).send("Erreur lors du chargement des équipes.");
+  }
+});
+
 module.exports = router;
  

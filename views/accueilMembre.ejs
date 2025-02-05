@@ -1,181 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <!-- Navbar -->
+    <%- include('composant/navbar') %>
+    <!-- Navbar -->
+    <link rel="stylesheet" href="/accueilMembre.css">
+    
     <meta charset="UTF-8">
     <title>Page du membre <%= username %></title>
 
 </head>
-<style>
-   .container {
-        
-        margin-left: 20px;
-    }
-         
-         .modal {
-            display: none; 
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); 
-            padding-top: 60px;
-        }
 
-          
-        .modal-content {
-            background-color: #333; 
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            width: 80%;
-            max-width: 600px;
-            border-radius: 10px;
-            color: white; 
-        }
-
-       
-        .close {
-            color: white;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: red; 
-            text-decoration: none;
-        }
-
-       
-        .modal-header {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: red; 
-            margin-bottom: 15px;
-        }
-
-        .team-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .team-item {
-            display: flex;
-            justify-content: space-between; 
-            background-color: #444; 
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .team-item:hover {
-            background-color: #555; 
-            cursor: pointer;
-        }
-
-        .team-item .team-name {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: white; 
-        }
-
-        .team-item .team-name:hover {
-            color: red; 
-        }
-        
-        .ajouter-button {
-            background-color: red;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            font-size: 0.9rem;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .ajouter-button:hover {
-            background-color: #cc0000;
-        }
-</style>
 <body>
-     <!--Navbar-->
-     <%- include('composant/navbar') %>
-     <!--Navbar-->
-     <div class="mt-4 container">
-    <h1>Bienvenue, <%= username %>!</h1> 
-    <p>Personnaliser votre page</p>
-    <p>Choisissez votre équipe favorite <a id="fav" href="javascript:void(0);"><i>ici</i></a></p>
 
-    <a href="http://localhost:3000" id="retour-accueil" class="left-align">Retour à l'accueil</a>
-            <!-- Modal -->
-<div id="favModal" class="modal">
-        
-    <div class="modal-content">
-      <span class="close" id="closeModal">&times;</span>
-      <div class="modal-header">
-        <h2>Les Equipes</h2>
-      </div>
-      <div class="team-list">
-       <!-- LIST OF TEAMS -->
-        <div class="team-item">
-          <div class="team-name">Sabres de Buffalo</div>
-          <button class="ajouter-button">Ajouter</button>
+    <div class="mt-4 container">
+        <h1>Bienvenue, <%= username %>!</h1> 
+        <p>Personnaliser votre page</p>
+        <p>Choisissez votre équipe favorite :</p>
+        <p id="selected-team-name" class="team-name-display">Aucune équipe sélectionnée</p>
+
+
+        <!--  Liste des équipes sous forme de logos -->
+        <div class="team-selection">
+            <% equipes.forEach(equipe => { %>
+                <img src="<%= equipe.logo %>" class="team-logo" data-team="<%= equipe.full_name %>" alt="<%= equipe.full_name %>">
+            
+            <% }); %>
         </div>
-  
-        <div class="team-item">
-          <div class="team-name">Panthers de la Floride</div>
-          <button class="ajouter-button">Ajouter</button>
-        </div>
-  
-        <div class="team-item">
-          <div class="team-name">Lightning de Tampa Bay</div>
-          <button class="ajouter-button">Ajouter</button>
-        </div>
-  
-        <div class="team-item">
-          <div class="team-name">Maple Leafs de Toronto</div>
-          <button class="ajouter-button">Ajouter</button>
-        </div>
-  
-        <div class="team-item">
-          <div class="team-name">Bruins de Boston</div>
-          <button class="ajouter-button">Ajouter</button>
-        </div>
-      </div>
+
+        <a href="http://localhost:3000" id="retour-accueil" class="left-align">Retour à l'accueil</a>
     </div>
-  </div>
-  
-  <script>
-      
-      var modal = document.getElementById("favModal");
-  
-           var favButton = document.getElementById("fav");
-  
-     
-      var closeModal = document.getElementById("closeModal");
-  
-     
-      favButton.onclick = function() {
-          modal.style.display = "block";
-      }
-  
-      
-      closeModal.onclick = function() {
-          modal.style.display = "none";
-      }
-  
-      
-      window.onclick = function(event) {
-          if (event.target == modal) {
-              modal.style.display = "none";
-          }
-      }
-  </script>
-  
-  </body>
-  </html>
+
+    <!-- Ajout du script pour changer le fond d'écran -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const logos = document.querySelectorAll(".team-logo");
+            const teamNameDisplay = document.getElementById("selected-team-name");
+
+            
+            logos.forEach(logo => {
+                logo.addEventListener("click", () => {
+                    const logoUrl = logo.getAttribute("src");
+                    const teamName = logo.getAttribute("data-team"); // Récupère le nom de l'équipe
+                    teamNameDisplay.textContent = teamName; // Met à jour le texte
+                    document.body.style.setProperty('--background-image', `url('${logoUrl}')`);
+                });
+            });
+        });
+    </script>
+
+    <%- include("composant/footer.ejs") %>
+
+</body>
+</html>

@@ -1,189 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        
-        .signup-link {
-            color: #f8f9fa;
-            background-color: purple;
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            font-size: 1.3rem;
-        }
-        body {
-            background-color: #0a0a0a;
-            color: #f8f9fa;
-        }
-        h3{
-            background-color: purple;
-        }
-        .card {
-            background-color: #1e1e1e;
-            color: #f8f9fa;
-            border: none;
-        }
-        .card-body {
-            padding: 2rem;
-        }
-        #register{
-            margin-top: 20px;
-            background-color: purple;
-        }
-        .form-label {
-            color: #f8f9fa;
-        }
-        .btn-primary {
-            background-color: purple;
-            border: none;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-        .z{
-            background-color: purple;
-        }
-        .link-secondary {
-            color: #adb5bd;
-        }
-        .link-secondary:hover {
-            color: #f8f9fa;
-            text-decoration: underline;
-        }
-        .signup-link {
-            margin-top: 1rem;
-            font-size: 1rem;
-        }
-        .signup-link a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .signup-link a:hover {
-            text-decoration: underline;
-        }
-        .error, .login {
-            color: #f8f9fa;
-            background-color: #dc3545;
-            padding: 1rem;
-            border-radius: 5px;
-            margin-top: 1rem;
-            display: none;
-        }
-        #forgot {
-            font-size: 1rem;
-            margin-top: 1rem;
-            color: #f8f9fa;
-        }
-        #retour-accueil {
-            font-size: 1rem;
-            margin-top: 1rem;
-            color: #f8f9fa;
-            text-decoration: none;
-        }
-        #retour-accueil:hover {
-            text-decoration: underline;
-        }
-        /* Align and style links */
-        .links-container {
-            margin-top: 1rem;
-            color: #f8f9fa;
-        }
-        .links-container a {
-            color: #f8f9fa;
-            font-size: 1rem;
-            text-decoration: none;
-        }
-        .links-container a:hover {
-            text-decoration: underline;
-        }
-        .links-container .left-align {
-            text-align: left;
-            display: block;
-        }
-    </style>
+    <title>Connexion</title>
+
+    <!-- lien vers le css -->
+    <link rel="stylesheet" href="/login.css">
 </head>
 <body>
-    <div class="container">
-    <section class="bg-dark py-5">
-    
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-6">
-                <div class="card shadow-sm rounded-4">
-                    <div class="card-body">
-                        <h3 class="text-center mb-5">Connexion Membres</h3>
+    <div class="wrapper">
+        <!-- navbar -->
+        <%- include('composant/navbar') %>
 
-                        <div id="register">
-                        <p class="text-center register">Pas encore membre? <a href="http://localhost:3000/users/signup" class="text-center text-bg-primary fw-bolder ">S'enregistrer içi</a></p>
-                        </div>
-                        <form id="loginForm" action="/users/login" method="POST">
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-                            </div>
-                            <div class="d-grid">
+        <!-- contenu centré -->
+        <div class="content">
+            <div class="login-container">
+                <h1>Connexion</h1>
+                <% if (typeof error !== "undefined") { %>
+                    <p class="error-message"><%= error %></p>
+                <% } %>
 
-                        
-        
-                                <button class="signup-link" id="btn-login" type="submit">Se connecter</button>
-                            </div>
-                        </form>
-
-                        <div class="error mt-4 invalid">
-                            <p>Invalid credentials. Please try again.</p>
-                        </div>
-
-                        <div class="login mt-4">
-                            <p>Welcome back! You are now logged in.</p>
-                        </div>
-
-                        <!-- Align and style the links (Mot de passe oublié & Retour à l'accueil) -->
-                        <div class="links-container mt-5">
-                            <a href="#" id="forgot" class="left-align">Mot de passe oublié</a>
-                            <a href="http://localhost:3000" id="retour-accueil" class="left-align">Retour à l'accueil</a>
-                        </div>
+                <form action="/users/login" method="POST">
+                    <div class="input-group">
+                        <label for="email">Email :</label>
+                        <input type="email" id="email" name="email" required>
                     </div>
+
+                    <div class="input-group">
+                        <label for="password">Mot de passe :</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+
+                    <button type="submit" class="login-button">Se connecter</button>
+                </form>
+
+                <div class="login-links">
+                    <p>Pas encore inscrit ? <a href="/users/signup">Créer un compte</a></p>
                 </div>
             </div>
         </div>
+
+        <!-- footer bien collé en bas -->
+        <%- include("composant/footer.ejs") %>
     </div>
-</section>
-
-<script>
-    document.getElementById('loginForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const data = {
-            email: formData.get('email'),
-            password: formData.get('password').trim(),
-        };
-
-        try {
-            const response = await fetch('http://localhost:3000/users/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-
-            if (response.ok) {
-                window.location.href = 'http://localhost:3000/users/members';
-            } else {
-                document.querySelector('.error').style.display = 'block';
-            }
-        } catch (error) {
-            console.error('Error during login:', error);
-            alert('An error occurred during login. Please try again.');
-        }
-    });
-</script>
 </body>
 </html>
