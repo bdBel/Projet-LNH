@@ -1,7 +1,7 @@
 const { getGamesByDate } = require('./liveScoreService');
 const connectDb = require('../config/db');
 const Video = require('../models/Video'); // Assurez-vous que le chemin est correct
-const API_KEY = 'AIzaSyDJTQHL-YT6LRg3jJoth9juTwV72HMGV3Q';//AIzaSyDJTQHL-YT6LRg3jJoth9juTwV72HMGV3Q
+const API_KEY = 'AIzaSyDJTQHL-YT6LRg3jJoth9juTwV72HMGV3Q';
 
 const getVideoIds = async () => {
     const fetch = (await import('node-fetch')).default;
@@ -44,6 +44,7 @@ const getVideoIds = async () => {
                         { $set: videoData },
                         { upsert: true }
                     );
+                    console.log('Video insérer')
 
                     }
 
@@ -81,7 +82,7 @@ const getVideosFromDb = async () => {
         throw error;
     }
 };
-
+ //getVideoIds();
 
 module.exports = {
     getVideoIds,

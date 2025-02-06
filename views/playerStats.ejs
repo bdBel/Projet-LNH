@@ -43,7 +43,7 @@
                     <th>+/-</th>
                     <th>PPG</th>
                     <th>PPP</th>
-                    <th>SHG</th>
+                    <th>OTG</th>
                     <th>SHP</th>
                     <th>SHG</th>
                 </tr>
@@ -62,12 +62,59 @@
                             <td><%= saison.plusMinus || 0 %></td>
                             <td><%= saison.powerPlayGoals || 0 %></td>
                             <td><%= saison.powerPlayPoints || 0 %></td>
-                            <td><%= saison.shortHandedGoals || 0 %></td>
-                            <td><%= saison.shortHandedPoints || 0 %></td>
+                            <td><%= saison.otGoals || 0 %></td>
+                            <td><%= saison.avgToi || 0 %></td>
                             <td><%= saison.shots || 0 %></td>
                         </tr>
                     <% }) %>
-                
+                    
+                    <tr>
+                        <td>Total</td>
+                        <td></td>
+                        <td><%= playerStats.careerTotals.regularSeason.gamesPlayed %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.goals %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.assists %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.points %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.plusMinus %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.powerPlayGoals %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.powerPlayPoints %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.otGoals %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.avgToi %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.shots %></td>
+                    </tr>                
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>Série</th>
+                    <th>Équipe</th>
+                    <th>PJ</th>
+                    <th>B</th>
+                    <th>A</th>
+                    <th>P</th>
+                    <th>+/-</th>
+                    <th>PPG</th>
+                    <th>PPP</th>
+                    <th>OTG</th>
+                    <th>SHP</th>
+                    <th>SHG</th>
+                </tr>
+            </thead>
+            <tbody>                  
+                    <tr>
+                        <td>Total</td>
+                        <td></td>
+                        <td><%= playerStats.careerTotals.regularSeason.gamesPlayed %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.goals %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.assists %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.points %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.plusMinus %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.powerPlayGoals %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.powerPlayPoints %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.otGoals %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.avgToi %></td>
+                        <td><%= playerStats.careerTotals.regularSeason.shots %></td>
+                    </tr>                
             </tbody>
         </table>
     </main>
