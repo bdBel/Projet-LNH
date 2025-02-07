@@ -1,3 +1,4 @@
+require('events').EventEmitter.defaultMaxListeners = 20;
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -7,6 +8,7 @@ const connectDB = require('./config/db');
 const session = require('express-session');
 require('dotenv').config();
 const cors = require('cors');
+const cron = require('node-cron');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/userRoutes');
@@ -85,5 +87,21 @@ app.use(function(err, req, res, next) {
 app.listen(3000, () => {
   console.log('serveur demarre sur http://localhost:3000');
 });
+
+//Cron job planifier pour la mise a jour des données
+const { getVideoIds } = require('./service/videoService'); 
+cron.schedule('0 4 * * *', async () => {
+  console.log(`[${new Date().toISOString()}] 🔄 Exécution de la tâche cron`);
+  
+  try {
+      await getVideoIds();
+      console.log(`[${new Date().toISOString()}] ✅ Données mises à jour`);
+  } catch (error) {
+      console.error(`[${new Date().toISOString()}] ❌ Erreur dans getVideoIds() :`, error);
+  }
+});
+
+
+
 
 module.exports = app;

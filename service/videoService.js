@@ -4,6 +4,7 @@ const Video = require('../models/Video'); // Assurez-vous que le chemin est corr
 const API_KEY = 'AIzaSyDJTQHL-YT6LRg3jJoth9juTwV72HMGV3Q';
 
 const getVideoIds = async () => {
+    console.log(`[${new Date().toISOString()}] 🚀 getVideoIds() exécuté`);
     const fetch = (await import('node-fetch')).default;
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
