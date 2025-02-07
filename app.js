@@ -90,11 +90,15 @@ app.listen(3000, () => {
 
 //Cron job planifier pour la mise a jour des données
 const { getVideoIds } = require('./service/videoService'); 
+const {mettreAJourToutesStatistiques} = require('./service/statistiqueApi');
+
+
 cron.schedule('0 4 * * *', async () => {
   console.log(`[${new Date().toISOString()}] 🔄 Exécution de la tâche cron`);
   
   try {
       await getVideoIds();
+      await mettreAJourToutesStatistiques();
       console.log(`[${new Date().toISOString()}] ✅ Données mises à jour`);
   } catch (error) {
       console.error(`[${new Date().toISOString()}] ❌ Erreur dans getVideoIds() :`, error);

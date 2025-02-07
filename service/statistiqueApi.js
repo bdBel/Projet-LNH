@@ -34,7 +34,6 @@ const insererStatistiquesJoueurs = async () => {
     }
 
     for (const joueurData of Object.values(joueursMap)) {
-      console.log('insertion mise à jour joueur:', joueurData);
 
       await StatistiqueJoueur.updateOne(
         { playerId: joueurData.playerId },
@@ -43,7 +42,7 @@ const insererStatistiquesJoueurs = async () => {
       );
     }
 
-    console.log('statistiques joueurs mises à jour avec succès');
+    console.log('statistiques joueurs mises à jour avec succès', 200);
   } catch (error) {
     console.error('erreur mise à jour statistiques joueurs :', error);
   }
@@ -78,7 +77,6 @@ const insererStatistiquesGardiens = async () => {
     }
 
     for (const gardienData of Object.values(gardiensMap)) {
-      console.log('insertion mise à jour gardien:', gardienData);
 
       await StatistiqueGardien.updateOne(
         { playerId: gardienData.playerId },
@@ -87,7 +85,7 @@ const insererStatistiquesGardiens = async () => {
       );
     }
 
-    console.log('statistiques gardiens mises à jour avec succès');
+    console.log('statistiques gardiens mises à jour avec succès', 200);
   } catch (error) {
     console.error('erreur mise à jour statistiques gardiens :', error);
   }
@@ -96,7 +94,7 @@ const insererStatistiquesGardiens = async () => {
 // récupérer stats équipes depuis api et stocker dans mongodb
 const insererStatistiquesEquipes = async () => {
   try {
-    const response = await axios.get('https://api-web.nhle.com/v1/standings/2025-02-04');
+    const response = await axios.get('https://api-web.nhle.com/v1/standings/now');
    
     // Vérifier que la cle "standings" existe
     if (!response.data || !response.data.standings) {
@@ -128,7 +126,6 @@ const insererStatistiquesEquipes = async () => {
 
     // Insérer ou mettre à jour les équipes en base de données
     for (const equipeData of Object.values(equipesMap)) {
-      console.log('Insertion/Mise à jour équipe:', equipeData);
   
       if (!equipeData.teamAbbrev) {
           console.warn(`Équipe ignorée car teamAbbrev est null:`, equipeData);
@@ -142,7 +139,7 @@ const insererStatistiquesEquipes = async () => {
       );
   }
 
-    console.log('Statistiques des équipes mises à jour avec succès.');
+    console.log('Statistiques des équipes mises à jour avec succès.', 200);
   } catch (error) {
     console.error('Erreur lors de la récupération ou de l’insertion des statistiques des équipes :', error);
   }
@@ -153,19 +150,19 @@ const insererStatistiquesEquipes = async () => {
 // mettre à jour toutes les statistiques en appelant chaque fonction
 const mettreAJourToutesStatistiques = async () => {
   try {
-    console.log('début mise à jour statistiques');
+    console.log('Début mise à jour statistiques');
     
     await insererStatistiquesJoueurs();
     await insererStatistiquesGardiens();
     await insererStatistiquesEquipes();
 
-    console.log('mise à jour statistiques terminée');
+    console.log('Mise à jour statistiques terminée');
   } catch (error) {
     console.error('erreur mise à jour statistiques :', error);
   }
 };
 
-mettreAJourToutesStatistiques();
+
 
 // exporter les fonctions pour utilisation ailleurs
 module.exports = {
