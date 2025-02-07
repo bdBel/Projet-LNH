@@ -7,9 +7,8 @@ const EquipeService = require('../service/EquipeService');
 router.get("/equipe/:teamsABV", async (req, res) => {
     try {
       const teamsABV = req.params.teamsABV; // Récupérer le paramètre de l'URL
-      console.log("Requete pour l'equipe avec l'abréviation : " + teamsABV);
       const equipe = await EquipeService.getEquipeByABV(teamsABV); // Appel au service pour récupérer l'équipe
-      console.log('Équipe récupérée :', equipe); 
+      console.log('Équipe récupérée :', 200); 
   
       if (!equipe) {
         // Si l'équipe n'est pas trouvée

@@ -3,15 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/classement.css"> <!-- Style principal classement -->
   <title>Équipe : <%= equipe.name %></title>
 </head>
 <body>
-  <h1><%= equipe.name %> (<%= equipe.teamsABV %>)</h1>
-  <img src="<%= equipe.logo %>" alt="Logo de l'équipe" style="width:150px; height:auto;">
-  <p><strong>Ville :</strong> <%= equipe.city %></p>
-  <p><strong>Conférence :</strong> <%= equipe.conference %></p>
-  <p><strong>Division :</strong> <%= equipe.division %></p>
-  <p><strong>Fondée en :</strong> <%= equipe.founded %></p>
-  <p><strong>Championnats gagnés :</strong> <%= equipe.championships %></p>
+  
+    <!--Navbar-->
+    <%- include('composant/navbar') %>
+    <!--Navbar-->
+
+  <table>
+    <thead>
+        <tr>
+          <th><img src="<%= equipe.logo %>" alt="Logo de l'équipe" style="width:100px; height:auto;"></th>
+          <th><%= equipe.full_name %></th> <!-- Position dans le classement -->
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+               <td>Ville</td>
+               <td><%= equipe.city %></td>
+            </tr>
+            <tr>
+              <td>Conférence</td>
+              <td><%= equipe.conference %></td>
+           </tr>
+            <tr>
+               <td>Division</td>
+               <td><%= equipe.division %></td>
+            </tr>
+            <tr>
+              <td>Fondée en :</td>
+              <td> <%= equipe.founded %></td>
+           </tr>
+           <tr>
+            <td>Championnats gagnés : <%= equipe.championships %></td>
+            <td>    <% if (equipe.championships > 0) { %>
+              <div>
+                  <% for (let i = 0; i < equipe.championships; i++) { %>
+                      <img src="/images/StanleyCup.JPG" alt="Stanley Cup" width="25">
+                  <% } %>
+              </div>
+          <% } %></td>
+          </tr>
+    </tbody>
+</table>
+
+   <!--Footer-->
+   <%- include('composant/footer') %>
+   <!--Footer-->
 </body>
 </html>

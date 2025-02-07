@@ -57,7 +57,7 @@
 
         /* conteneur menu deroulant */
         .dropdown {
-            position: relative;
+            position:relative;
         }
 
         /* contenu menu deroulant */
@@ -65,21 +65,23 @@
             display: none;
             position: absolute;
             background-color: white;
-            min-width: 140px;
+            min-width: 130px;
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
             border-radius: 5px;
             overflow: hidden;
             top: 100%;
             left: 50%;
-            transform: translateX(-50%);
+            margin-left: -65px;
+            font: -webkit-mini-control;
         }
+        
 
         /* style liens menu deroulant */
         .dropdown-content a {
             color: black;
             padding: 10px 15px;
             display: block;
-            text-align: left;
+            text-align: center;
             transition: background-color 0.3s ease-in-out;
         }
 
@@ -93,6 +95,7 @@
         .dropdown:hover .dropdown-content {
             display: block;
             animation: fadeIn 0.3s ease-in-out;
+            z-index: 3000;
         }
 
         /* animation ouverture menu */
@@ -131,15 +134,15 @@
                         <span><%= username %></span>
                     </a>
                     <div class="dropdown-content">
-                        <a href="/users/logout">se deconnecter</a>
-                        <a href="/users/members">votre espace</a>
+                        <a href="/users/logout">Se deconnecter</a>
+                        <a href="/users/members">Votre espace</a>
                     </div>
                 <% } else { %>
                     <a href="#" class="dropdown-link">Membres</a>
                     <div class="dropdown-content">
-                        <a href="/users/login">se connecter</a>
-                        <a href="http://localhost:3000/users/signup">creer un compte</a>
-                        <a href="/users/login">se deconnecter</a>
+                        <a href="/users/login">Se connecter</a>
+                        <a href="http://localhost:3000/users/signup">Creer un compte</a>
+                        <a href="/users/login">Se deconnecter</a>
                     </div>
                 <% } %>
             </li>

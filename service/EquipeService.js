@@ -6,12 +6,11 @@ const connectDB = require('../config/db');
 const getEquipeByABV = async (teamsABV) => {
   try {
     connectDB();
-    console.log('Recherche de l\'équipe avec l\'abréviation :', teamsABV);
     const equipe = await Equipe.findOne({ teamsABV: teamsABV });
     if (!equipe) {
       throw new Error('Equipe non trouvée');
     }
-    console.log('Équipe trouvée :', equipe);
+    console.log('Équipe trouvée :', 200);
     return equipe;
   } catch (err) {
     console.error('Erreur dans le service:', err);
