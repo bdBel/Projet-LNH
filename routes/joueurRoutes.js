@@ -6,13 +6,10 @@ const EquipeService = require('../service/EquipeService');
 // Récupérer une liste de joueurs
 router.get("/:teamsABV/joueur", async (req, res) => {
     try {
-        console.log("Tu es dans le router");
         const teamsABV = req.params.teamsABV;
-        //TODO: à enlever
-        console.log("Requête pour l'équipe avec l'abréviation : " + teamsABV);
         const joueurs = await JoueurService.getJoueursByEquipe(teamsABV);
           //TODO: à enlever
-        console.log('Joueurs récupérés :', joueurs);
+        console.log('Joueurs récupérés :', 200);
 
         //Récupère le nom de l'équipe avec le teamabbrev
         const teamName = await EquipeService.getEquipeByABV(teamsABV); 

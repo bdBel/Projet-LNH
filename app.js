@@ -63,11 +63,9 @@ app.use('/stats/gardien', statistiqueGardienRoutes);
 app.use('/stats/equipe', statistiqueEquipeRoutes);
 app.use('/stats/joueur', statistiqueJoueurRoutes);
 app.use('/stats', statistiqueRoutes);
-console.log("route /stats enregistree");
 
 // ajout route classement
 app.use('/classement', classementRoutes);
-console.log("route /classement enregistree");
 
 // gestion erreurs 404
 app.use(function(req, res, next) {
@@ -97,7 +95,7 @@ cron.schedule('0 4 * * *', async () => {
   console.log(`[${new Date().toISOString()}] 🔄 Exécution de la tâche cron`);
   
   try {
-      await getVideoIds();
+      //await getVideoIds();
       await mettreAJourToutesStatistiques();
       console.log(`[${new Date().toISOString()}] ✅ Données mises à jour`);
   } catch (error) {

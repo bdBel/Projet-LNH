@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
         // Récupérer toutes les statistiques des équipes
         const statsEquipes = await StatistiqueEquipe.find().lean();
 
-        console.log("Stats récupérées :", statsEquipes);
+        console.log("Stats récupérées :", 200);
 
         // Associer les statistiques aux équipes correspondantes avec `teamAbbrev`
         const ajouterStats = (equipes) => {
@@ -37,9 +37,6 @@ router.get('/', async (req, res) => {
         // Ajouter les stats et trier par points
         const equipesOuestAvecStats = ajouterStats(equipesOuest).sort((a, b) => (b.stats.points || 0) - (a.stats.points || 0));
         const equipesEstAvecStats = ajouterStats(equipesEst).sort((a, b) => (b.stats.points || 0) - (a.stats.points || 0));
-
-        console.log("Équipes Ouest avec stats :", equipesOuestAvecStats);
-        console.log("Équipes Est avec stats :", equipesEstAvecStats);
 
         // Rendu de la page
         res.render('classement', { equipesOuest: equipesOuestAvecStats, equipesEst: equipesEstAvecStats });

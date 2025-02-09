@@ -24,7 +24,6 @@ async function insererUpdateJoueur() {
         continue;
       }
 
-      console.log(`Fetching data for playerId: ${playerId}`);
 
       // Obtenir les informations détaillées pour chaque joueur
       const playerResponse = await axios.get(`https://api-web.nhle.com/v1/player/${playerId}/landing`);
@@ -38,7 +37,7 @@ async function insererUpdateJoueur() {
       );
     }
 
-    console.log('Les données du joueur ont été mises à jour avec succès');
+    console.log('Les données du joueur ont été mises à jour avec succès', 200);
   } catch (error) {
     console.error('Erreur pendant l\'insertion des données', error);
   }

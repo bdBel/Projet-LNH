@@ -37,7 +37,6 @@ const StatistiqueService = {
     async getAllStatsJoueurs() {
         try {
             const joueurs = await StatistiqueJoueur.find({});
-            console.log("Liste complète des joueurs retournés:", joueurs);
             return joueurs;
         } catch (err) {
             console.error("Erreur lors de la récupération de toutes les stats joueurs :", err);
