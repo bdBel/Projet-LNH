@@ -27,7 +27,7 @@ router.get("/equipe/:teamsABV", async (req, res) => {
 router.get("/listeEquipes", async (req, res) => {
   try {
     const listeEquipes = await EquipeService.getEquipes(); // Appel au service pour récupérer l'équipe
-    console.log('Liste d\'Équipe récupérée :', listeEquipes); 
+    console.log('Liste d\'Équipe récupérée :', 200); 
 
     if (!listeEquipes) {
       // Si la liste d'équipe n'est pas trouvée

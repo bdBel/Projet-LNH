@@ -76,7 +76,6 @@ const getVideosFromDb = async () => {
         await connectDb(); // Connectez-vous à la base de données
         const videos = await Video.find({}); // Récupérer les vidéos de la base de données
 
-        console.log('Videos from database:', videos);
         return videos;
     } catch (error) {
         console.error('Error fetching videos from database:', error);

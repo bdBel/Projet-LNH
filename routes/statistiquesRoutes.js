@@ -11,7 +11,6 @@ router.get('/', async (req, res) => {
 
         // recuperer toutes stats joueurs
         const joueurs = await StatistiqueService.getAllStatsJoueurs();
-        console.log("Exemple de joueur récupéré :", joueurs[0]);
 
         // recuperer toutes stats gardiens
         const gardiens = await StatistiqueService.getAllStatsGardiens();
@@ -30,8 +29,7 @@ router.get('/', async (req, res) => {
         .sort((a, b) => b.points - a.points);
     
         const defenseurs = voirTout ? topDefenseurs : topDefenseurs.slice(0, 10);
-    
-        console.log("Défenseurs trouvés:", defenseurs);
+
 
         // recuperer logos des equipes et creer map equipe abrev vers logo
         const equipes = await EquipeService.getEquipes();
@@ -53,7 +51,7 @@ router.get('/', async (req, res) => {
             def.teamLogo = equipesMap[def.team] || '/default_logo.png';
         });
 
-        console.log("Données envoyées à la vue statistiques:", { patineurs, defenseurs, gardiensTop, voirTout });
+        console.log("Données envoyées à la vue statistiques:", 200);
 
         res.render('statistique', { 
             stats: { patineurs, defenseurs, gardiens: gardiensTop }, 
@@ -68,7 +66,6 @@ router.get('/', async (req, res) => {
 
 router.get('/patineurs', async (req, res) => {
     try {
-        console.log("Route /stats/patineurs appelée !");
         console.log("Accès à la page des patineurs");
 
         const page = parseInt(req.query.page) || 1; 
@@ -97,7 +94,6 @@ router.get('/patineurs', async (req, res) => {
         const totalJoueurs = joueurs.length;
         const totalPages = Math.ceil(totalJoueurs / limit);
 
-        console.log(`Affichage des joueurs page ${page}/${totalPages}`);
 
         res.render('PagePatineurs/patineurs', {
             patineurs,
