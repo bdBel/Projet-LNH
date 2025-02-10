@@ -69,7 +69,7 @@ async function insererUpdateEquipe() {
   }
 }
 
-insererUpdateJoueur();
+//insererUpdateJoueur();
 module.exports = {
   insererUpdateJoueur,
   insererUpdateEquipe,
