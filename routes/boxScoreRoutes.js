@@ -4,7 +4,9 @@ const data = require('../service/liveScoreService');
 
 
 router.get("/boxscore/:id", async (req, res) => {
+    
     try {
+        
         console.log('id:', req.params.id);
         //Reprendre le id dans l'URL
         const id = req.params.id;

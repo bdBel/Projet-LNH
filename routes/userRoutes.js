@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User'); 
 const router = express.Router();
 const userService = require('../service/userService');
-//const liveScoreService = require('../service/liveScoreService');
 const { getGamesLive } = require('../service/liveScoreService');
 
 router.get("/login", async (req,res)=>{

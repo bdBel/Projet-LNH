@@ -7,6 +7,7 @@ const StatistiqueEquipe = require('../models/StatistiqueEquipe'); // import mode
 // route principale pour afficher le classement des equipes avec leurs statistiques
 router.get('/', async (req, res) => {
     try {
+        req.session.username = user.prenom; 
         if (!mongoose.connection.readyState) {
             console.error("mongodb n'est pas connecte");
             return res.status(500).send("erreur de connexion a la base de donnees");
