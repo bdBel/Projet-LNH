@@ -5,6 +5,7 @@ const EquipeService = require('../service/EquipeService');
 
 // Récupérer une équipe par son abréviation
 router.get("/equipe/:teamsABV", async (req, res) => {
+  const username = req.session.username;
     try {
       const teamsABV = req.params.teamsABV; // Récupérer le paramètre de l'URL
       const equipe = await EquipeService.getEquipeByABV(teamsABV); // Appel au service pour récupérer l'équipe
@@ -16,7 +17,7 @@ router.get("/equipe/:teamsABV", async (req, res) => {
       }
   
       // Rendre la vue 'equipe.ejs' avec les données de l'équipe
-      res.render('equipe', { equipe });
+      res.render('equipe', { username, equipe });
     } catch (err) {
       // En cas d'erreur, afficher une page d'erreur avec un message
       res.status(500);
@@ -25,6 +26,7 @@ router.get("/equipe/:teamsABV", async (req, res) => {
 
   // Récupérer une liste d'équipe
 router.get("/listeEquipes", async (req, res) => {
+  const username = req.session.username; // Accès à la session
   try {
     const listeEquipes = await EquipeService.getEquipes(); // Appel au service pour récupérer l'équipe
     console.log('Liste d\'Équipe récupérée :', 200); 
@@ -35,7 +37,11 @@ router.get("/listeEquipes", async (req, res) => {
     }
 
     // Rendre la vue 'equipe.ejs' avec les données de l'équipe
-    res.render('listeEquipe', { equipe: listeEquipes });
+    
+    res.render('listeEquipe', 
+      { username:username,
+         equipe: listeEquipes 
+        });
   
   } catch (err) {
     // En cas d'erreur, afficher une page d'erreur avec un message

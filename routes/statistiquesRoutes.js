@@ -4,6 +4,7 @@ const StatistiqueService = require('../service/statistiqueService');
 const EquipeService = require('../service/EquipeService');
 
 router.get('/', async (req, res) => {
+    const username = req.session.username;
     try {
         console.log("Accès à la page principale Statistiques");
 
@@ -53,7 +54,9 @@ router.get('/', async (req, res) => {
 
         console.log("Données envoyées à la vue statistiques:", 200);
 
-        res.render('statistique', { 
+        res.render('statistique', 
+            { 
+            username: username,
             stats: { patineurs, defenseurs, gardiens: gardiensTop }, 
             voirTout 
         });

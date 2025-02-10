@@ -6,6 +6,8 @@ const StatistiqueEquipe = require('../models/StatistiqueEquipe'); // Import du m
 
 // Route principale pour afficher le classement des équipes avec leurs statistiques
 router.get('/', async (req, res) => {
+    const username = req.session.username; // Accès à la session
+    
     try {
         if (!mongoose.connection.readyState) {
             console.error("MongoDB n'est pas connecté");
@@ -39,7 +41,10 @@ router.get('/', async (req, res) => {
         const equipesEstAvecStats = ajouterStats(equipesEst).sort((a, b) => (b.stats.points || 0) - (a.stats.points || 0));
 
         // Rendu de la page
-        res.render('classement', { equipesOuest: equipesOuestAvecStats, equipesEst: equipesEstAvecStats });
+        res.render('classement', {
+             username: username,
+             equipesOuest: equipesOuestAvecStats, equipesEst: equipesEstAvecStats 
+            });
 
     } catch (error) {
         console.error("Erreur lors de la récupération du classement", error);
