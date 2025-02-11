@@ -1,8 +1,6 @@
-/* assurer une mise en page plein ecran */
 html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;    
+    flex-direction: column; /* Organisation en colonne */
+    min-height: 100vh; /* Assure que la page prend au moins toute la hauteur */
 }
 
 /* permet au contenu principal de prendre l'espace restant et pousser le footer en bas */
@@ -23,7 +21,7 @@ body > div {
 
 /* style du footer */
 .site-footer {
-    background: #121212;
+    background: #ece8e8;
     color: #ccc;
     padding: 20px 0;
     text-align: center;
@@ -37,6 +35,7 @@ body > div {
 /* espacement entre elements du haut du footer */
 .footer-top {
     padding-bottom: 15px;
+    color: #ccc;
 }
 
 /* style des icones de reseaux sociaux */
@@ -89,4 +88,5 @@ footer {
     width: 100%;
     position: relative;
     bottom: 0;
+    margin-top: auto; /* Permet au contenu de pousser le footer en bas */
 }
