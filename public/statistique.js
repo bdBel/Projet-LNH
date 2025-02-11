@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let tooltip = document.createElement("div");
             tooltip.classList.add("tooltip-box");
             tooltip.innerHTML = `
-                <img src="${this.dataset.photo}" alt="Photo" class="tooltip-img">
+                <img style='border-radius: 50%; width: 150px' src="${this.dataset.photo}" alt="Photo" class="tooltip-img">
                 <p><strong>${this.dataset.name}</strong></p>
                 <p>${this.dataset.number}</p>
                 <p>${this.dataset.team}</p>

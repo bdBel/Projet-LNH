@@ -3,64 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/listeEquipe.css">
   <title>Liste des Équipes</title>
-  <style> 
-    body{
-      font-family: Arial, sans-serif;
-      margin: 0;
-    }
-    .team-card {
-      margin-top: 10px;
-      width: 500px;
-      max-height: 95px;
-      box-shadow: 4px 4px 8px rgb(219, 40, 40);
-      display: flex;
-    }
-    .box img {
-      width: 70%;
-      margin-top: 1%;    
-    } 
-    /**/
-    .container {
-      display: flex;
-      justify-content: space-between; /* Espace entre les boîtes */
-      padding-left: 10%;
-      padding-right: 10%;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      background-color: #f9f9f9;
-    }
-    .box {
-      width: 100%; /* Largeur de chaque boîte */
-      padding: 5%;      
-    }
-    .box h2 {
-      padding-left: 5%;
-      margin-bottom: 10px;
-    }
-    .team-card-img {
-      justify-content: right;
-      width: 25%;
-      max-width: 35%;
-      align-content: center;
-    }
-    
-    .team-info ul{
-      display: flex;
-      list-style-type: none;
-    }
-    .team-info ul li{
-      margin-right:30px;
-    }
-
-    .team-info ul li a{
-      text-decoration: none;
-      color: black;
-    }
-    .team-info h3{
-      margin-left:30px;
-    }
-  </style>
   
 </head>
 <body>
@@ -152,5 +96,10 @@
           <% }) %>
     </div>
   </div>
+
+  <!--Footer-->
+  <%- include('composant/footer') %>
+  <!--Footer-->
+  
 </body>
 </html>

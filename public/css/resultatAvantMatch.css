@@ -1,0 +1,162 @@
+.container {
+    display: flex;
+    justify-content: space-between; 
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    max-height: 120px;
+  }   
+
+  .boxscore{
+      display: flex;
+      align-items: center;
+  }
+
+  .gamestate{
+      display: block;
+      margin: 0 30px;
+      text-align: center;
+  }
+
+
+  .container-awayTeam, .container-homeTeam {
+      display: flex;
+      justify-content: space-between; 
+      align-items: center;
+      padding: 10px;
+      
+      border-radius: 5px;
+   
+  }
+  .score-awayTeam, .score-homeTeam {
+    display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #42486463;
+      color: rgb(5, 5, 5);
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px;
+      width: 80px;
+      text-align: center;
+      border-radius: 5px;
+  }
+  .image-logo {
+    width: 200px;
+    height: 100px;
+  }   
+
+  .player-card {
+    display: flex;
+    align-items: center;
+    width: 330px; 
+    height: 80px;     
+    margin-top: 20px; 
+    box-shadow: 4px 4px 8px rgb(219, 40, 40);  
+    padding-right: 10px;
+  }
+  
+  .player-card img{
+  margin: 0 20px; 
+  width: 70px; 
+  height: 70px; 
+  border-radius: 50%; 
+  background-color: rgba(105, 105, 105, 0.541);
+  justify-items: center;
+  
+  }
+  .player-card-goalie{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%; 
+    height: 80px;     
+    margin-top: 20px; 
+    margin-bottom: 20px;
+    padding-left: 20px;
+    box-shadow: 4px 4px 8px rgb(219, 40, 40);  
+    border-left: 1px #ccc;
+  }
+
+  .player-card-goalie img{
+  width: 70px; 
+  height: 70px; 
+  border-radius: 50%; 
+  background-color: rgba(105, 105, 105, 0.541);
+  justify-items: center;
+  }    
+
+  .matchupContainer{
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 100px;
+    border: 2px solid #ccc;
+    padding-bottom: 50px;
+  }
+
+  .matchupPoints {
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: 900;
+    text-align: center;
+    width: 130px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .matchupPlayer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  .matchupPlayer-goalie {
+    align-items: center;
+    margin-left: 50px;
+    justify-items: center;
+  }
+
+  .matchupPlayerInfo{
+    display: flex;
+    flex-direction: column;      
+    margin-left: 12px;
+    margin-right: 0;    
+    font-size: 16px;
+    width: 80px;
+  }
+
+  .matchupHeader{
+    margin-left: 50px;
+    margin-right: 50px;
+    
+  }
+
+  .matchupHeader ul{
+    list-style-type: none;
+    font-size: 25px;
+  }
+  .joueursContainer{
+   
+   padding-bottom: 50px;
+   margin: 100px;
+  }
+
+  .goalerInfo{
+    display: flex;    
+  }
+
+  .goalerInfo div{
+    width: 100px;
+  }
+  .matchupGoalieInfo{
+    display: flex;
+    flex-direction: column;      
+    margin-left: 12px;
+    margin-right: 0;     
+    width: 120px;
+    font-size: 18px;
+  }
+
+  .matchupGoalieInfo div{
+    text-align: center;
+  }

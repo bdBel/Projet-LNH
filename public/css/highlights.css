@@ -1,0 +1,23 @@
+.videoContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.videoContainer iframe{
+    margin: 10px;
+    width: 450px;
+    height: 280px;
+}   
+
+.header{
+    text-align: center;
+    text-transform: uppercase;
+    background: linear-gradient(to right, #d32f2f 30%, white 80%);
+    color: black;
+    padding: 20px;
+    position: relative;
+}
+.header span{
+    font-size: 20px;
+    font-family: italic;
+}

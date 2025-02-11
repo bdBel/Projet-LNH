@@ -1,0 +1,90 @@
+.container {
+    display: flex;
+    justify-content: space-between; 
+    border: 1px solid #d83838;
+    background-color: #f9f9f9;
+    max-height: 120px;
+  }
+  
+
+  .boxscore{
+      display: flex;
+      align-items: center;
+      
+  }
+
+  .box{
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      width: 75%;
+      justify-items: center;
+      margin-left: 12.5%;
+  }
+
+  .gamestate{
+      display: block;
+      margin: 0 30px;
+  }
+
+
+  .container-awayTeam, .container-homeTeam {
+      display: flex;
+      justify-content: space-between; 
+      align-items: center;
+      padding: 10px;
+      border-radius: 5px;
+   
+  }
+  .score-awayTeam, .score-homeTeam {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color:rgb(218, 221, 221);
+      color: rgb(5, 5, 5);
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px;
+      width: 80px;
+      text-align: center;
+      border-radius: 5px;
+  }
+  .image-logo {
+    width: 200px;
+    height: 100px;
+  }   
+
+  .player-card {
+    margin-top: 10px;
+    width: 60%; /* Ajuster la largeur des cartes */
+    box-shadow: 4px 4px 8px rgb(219, 40, 40);
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .player-card img{
+   width: 100px;
+   border-radius: 50%;
+  }
+
+  .goal-card {
+      background-color: rgb(218, 221, 221);
+      padding: 10px;
+      border: 10%;
+      border-radius: 30px;
+      min-width: 200px;
+      margin-left: 20px;
+  }
+  .goal-card-time {
+      background-color: rgb(218, 221, 221);
+      padding: 10px;
+      border: 10%;
+      border-radius: 30px;
+      min-width: 80px;
+      margin-left: 30px;
+      text-align: center;
+  }

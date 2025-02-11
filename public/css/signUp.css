@@ -1,0 +1,127 @@
+body {
+    background-color: #faf9f9;
+    color: #f8f9fa;
+    font-family: 'Poppins', sans-serif; 
+    transform: scale(0.90);
+}
+
+.card {
+    background-color: #1e1e1e;
+    color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.card-header {
+    background-color: #d32f2f;
+    color: #f8f9fa;
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.card-body {
+    background-color: #ffffff;
+    padding: 2rem;
+}
+
+.form-label {
+    color: #f8f9fa;
+    font-weight: 400;
+}
+
+.form-control {
+    background-color: #444;
+    color: #f8f9fa;
+    border: none;
+    border-radius: 5px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.btn-primary {
+    background-color: #d32f2f;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #d32f2f;
+    box-shadow: 0 8px 12px rgba(0, 123, 255, 0.3);
+}
+
+.link-secondary {
+    color: #adb5bd;
+}
+
+.link-secondary:hover {
+    text-decoration: underline;
+    color: #f8f9fa;
+}
+
+.signup-link {
+    margin-bottom: 50px;
+    color: #f8f9fa;
+    background-color: #d32f2f;
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.3rem;
+}
+
+.signup-link a {
+    color: #007bff;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+.error, .login {
+    color: #f8f9fa;
+    background-color: purple;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    display: none;
+}
+
+#retour-accueil {
+    font-size: 1 rem;
+    margin-top: 1.5 rem;
+    display: inline-block;
+    color: #f8f9fa;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    transition: all 0.3s ease;
+}
+
+#retour-accueil:hover {
+    color: #007bff;
+    text-decoration: underline;
+    text-shadow: 2px 2px 5px rgba(0, 123, 255, 0.5);
+}
+
+#forgot {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    color: #f8f9fa;
+    font-family: 'Dancing Script', cursive;
+    font-weight:400;
+    transition: all 0.3s ease;
+}
+
+#forgot:hover {
+    color: #007bff;
+    text-decoration: underline;
+    text-shadow: 2px 2px 5px rgba(0, 123, 255, 0.5);
+}

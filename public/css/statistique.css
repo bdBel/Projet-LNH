@@ -39,7 +39,7 @@ body::before {
 /* style titre des blocs de stats */
 .stat-box h3 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
@@ -62,6 +62,7 @@ body::before {
     align-items: center;
     flex-direction: column;
     display: flex;
+    margin-bottom: 30px;
 }
 
 /* effet au survol des blocs */
@@ -110,7 +111,7 @@ body::before {
     background: linear-gradient(to bottom, white 70%, #ff4d4d);
     border: 3px solid transparent;
     padding: 15px;
-    box-shadow: 0px 4px 20px rgba(255, 77, 77, 0.5);
+    box-shadow: 0px 4px 20px rgba(224, 14, 14, 0.5);
     border-radius: 12px;
     font-family: 'Bebas Neue', sans-serif;
     font-size: 16px;
@@ -192,3 +193,14 @@ body::before {
 .btn-primary:active {
     transform: scale(0.95);
 }
+
+.rank {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #b71c1c;
+    margin-bottom: 20px;
+}
+
+

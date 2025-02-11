@@ -1,0 +1,50 @@
+body{
+    margin-left: 8%;
+    margin-right: 8%;
+    background-color: #ccc;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.mainContainer{
+display: flex;
+flex-direction: column;
+background-color: #ffffff;
+}
+.containerEntete, .containerJoueur{
+display: flex;
+justify-content: space-around;
+background-color: #f1f1f1;
+padding: 10px;
+border-top: 2px solid #ccc;
+text-align: center;
+align-items: center;
+}
+/* Styles pour alterner les couleurs des lignes */
+.containerEntete:nth-child(odd), .containerJoueur:nth-child(odd) {
+background-color: #ffffff;
+}
+
+.containerEntete div, .containerJoueur div {
+width: 150px;
+align-items: center;  
+font-size: 16px;  
+font: bold;
+}
+.playerContainer h1{
+font-size: 40px;
+margin-left: 10px;
+} 
+
+.playerImageContainer img{
+width: 100px; 
+border-radius: 50%; 
+background-color: rgb(73, 72, 72); 
+margin-right: 10px;
+}
+.playerContainer h3{
+font-size: 20px;
+border-top: 2px solid #ccc;
+padding-top: 30px;
+padding-left: 10px;
+justify-items: center;
+} 
