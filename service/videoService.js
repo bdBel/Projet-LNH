@@ -13,8 +13,7 @@ const getVideoIds = async () => {
     try {
         await connectDb(); // Connectez-vous à la base de données
 
-        await Video.deleteMany({}); // Supprimer toutes les vidéos de la base de données
-       
+        await Video.deleteMany({}); // Supprimer toutes les vidéos de la base de données       
 
         const games = await getGamesByDate(formattedDate);
         const videoPromises = games.map(async (game) => {
@@ -45,7 +44,6 @@ const getVideoIds = async () => {
                         { $set: videoData },
                         { upsert: true }
                     );
-                    console.log('Video insérer')
 
                     }
 
@@ -62,6 +60,8 @@ const getVideoIds = async () => {
         const videos = await Promise.all(videoPromises);
         const validVideos = videos.filter(video => video !== null);
 
+        
+        console.log('Video mis a jour:');
         // Retourner les vidéos sous forme de liens YouTube
         return validVideos;
     } catch (error) {
@@ -82,7 +82,6 @@ const getVideosFromDb = async () => {
         throw error;
     }
 };
- //getVideoIds();
 
 module.exports = {
     getVideoIds,

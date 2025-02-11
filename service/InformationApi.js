@@ -10,7 +10,7 @@ async function insererUpdateJoueur() {
   try {
     // Connexion à la base de données MongoDB
     await connectDB();
-    const data = fs.readFileSync('c:/Users/gabla/VisualStudioCode/Projet-LNH/listeJoueur/players.txt', 'utf8');
+    const data = fs.readFileSync('./listeJoueur/players.txt', 'utf8');
     const lines = data.split('\n');
 
     for (const line of lines) {
@@ -69,7 +69,7 @@ async function insererUpdateEquipe() {
   }
 }
 
-insererUpdateJoueur();
+//insererUpdateJoueur();
 module.exports = {
   insererUpdateJoueur,
   insererUpdateEquipe,

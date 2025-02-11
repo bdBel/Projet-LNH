@@ -105,24 +105,34 @@ app.use(function(err, req, res, next) {
 // demarrer serveur
 app.listen(3000, () => {
   console.log('serveur demarre sur http://localhost:3000');
+  console.log(`🕒 Heure système du serveur : ${new Date().toISOString()}`);
+
 });
 
 //Cron job planifier pour la mise a jour des données
 const { getVideoIds } = require('./service/videoService'); 
 const {mettreAJourToutesStatistiques} = require('./service/statistiqueApi');
+const { insererUpdateJoueur } = require('./service/InformationApi');
 
 
-cron.schedule('0 4 * * *', async () => {
+cron.schedule('0 9 * * *', async () => {
   console.log(`[${new Date().toISOString()}] 🔄 Exécution de la tâche cron`);
   
   try {
-      //await getVideoIds();
+      await getVideoIds();
+      await insererUpdateJoueur();
       await mettreAJourToutesStatistiques();
       console.log(`[${new Date().toISOString()}] ✅ Données mises à jour`);
   } catch (error) {
       console.error(`[${new Date().toISOString()}] ❌ Erreur dans getVideoIds() :`, error);
   }
 });
+
+/**
+ * En hiver cron.schedule('0 9 * * *', async () => {
+   En été cron.schedule('0 8 * * *', async () => {
+
+ */
 
 
 
