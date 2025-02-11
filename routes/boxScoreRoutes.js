@@ -5,7 +5,6 @@ const data = require('../service/liveScoreService');
 
 router.get("/boxscore/:id", async (req, res) => {
     try {
-        console.log('id:', req.params.id);
         //Reprendre le id dans l'URL
         const id = req.params.id;
         //Récupérer les données du match avec le id récupérer
@@ -14,6 +13,7 @@ router.get("/boxscore/:id", async (req, res) => {
 
         if(game.gameState === "FUT" || game.gameState === "PRE"){
             game.gameState = "À VENIR" 
+            console.log('Statut du match: À venir');
             res.render('resultatAvantMatch', {game});
         }else{
              //Transformer les donner d'affichage de l'état du match
@@ -59,10 +59,10 @@ router.get("/boxscore/:id", async (req, res) => {
                 }
             });
 
-            
+             
+            console.log('Statut du match: En cour ou Terminer');
             res.render('resultat', {game});
         };
-        console.log(game.matchup);
 
     return game;
         
