@@ -1,5 +1,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+   
 
     <style>
         /* style logo nhl */
@@ -127,26 +128,38 @@
             <li><a href="https://www.nhlshop.ca/source/BM-nhlcom-HP-main-nav-ca">Boutique</a></li>
 
             <!-- menu deroulant membres -->
-            <li class="dropdown">
-                <% if (typeof username !== 'undefined') { %> 
-                    <a href="#" class="dropdown-link" style="display: flex; align-items: center;">
-                        <img src="/images/puck.jpg" alt="User Image" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 8px;" />
-                        <span><%= username %></span>
-                    </a>
-                    <div class="dropdown-content">
-                        <a href="/users/logout">Se deconnecter</a>
-                        <a href="/users/members">Votre espace</a>
-                    </div>
-                <% } else { %>
-                    <a href="#" class="dropdown-link">Membres</a>
-                    <div class="dropdown-content">
-                        <a href="/users/login">Se connecter</a>
-                        <a href="http://localhost:3000/users/signup">Creer un compte</a>
-                        <a href="/users/login">Se deconnecter</a>
-                    </div>
-                <% } %>
-            </li>
+            <!-- navbar.ejs -->
+<li class="dropdown">
+    <% if (username) { %>
+        <a href="#" class="dropdown-link" style="display: flex; align-items: center;">
+            <!-- User image with fallback to puck.png if missing -->
+            <img src="<%= userImage %>" alt="User Image"
+                 onerror="this.src='/images/puck.png';" 
+                 style="height: 80px; border-radius: 50%; margin-right: 10px" />
+            <span style="margin-left: 10px;"><%= username %></span>
+        </a>
+        <div class="dropdown-content">
+            <a href="/users/logout">Se déconnecter</a>
+            <a href="/users/members">Votre espace</a>
+            <p><a href="#" id="upload-link">Ajouter votre photo</a></p>
+            <form action="/users/uploadPhoto" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="MAX_FILE_SIZE" value="2097152">
+                <input type="file" name="photo" id="fileInput" style="display:none;" accept="image/jpeg, image/png, image/gif" />
+                <button type="submit" id="submitBtn" style="display:none;"></button>
+            </form>
+        </div>
+    <% } else { %>
+        <a href="#" class="dropdown-link">Membres</a>
+        <div class="dropdown-content">
+            <a href="/users/login">Se connecter</a>
+            <a href="http://localhost:3000/users/signup">Créer un compte</a>
+        </div>
+    <% } %>
+</li>
+
+            
         </ul>
     </nav>
     
+     <script src="/js/profile.js"></script>
 </body>

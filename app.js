@@ -9,6 +9,7 @@ const session = require('express-session');
 require('dotenv').config();
 const cors = require('cors');
 const cron = require('node-cron');
+//const multer = require('multer');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/userRoutes');
@@ -42,21 +43,41 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());  
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public'));
+//app.use(multer().single('photo'));
 
 // config session utilisateur
+
 app.use(session({
   secret: 'nhl',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: { maxAge: 3600000 } // Cookie expire après 1 hre
 }));
 
+
 // ajout routes principales
+
+app.use((req, res, next) => {
+  //verifier si la session est active
+  if (req.session && req.session.username) {
+      // appliquer  image and username globalement  a toutes lesvues
+      res.locals.userImage = req.session.userImage ? `/images/${req.session.userImage}` : '/images/puck.jpg';
+      res.locals.username = req.session.username;
+      res.locals.currentPage = req.url; 
+  } else {
+      res.locals.userImage = '/images/puck.jpg'; // Default image 
+      res.locals.username = null; 
+      res.locals.currentPage = req.url; 
+  }
+  next();
+});
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', equipeRoutes);
 app.use('/', joueurRoutes);
 app.use('/', liveScoreRoutes);
 app.use('/game', boxScoreRoutes);
+
 
 // ajout routes statistiques
 app.use('/stats/gardien', statistiqueGardienRoutes);

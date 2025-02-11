@@ -4,10 +4,13 @@ const User = require('../models/User');
 const Equipe = require('../models/Equipe'); 
 const router = express.Router();
 const userService = require('../service/userService');
+const multer = require('multer');
+
 
 // affichage de la page de connexion
 router.get("/login", async (req, res) => {
-    res.render('../views/loginRegister.ejs', { error: null });
+    res.render('../views/loginRegister.ejs', { currentPage: 'login', error: null });
+    //res.render('../views/loginRegister.ejs', { error: null });
 });
 
 // affichage de la page dinscription
@@ -29,6 +32,8 @@ router.post('/signup', async (req, res) => {
 
 // connexion utilisateur
 router.post('/login', async (req, res) => {
+
+    
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -36,8 +41,14 @@ router.post('/login', async (req, res) => {
     }
 
     try {
+        //données de session
         const user = await userService.loginUser(email, password);
-        req.session.username = user.prenom;
+        if(!user){
+
+            return res.render('loginRegister.ejs', { error: "identifiants incorrects reessayez" });
+        }
+        req.session.username = user.prenom || "utilisateur";
+        req.session.userImage = user.image ? `/images/${user.image}` : '/images/puck.jpg'; 
         res.redirect('/users/members');
     } catch (error) {
         console.error("erreur de connexion", error);
@@ -52,36 +63,78 @@ router.get('/members', async (req, res) => {
     }
 
     try {
-        // recuperation des equipes depuis mongodb
+        // Recuperation des equipes depuis mongodb
         const equipes = await Equipe.find({}, 'full_name logo');
 
         if (!equipes || equipes.length === 0) {
-            console.log("aucune equipe trouvee dans la base de donnees");
+            console.log("Aucune equipe trouvee dans la base de donnees");
         } else {
             console.log(`${equipes.length} equipes chargees`);
         }
 
-        // envoi des equipes et du username a la vue
+        // Envoi des equipes, de l'image et du username à la vue
+        const userImage = req.session.userImage || '/images/puck.jpg';
         res.render('accueilMembre.ejs', { 
             username: req.session.username, 
-            equipes 
+            equipes,
+            userImage,
+            currentPage: 'members' // Add the currentPage here
         });
 
     } catch (err) {
-        console.error("erreur lors du chargement des equipes", err);
-        res.status(500).send("erreur interne du serveur");
+        console.error("Erreur lors du chargement des equipes", err);
+        res.status(500).send("Erreur interne du serveur");
     }
 });
 
-// deconnexion utilisateur
+// Route poud ajouter la photo personnalié
+
+
+// multer storage configu(image uploads)
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/images/');  // repertoire de stockage des images
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname);  // renommer le fichier POUR EVITER LES DOUBLONS
+    }
+});
+
+// Initialiser multer with the storage configuration
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 2 * 1024 * 1024 }, // 2MB file size limit
+    fileFilter: (req, file, cb) => {
+        if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+            return cb(new Error('Only image files are allowed!'), false);  // File type validation
+        }
+        cb(null, true);
+    }
+}).single('photo'); //le name dans le form
+
+// route pour charger la photo
+router.post('/uploadPhoto', upload, (req, res) => {
+
+    if (!req.file) {
+        return res.status(400).json({ success: false, message: 'pas de fichier téléchargé' });
+    }
+    //STOCKER L'IMAGE DANS LA SESSION
+    
+    req.session.userImage = req.file.filename; // 
+    //mise a jour de l'image locale
+    res.locals.userImage = `/images/${req.file.filename}`;
+    
+    res.json({ success: true, filename: req.file.filename });
+});
 router.get('/logout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
-            return res.redirect('/');
+            return res.status(500).send('Failed to log out');
         }
-        res.redirect('/');  
+        res.redirect('/'); 
     });
 });
+
 
 // liste des utilisateurs
 router.get('/userList', function(req, res, next) {

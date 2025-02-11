@@ -5,35 +5,72 @@
     <!-- Navbar -->
     <%- include('composant/navbar') %>
     <!-- Navbar -->
+    
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="/accueilMembre.css">
     
     <meta charset="UTF-8">
     <title>Page du membre <%= username %></title>
+     
+    <style>
 
-</head>
+    .row {
+        
+        margin-top:100px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    </style>
+    </head>
 
 <body>
 
-    <div class="mt-4 container">
-        <h1>Bienvenue, <%= username %>!</h1> 
-        <p>Personnaliser votre page</p>
+    <div class="container">
+    
+        <div class="row">
+            
+            <!-- Left Column: Text -->
+            <div class="col-md-6 d-flex flex-column justify-content-center">
+                <h1>Bienvenue, <%= username %>!</h1> 
+                <p>Personnaliser votre page</p>
+                <p><a href="#" id="upload-link">Autre chose</a></p>
+
+                <!-- Upload Form -->
+                <form action="/users/uploadPhoto" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="2097152"> <!-- Max file size limit: 2MB -->
+                    <input type="file" name="photo" id="fileInput" style="display:none;" accept="image/jpeg, image/png, image/gif" />
+                    <button type="submit" id="submitBtn" style="display:none;"></button>
+                </form>
+            </div>
+
+            <!-- changer photoen tableau -->
+            <!-- Right Column: Profile Image -->
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <img src="/images/profile.png" alt="Profile Image" class="profile-img" style="height: 150px; border-radius: 50%;" />
+            </div>
+        </div>
+
+        <!-- Team Selection -->
         <p>Choisissez votre équipe favorite :</p>
         <p id="selected-team-name" class="team-name-display">Aucune équipe sélectionnée</p>
 
-
-        <!--  Liste des équipes sous forme de logos -->
+        <!-- Liste des équipes sous forme de logos -->
         <div class="team-selection">
             <% equipes.forEach(equipe => { %>
                 <img src="<%= equipe.logo %>" class="team-logo" data-team="<%= equipe.full_name %>" alt="<%= equipe.full_name %>">
-            
             <% }); %>
-        </div>
+        </div> 
 
         <a href="http://localhost:3000" id="retour-accueil" class="left-align">Retour à l'accueil</a>
     </div>
 
-    <!-- Ajout du script pour changer le fond d'écran -->
+   
     <script>
+
+//changer l'image de fond
+
         document.addEventListener("DOMContentLoaded", () => {
             const logos = document.querySelectorAll(".team-logo");
             const teamNameDisplay = document.getElementById("selected-team-name");
@@ -48,9 +85,12 @@
                 });
             });
         });
+
     </script>
 
     <%- include("composant/footer.ejs") %>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
