@@ -16,7 +16,7 @@
      
     <style>
 
-    .row {
+    .row1 {
         
         margin-top:100px;
         font-family: Arial, Helvetica, sans-serif;
@@ -29,13 +29,13 @@
 
     <div class="container">
     
-        <div class="row">
+        <div class="row1">
             
             <!-- Left Column: Text -->
-            <div class="col-md-6 d-flex flex-column justify-content-center">
+            <div class="welcome col-md-6 d-flex flex-column justify-content-center">
                 <h1>Bienvenue, <%= username %>!</h1> 
                 <p>Personnaliser votre page</p>
-                <p><a href="#" id="upload-link">Autre chose</a></p>
+                <p><a href="#" id="upload-link"></a></p>
 
                 <!-- Upload Form -->
                 <form action="/users/uploadPhoto" method="POST" enctype="multipart/form-data">
@@ -48,7 +48,7 @@
             <!-- changer photoen tableau -->
             <!-- Right Column: Profile Image -->
             <div class="col-md-6 d-flex justify-content-center align-items-center">
-                <img src="/images/profile.png" alt="Profile Image" class="profile-img" style="height: 150px; border-radius: 50%;" />
+                <!-- <img src="/images/action.jpg" alt="Profile Image" class="profile-img" style="height: 150px; border-radius: 50%;" /> -->
             </div>
         </div>
 

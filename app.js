@@ -51,7 +51,7 @@ app.use(session({
   secret: 'nhl',
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 3600000 } // Cookie expire après 1 hre
+  cookie: { maxAge: 3600000, httpOnly: true, secure: false } // Cookie expire après 1 hre
 }));
 
 
@@ -61,11 +61,11 @@ app.use((req, res, next) => {
   //verifier si la session est active
   if (req.session && req.session.username) {
       // appliquer  image and username globalement  a toutes lesvues
-      res.locals.userImage = req.session.userImage ? `/images/${req.session.userImage}` : '/images/puck.jpg';
+      res.locals.userImage = req.session.userImage ? `/images/${req.session.userImage}` : 'images/puck.jpg';
       res.locals.username = req.session.username;
       res.locals.currentPage = req.url; 
   } else {
-      res.locals.userImage = '/images/puck.jpg'; // Default image 
+      res.locals.userImage = 'images/puck.jpg'; // Default image 
       res.locals.username = null; 
       res.locals.currentPage = req.url; 
   }

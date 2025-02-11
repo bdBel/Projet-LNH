@@ -49,7 +49,9 @@ router.post('/login', async (req, res) => {
         }
         req.session.username = user.prenom || "utilisateur";
         req.session.userImage = user.image ? `/images/${user.image}` : '/images/puck.jpg'; 
+        
         res.redirect('/users/members');
+        console.log(req.session) // affichage des données de session
     } catch (error) {
         console.error("erreur de connexion", error);
         res.render('loginRegister.ejs', { error: "identifiants incorrects reessayez" });
@@ -61,6 +63,7 @@ router.get('/members', async (req, res) => {
     if (!req.session.username) {
         return res.redirect('/users/login');
     }
+    const userImage = req.session.userImage || '/images/puck.png'; 
 
     try {
         // Recuperation des equipes depuis mongodb
@@ -73,7 +76,7 @@ router.get('/members', async (req, res) => {
         }
 
         // Envoi des equipes, de l'image et du username à la vue
-        const userImage = req.session.userImage || '/images/puck.jpg';
+       
         res.render('accueilMembre.ejs', { 
             username: req.session.username, 
             equipes,
