@@ -3,7 +3,6 @@ body {
     font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
     background-color: #f8f9fa; /* fond clair pour lisibilite */
     color: #333;
-    padding: 20px;
 }
 
 /* style des tableaux */
@@ -65,9 +64,16 @@ tr:hover {
 /* style titre page */
 h1 {
     text-align: center;
-    color: #d32f2f;
+    color: #000000;
     margin-bottom: 20px;
     font-size: 28px;
+}
+
+h2{
+    margin-left: calc(15% - 50px);
+    color: #000000;
+    margin-bottom: 20px;
+    font-size: 24px;
 }
 
 /* style bouton retour */
@@ -89,7 +95,8 @@ h1 {
     background: linear-gradient(to bottom, #b71c1c, #d32f2f);
 }
 
-/* espacement entre tableaux */
-h2 {
-    margin-top: 40px;
+hr {
+    margin: 20px auto;
+    width: 80%;
+    border: 1px solid #000000;
 }
